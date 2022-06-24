@@ -16,6 +16,7 @@ LIBS		= -L$(LIBFT_DIR) -lft \
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
 SRCS		= 	nb_list.c \
+				operate.c \
 				main.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
