@@ -43,6 +43,10 @@ int	main(int argc, char *argv[])
 
 static void	runner(void)
 {
+	int		size;
+
+	size = ft_lstsize(g_lst1);
+	if (s)
 	// ft_printf("==START==\n");
 	// lst_print(g_lst1, g_lst2);
 	swap(MODE_A);
