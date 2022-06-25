@@ -58,7 +58,7 @@ static void	set_lst_nb(t_list **lst, char *str)
 	nb = malloc(sizeof(int));
 	*nb = ft_atoi(str);
 	var = ft_lstnew(nb);
-	ft_lstadd_back(lst, var);
+	ft_lstadd_front(lst, var);
 }
 
 // Using for debuging

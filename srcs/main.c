@@ -43,6 +43,7 @@ int	main(int argc, char *argv[])
 
 static void	runner(void)
 {
-	push(MODE_B);
-	lst_print(g_lst1, g_lst2);
+	// ft_printf("==START==\n");
+	// lst_print(g_lst1, g_lst2);
+	swap(MODE_A);
 }
