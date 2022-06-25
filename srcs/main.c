@@ -1,52 +1,48 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/25 22:15:14 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/06/25 22:15:18 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-void	runner(t_list *lst);
+static void	runner(void);
 
 int	main(int argc, char *argv[])
 {
-	t_list	*lst;
-
+	g_lst1 = NULL;
+	g_lst2 = NULL;
 	if (argc == 1)
+	{
 		ft_printf("Error\n");
+		return (0);
+	}
 	else if (argc == 2)
-		lst = set_var_str(argv[1]);
+		g_lst1 = set_var_str(argv[1]);
 	else
-		lst = set_var_nbs(argc, argv);
-	if (!lst)
+		g_lst1 = set_var_nbs(argc, argv);
+	if (!g_lst1)
 		ft_printf("Error\n");
 	else
 	{
-		runner(lst);
-		ft_lstclear(&lst, &del_content);
+		if (!valid_lst(g_lst1) || sorted_lst(g_lst1))
+			ft_printf("Error\n");
+		else
+			runner();
+		ft_lstclear(&g_lst1, &del_content);
+		ft_lstclear(&g_lst2, &del_content);
 	}
 	return (0);
 }
 
-void	runner(t_list *lst1)
+static void	runner(void)
 {
-	t_list *lst2;
-
-	lst2 = NULL;
-	push(&lst1, &lst2, MODE_B);
-	lst_print(lst1, lst2);
-	push(&lst1, &lst2, MODE_B);
-	lst_print(lst1, lst2);
-	push(&lst1, &lst2, MODE_B);
-	lst_print(lst1, lst2);
-	push(&lst1, &lst2, MODE_A);
-	lst_print(lst1, lst2);
-	push(&lst1, &lst2, MODE_A);
-	lst_print(lst1, lst2);
-	push(&lst1, &lst2, MODE_A);
-	lst_print(lst1, lst2);
-	push(&lst1, &lst2, MODE_A);
-	lst_print(lst1, lst2);
-	push(&lst1, &lst2, MODE_A);
-	lst_print(lst1, lst2);
-	swap(lst1, lst2, MODE_A);
-	lst_print(lst1, lst2);
-	swap(lst1, lst2, MODE_B);
-	lst_print(lst1, lst2);
-	swap(lst1, lst2, MODE_S);
-	lst_print(lst1, lst2);
+	push(MODE_B);
+	lst_print(g_lst1, g_lst2);
 }

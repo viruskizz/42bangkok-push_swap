@@ -15,8 +15,12 @@ LIBS		= -L$(LIBFT_DIR) -lft \
 
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
-SRCS		= 	nb_list.c \
-				operate.c \
+SRCS		= 	mylist.c \
+				validate.c \
+				opts/push.c \
+				opts/swap.c \
+				opts/rotate.c \
+				opts/reverse.c \
 				main.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
