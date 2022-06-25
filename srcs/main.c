@@ -27,8 +27,26 @@ void	runner(t_list *lst1)
 	t_list *lst2;
 
 	lst2 = NULL;
+	push(&lst1, &lst2, MODE_B);
+	lst_print(lst1, lst2);
+	push(&lst1, &lst2, MODE_B);
+	lst_print(lst1, lst2);
+	push(&lst1, &lst2, MODE_B);
+	lst_print(lst1, lst2);
+	push(&lst1, &lst2, MODE_A);
+	lst_print(lst1, lst2);
+	push(&lst1, &lst2, MODE_A);
+	lst_print(lst1, lst2);
+	push(&lst1, &lst2, MODE_A);
+	lst_print(lst1, lst2);
+	push(&lst1, &lst2, MODE_A);
+	lst_print(lst1, lst2);
+	push(&lst1, &lst2, MODE_A);
+	lst_print(lst1, lst2);
 	swap(lst1, lst2, MODE_A);
 	lst_print(lst1, lst2);
 	swap(lst1, lst2, MODE_B);
+	lst_print(lst1, lst2);
 	swap(lst1, lst2, MODE_S);
+	lst_print(lst1, lst2);
 }

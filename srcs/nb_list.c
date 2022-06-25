@@ -49,6 +49,8 @@ void	set_lst_nb(t_list **lst, char *str)
 
 int	cint(t_list *lst)
 {
+	if (!lst)
+		return (0);
 	return *((int *)lst->content);
 }
 
