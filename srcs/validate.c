@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	valid_int(char *str)
+int	is_valid_int(char *str)
 {
 	while (*str)
 	{
@@ -22,7 +22,7 @@ int	valid_int(char *str)
 	return (1);
 }
 
-int	valid_lst(t_list *lst)
+int	is_valid_lst(t_list *lst)
 {
 	t_list	*tmp;
 	t_list	*ptr;
@@ -42,7 +42,7 @@ int	valid_lst(t_list *lst)
 	return (1);
 }
 
-int	sorted_lst(t_list *lst)
+int	is_sorted_lst(t_list *lst)
 {
 	t_list	*tmp;
 	t_list	*ptr;

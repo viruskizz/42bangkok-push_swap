@@ -29,7 +29,7 @@ t_list	*set_var_str(char *str)
 	tmp = arr;
 	while (*tmp)
 	{
-		if (!valid_int(*tmp++))
+		if (!is_valid_int(*tmp++))
 			return (NULL);
 	}
 	lst = NULL;

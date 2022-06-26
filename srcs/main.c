@@ -31,7 +31,7 @@ int	main(int argc, char *argv[])
 		ft_printf("Error\n");
 	else
 	{
-		if (!valid_lst(g_lst1) || sorted_lst(g_lst1))
+		if (!is_valid_lst(g_lst1) || is_sorted_lst(g_lst1))
 			ft_printf("Error\n");
 		else
 			runner();
@@ -43,11 +43,13 @@ int	main(int argc, char *argv[])
 
 static void	runner(void)
 {
+	int		i;
 	int		size;
 
+	i = 0;
 	size = ft_lstsize(g_lst1);
-	if (s)
-	// ft_printf("==START==\n");
-	// lst_print(g_lst1, g_lst2);
-	swap(MODE_A);
+	set_sort_arr();
+	while (i < size)
+		ft_printf("%d, ", g_sarr[i++]);
+	// swap(MODE_A);
 }

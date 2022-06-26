@@ -17,6 +17,7 @@ BUILD_DIR	= build
 SRC_DIR		= ./srcs
 SRCS		= 	mylist.c \
 				validate.c \
+				sort.c \
 				opts/push.c \
 				opts/swap.c \
 				opts/rotate.c \
