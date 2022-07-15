@@ -47,9 +47,16 @@ static void	runner(void)
 	int		size;
 
 	i = 0;
-	size = ft_lstsize(g_lst1);
 	set_sort_arr();
-	while (i < size)
-		ft_printf("%d, ", g_sarr[i++]);
+	// ft_printf("size %d\n", g_sorted.size);
+	// while (i < g_sorted.size)
+	// 	ft_printf("%d, ", g_sorted.arr[i++]);
+	// ft_printf("\n[%d]: %d\n", get_sorted_idx(cint(g_lst1)), cint(g_lst1));
+	lst_print();
+	sort();
+	lst_print();
+	
 	// swap(MODE_A);
+	// reverse(MODE_A);
+	// lst_print();
 }

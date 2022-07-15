@@ -62,6 +62,22 @@ static void	set_lst_nb(t_list **lst, char *str)
 }
 
 // Using for debuging
+int	get_lst_idx(t_list *lst, int nb)
+{
+	t_list	*ptr;
+	int		i;
+
+	i = 0;
+	ptr = lst;
+	while (ptr)
+	{
+		if (cint(ptr) == nb)
+			return (i);
+		ptr = ptr->next;
+		i++;
+	}
+	return (-1);
+}
 
 int	cint(t_list *lst)
 {
@@ -70,13 +86,15 @@ int	cint(t_list *lst)
 	return (*((int *)lst->content));
 }
 
-void	lst_print(t_list *lst1, t_list *lst2)
+void	lst_print()
 {
 	t_list	*tmp1;
 	t_list	*tmp2;
+	int		size1;
+	int		size2;
 
-	tmp1 = lst1;
-	tmp2 = lst2;
+	tmp1 = g_lst1;
+	tmp2 = g_lst2;
 	ft_printf("A: ");
 	while (tmp1)
 	{
