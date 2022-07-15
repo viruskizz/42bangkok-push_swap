@@ -6,7 +6,8 @@ void	lastsort();
 
 void	sort()
 {
-	presort();
+	if (ft_lstsize > 3)
+		presort();
 	lastsort();
 }
 
