@@ -45,9 +45,9 @@ int	main(int argc, char *argv[])
 
 static void	sort(void)
 {
-	// int		i;
+	int		i;
 
-	// i = 0;
+	i = 0;
 	// ft_printf("\n= RUN =\n");
 	set_sort_arr();
 	// while (i < g_tmp.n)
@@ -56,9 +56,9 @@ static void	sort(void)
 	// 	i++;
 	// }
 	// lst_print();
-	// sort();
 	if (ft_lstsize(g_lst1) > 3)
 		pre_sort();
+	// lst_print();
 	bottom_sort();
 	complete_sort();
 	// if (is_sorted_lst(g_lst1))
@@ -69,4 +69,13 @@ static void	sort(void)
 	// lst_print();
 	// rotate(MODE_A);
 	// lst_print();
+
+	// t_list *tmp = lst_ptr(g_lst1, 0);
+	// t_list *tmp1 = lst_ptr(g_lst1, 1);
+	// t_list *tmp2 = lst_ptr(g_lst1, 2);
+	// t_list *tmp3 = lst_ptr(g_lst1, 3);
+	// ft_printf("%d <- %d -> %d\n", cint(tmp->prev), cint(tmp), cint(tmp->next));
+	// ft_printf("%d <- %d -> %d\n", cint(tmp1->prev), cint(tmp1), cint(tmp1->next));
+	// ft_printf("%d <- %d -> %d\n", cint(tmp2->prev), cint(tmp2), cint(tmp2->next));
+	// ft_printf("%d <- %d -> %d\n", cint(tmp3->prev), cint(tmp3), cint(tmp3->next));
 }

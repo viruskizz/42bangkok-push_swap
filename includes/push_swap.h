@@ -55,6 +55,7 @@ void	del_content(void *content);
 int		cint(t_list *lst);
 void	lst_print();
 int		lst_idx(t_list *lst, int nb);
+t_list	*lst_ptr(t_list *lst, int idx);
 
 // operation
 void	swap(int mode);

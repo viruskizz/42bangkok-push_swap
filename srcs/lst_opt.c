@@ -31,6 +31,20 @@ int	lst_idx(t_list *lst, int nb)
 	return (-1);
 }
 
+t_list	*lst_ptr(t_list *lst, int idx)
+{
+	int		size;
+	int		i;
+
+	size = ft_lstsize(lst);
+	i = 0;
+	if (idx >= size)
+		return (NULL);
+	while (i++ < idx)
+		lst = lst->next;
+	return (lst);
+}
+
 int	cint(t_list *lst)
 {
 	if (!lst)
