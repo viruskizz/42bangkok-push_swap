@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 static void	swap_lst(t_list **lst);
-static void swap_two(t_list **lst);
+static void	swap_two(t_list **lst);
 
 /**
  * @brief swap top and prev-top
@@ -38,7 +38,8 @@ void	swap(int mode)
 			swap_lst(&g_lst2);
 		ft_printf("sb\n");
 	}
-	else if (g_lst1 && g_lst2 && ft_lstsize(g_lst1) > 1 && ft_lstsize(g_lst2) > 1)
+	else if (g_lst1 && g_lst2
+		&& ft_lstsize(g_lst1) > 1 && ft_lstsize(g_lst2) > 1)
 	{
 		swap_lst(&g_lst1);
 		swap_lst(&g_lst2);
@@ -64,7 +65,7 @@ static void	swap_lst(t_list **lst)
 	tmp->next = lt;
 }
 
-static void swap_two(t_list **lst)
+static void	swap_two(t_list **lst)
 {
 	t_list	*lt;
 	t_list	*ft;
@@ -76,5 +77,4 @@ static void swap_two(t_list **lst)
 	ft->prev = lt;
 	lt->next = ft;
 	lt->prev = NULL;
-
 }

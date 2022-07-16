@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	runner(void);
+static void	sort(void);
 
 int	main(int argc, char *argv[])
 {
@@ -36,28 +36,31 @@ int	main(int argc, char *argv[])
 		else if (is_sorted_lst(g_lst1))
 			ft_printf("Error: already sorted argument\n");
 		else
-			runner();
+			sort();
 		ft_lstclear(&g_lst1, &del_content);
 		ft_lstclear(&g_lst2, &del_content);
 	}
 	return (0);
 }
 
-static void	runner(void)
+static void	sort(void)
 {
-	int		i;
-	int		size;
+	// int		i;
 
-	i = 0;
+	// i = 0;
 	// ft_printf("\n= RUN =\n");
 	set_sort_arr();
-	// while (i < g_sorted.size)
+	// while (i < g_tmp.n)
 	// {
-	// 	ft_printf("[%d]: %d\n", i, g_sorted.arr[i]);
+	// 	ft_printf("[%d]: %d\n", i, g_tmp.ar[i]);
 	// 	i++;
 	// }
 	// lst_print();
-	sort();
+	// sort();
+	if (ft_lstsize(g_lst1) > 3)
+		pre_sort();
+	bottom_sort();
+	complete_sort();
 	// if (is_sorted_lst(g_lst1))
 	// 	ft_printf("\nSORTED\n");
 	// lst_print();

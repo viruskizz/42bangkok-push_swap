@@ -28,26 +28,35 @@
 
 t_list		*g_lst1;
 t_list		*g_lst2;
-typedef struct  s_sorted
+typedef struct  s_template
 {
-	int *arr;
-	int size;
-}	t_sorted;
+	int *ar;
+	int n;
+}	t_template;
 
-t_sorted	g_sorted;
+t_template	g_tmp;
 
 int		is_valid_int(char *str);
 int		is_dup_var(t_list *lst);
 int		is_sorted_lst(t_list *lst);
-void	sort();
+
+void	pre_sort(void);
+void	bottom_sort(void);
+void	complete_sort(void);
+
+// template
 void	set_sort_arr();
 int		sorted_idx(int nb);
+
+// list function
 t_list	*set_var_nbs(int argc, char *argv[]);
 t_list	*set_var_str(char *str);
 void	del_content(void *content);
 int		cint(t_list *lst);
 void	lst_print();
 int		lst_idx(t_list *lst, int nb);
+
+// operation
 void	swap(int mode);
 void	push(int mode);
 void	rotate(int mode);

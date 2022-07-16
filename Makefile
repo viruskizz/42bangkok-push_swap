@@ -1,6 +1,6 @@
 NAME		= push_swap
 CC			= gcc
-# CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror
 RM			= /bin/rm -f
 
 LIBFT_DIR	= libft
@@ -15,8 +15,10 @@ LIBS		= -L$(LIBFT_DIR) -lft \
 
 BUILD_DIR	= build
 SRC_DIR		= ./srcs
-SRCS		= 	mylist.c \
+SRCS		= 	lst_setup.c \
+				lst_opt.c \
 				validate.c \
+				template.c \
 				sort.c \
 				opts/push.c \
 				opts/swap.c \

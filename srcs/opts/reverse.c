@@ -26,7 +26,8 @@ void	reverse(int mode)
 		reverse_lst(&g_lst2);
 		ft_printf("rrb\n");
 	}
-	else if (g_lst1 && g_lst2 && ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 2)
+	else if (g_lst1 && g_lst2
+		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 2)
 	{
 		reverse_lst(&g_lst1);
 		reverse_lst(&g_lst2);

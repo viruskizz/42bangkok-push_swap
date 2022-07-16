@@ -1,27 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: araiva <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/17 01:11:14 by araiva            #+#    #+#             */
+/*   Updated: 2022/07/17 01:11:15 by araiva           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #include "push_swap.h"
-void	move_top(int nb, int stack);
-int		get_mid_lst(t_list *lst);
-void	pre_sort();
-void	bottom_sort();
-void	complete_sort();
 
-void	sort()
-{
-	if (ft_lstsize(g_lst1) > 3)
-		pre_sort();
-	bottom_sort();
-	complete_sort();
-}
+static void	move_top(int nb, t_list	*lst, int stack);
 
-void	complete_sort()
+void	complete_sort(void)
 {
 	int	nidx;
-	int	lidx;
 
 	nidx = ft_lstsize(g_lst1);
-	while (nidx < g_sorted.size)
+	while (nidx < g_tmp.n)
 	{
-		move_top(g_sorted.arr[nidx], MODE_B);
+		move_top(g_tmp.ar[nidx], g_lst2, MODE_B);
 		push(MODE_A);
 		nidx++;
 	}
@@ -54,12 +53,11 @@ Focus on Max and Min value only
 	1	sa	2
 	3		3
 */
-void	bottom_sort()
+void	bottom_sort(void)
 {
 	int		min;
 	int		mid;
 	int		max;
-	int		mid_lidx;
 
 	if (is_sorted_lst(g_lst1))
 		return ;
@@ -67,19 +65,21 @@ void	bottom_sort()
 		swap(MODE_A);
 	else if (ft_lstsize(g_lst1) == 3)
 	{
-		max = g_sorted.arr[0];
-		mid = g_sorted.arr[1];
-		min = g_sorted.arr[2];
-		if (lst_idx(g_lst1, max) == 2 && (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 1))
+		max = g_tmp.ar[0];
+		mid = g_tmp.ar[1];
+		min = g_tmp.ar[2];
+		if (lst_idx(g_lst1, max) == 2
+			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 1))
 			rotate(MODE_A);
-		if (lst_idx(g_lst1, max) == 1 && (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 2))
+		if (lst_idx(g_lst1, max) == 1
+			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 2))
 			reverse(MODE_A);
 		if (lst_idx(g_lst1, max) == 0 && lst_idx(g_lst1, min) == 1)
 			swap(MODE_A);
 	}
 }
 
-void	pre_sort()
+void	pre_sort(void)
 {
 	int		mid;
 	int		midx;
@@ -87,7 +87,7 @@ void	pre_sort()
 
 	ptr = g_lst1;
 	midx = ft_lstsize(g_lst1) / 2;
-	mid = g_sorted.arr[midx];
+	mid = g_tmp.ar[midx];
 	while (ft_lstsize(g_lst1) > midx)
 	{
 		ptr = g_lst1;
@@ -95,7 +95,7 @@ void	pre_sort()
 		{
 			if (cint(ptr) <= mid)
 			{
-				move_top(cint(ptr), MODE_A);
+				move_top(cint(ptr), g_lst1, MODE_A);
 				push(MODE_B);
 			}
 			ptr = ptr->next;
@@ -105,19 +105,12 @@ void	pre_sort()
 		pre_sort();
 }
 
-void	move_top(int nb, int stack)
+static void	move_top(int nb, t_list	*lst, int stack)
 {
-	t_list	*lst;
 	int		size;
 	int		lidx;
 	int		times;
 
-	if (stack == MODE_A)
-		lst = g_lst1;
-	else if (stack == MODE_B)
-		lst = g_lst2;
-	else
-		return ;
 	size = ft_lstsize(lst);
 	lidx = lst_idx(lst, nb);
 	if (lidx == size - 2)
@@ -127,47 +120,11 @@ void	move_top(int nb, int stack)
 		times = lidx + 1;
 		while (times-- > 0)
 			reverse(stack);
-	} else {
+	}
+	else
+	{
 		times = size - lidx - 1;
 		while (times-- > 0)
-			rotate(stack);	
+			rotate(stack);
 	}
-}
-
-void	set_sort_arr()
-{
-	t_list	*ptr;
-	t_list	*chk;
-	int		idx;
-
-	g_sorted.size = ft_lstsize(g_lst1);
-	g_sorted.arr = malloc(sizeof(int) * g_sorted.size);
-	ptr = g_lst1;
-	while (ptr)
-	{
-		chk = g_lst1;
-		idx = 0;
-		while (chk)
-		{
-			if (cint(ptr) < cint(chk))
-				idx++;
-			chk = chk->next;
-		}
-		g_sorted.arr[idx] = cint(ptr);
-		ptr = ptr->next;
-	}
-}
-
-int		sorted_idx(int nb)
-{
-	int		i;
-
-	i = 0;
-	while (i < g_sorted.size)
-	{
-		if (g_sorted.arr[i] == nb)
-			return (i);
-		i++;
-	}
-	return (-1);
 }

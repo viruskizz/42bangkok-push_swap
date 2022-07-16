@@ -26,7 +26,8 @@ void	rotate(int mode)
 		rotate_lst(&g_lst2);
 		ft_printf("rb\n");
 	}
-	else if (g_lst1 && g_lst2 && ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 2)
+	else if (g_lst1 && g_lst2
+		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 2)
 	{
 		rotate_lst(&g_lst1);
 		rotate_lst(&g_lst2);

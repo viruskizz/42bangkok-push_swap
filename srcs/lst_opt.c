@@ -1,65 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mylist.c                                           :+:      :+:    :+:   */
+/*   lst_opt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: araiva <tsomsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 22:15:26 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/06/25 22:15:27 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/07/17 01:20:35 by araiva            #+#    #+#             */
+/*   Updated: 2022/07/17 01:20:35 by araiva           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	set_lst_nb(t_list **lst, char *str);
-
-void	del_content(void *content)
-{
-	free(content);
-}
-
-t_list	*set_var_str(char *str)
-{
-	char	**arr;
-	char	**tmp;
-	t_list	*lst;
-
-	arr = ft_split(str, ' ');
-	tmp = arr;
-	while (*tmp)
-	{
-		if (!is_valid_int(*tmp++))
-			return (NULL);
-	}
-	lst = NULL;
-	while (*arr)
-		set_lst_nb(&lst, *arr++);
-	return (lst);
-}
-
-t_list	*set_var_nbs(int argc, char *argv[])
-{
-	t_list	*lst;
-	int		i;
-
-	i = 1;
-	lst = NULL;
-	while (i < argc)
-		set_lst_nb(&lst, argv[i++]);
-	return (lst);
-}
-
-static void	set_lst_nb(t_list **lst, char *str)
-{
-	int		*nb;
-	t_list	*var;
-
-	nb = malloc(sizeof(int));
-	*nb = ft_atoi(str);
-	var = ft_lstnew(nb);
-	ft_lstadd_front(lst, var);
-}
 
 int	lst_idx(t_list *lst, int nb)
 {
@@ -88,12 +39,10 @@ int	cint(t_list *lst)
 }
 
 // Using for debuging
-void	lst_print()
+void	lst_print(void)
 {
 	t_list	*tmp1;
 	t_list	*tmp2;
-	int		size1;
-	int		size2;
 
 	tmp1 = g_lst1;
 	tmp2 = g_lst2;
