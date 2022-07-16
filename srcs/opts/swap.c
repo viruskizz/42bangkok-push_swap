@@ -12,7 +12,8 @@
 
 #include "push_swap.h"
 
-static void	swap_lst(t_list *lst);
+static void	swap_lst(t_list **lst);
+static void swap_two(t_list **lst);
 
 /**
  * @brief swap top and prev-top
@@ -21,43 +22,59 @@ static void	swap_lst(t_list *lst);
  */
 void	swap(int mode)
 {
-	if (mode == MODE_A)
+	if (mode == MODE_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
-		if (!g_lst1 || ft_lstsize(g_lst1) <= 1)
-			return ;
-		swap_lst(g_lst1);
+		if (ft_lstsize(g_lst1) == 2)
+			swap_two(&g_lst1);
+		else
+			swap_lst(&g_lst1);
 		ft_printf("sa\n");
 	}
-	else if (mode == MODE_B)
+	else if (mode == MODE_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
-		if (!g_lst2 || ft_lstsize(g_lst2) <= 1)
-			return ;
-		swap_lst(g_lst2);
+		if (ft_lstsize(g_lst2) == 2)
+			swap_two(&g_lst2);
+		else
+			swap_lst(&g_lst2);
 		ft_printf("sb\n");
 	}
-	else
+	else if (g_lst1 && g_lst2 && ft_lstsize(g_lst1) > 1 && ft_lstsize(g_lst2) > 1)
 	{
-		if (!g_lst1 || !g_lst2
-			|| ft_lstsize(g_lst1) <= 1 || ft_lstsize(g_lst2) <= 1)
-			return ;
-		swap_lst(g_lst1);
-		swap_lst(g_lst2);
+		swap_lst(&g_lst1);
+		swap_lst(&g_lst2);
 		ft_printf("ss\n");
 	}
 }
 
-static void	swap_lst(t_list *lst)
+static void	swap_lst(t_list **lst)
 {
 	t_list	*tmp;
 	t_list	*lt;
 	t_list	*ft;
 
-	tmp = lst;
+	tmp = *lst;
 	while (tmp->next->next->next)
 		tmp = tmp->next;
 	ft = tmp->next;
 	lt = tmp->next->next;
 	ft->next = NULL;
-	tmp->next = lt;
+	ft->prev = lt;
 	lt->next = ft;
+	lt->prev = tmp;
+	tmp->next = lt;
+}
+
+static void swap_two(t_list **lst)
+{
+	t_list	*lt;
+	t_list	*ft;
+
+	ft = *lst;
+	lt = ft->next;
+	*lst = ft->next;
+	ft->next = NULL;
+	ft->prev = lt;
+	lt->next = ft;
+	lt->prev = NULL;
+
 }

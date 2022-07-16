@@ -25,17 +25,13 @@ static void	push_lst(t_list **src, t_list **dest);
  */
 void	push(int mode)
 {
-	if (mode == MODE_A)
+	if (mode == MODE_A && g_lst2 && ft_lstsize(g_lst2) > 0)
 	{
-		if (!g_lst2)
-			return ;
 		push_lst(&g_lst2, &g_lst1);
 		ft_printf("pa\n");
 	}
-	else if (mode == MODE_B)
+	else if (mode == MODE_B && g_lst1 && ft_lstsize(g_lst1) > 0)
 	{
-		if (!g_lst1)
-			return ;
 		push_lst(&g_lst1, &g_lst2);
 		ft_printf("pb\n");
 	}

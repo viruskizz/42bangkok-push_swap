@@ -61,13 +61,14 @@ static void	set_lst_nb(t_list **lst, char *str)
 	ft_lstadd_front(lst, var);
 }
 
-// Using for debuging
-int	get_lst_idx(t_list *lst, int nb)
+int	lst_idx(t_list *lst, int nb)
 {
 	t_list	*ptr;
 	int		i;
 
 	i = 0;
+	if (!lst)
+		return (-1);
 	ptr = lst;
 	while (ptr)
 	{
@@ -86,6 +87,7 @@ int	cint(t_list *lst)
 	return (*((int *)lst->content));
 }
 
+// Using for debuging
 void	lst_print()
 {
 	t_list	*tmp1;

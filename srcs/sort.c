@@ -1,29 +1,85 @@
 #include "push_swap.h"
-void	move_top(t_list *lst, int nb, int stack);
+void	move_top(int nb, int stack);
 int		get_mid_lst(t_list *lst);
-void	presort();
-void	lastsort();
+void	pre_sort();
+void	bottom_sort();
+void	complete_sort();
 
 void	sort()
 {
-	if (ft_lstsize > 3)
-		presort();
-	lastsort();
+	if (ft_lstsize(g_lst1) > 3)
+		pre_sort();
+	bottom_sort();
+	complete_sort();
 }
 
-void	lastsort()
+void	complete_sort()
 {
-	int		min_idx;
-	int		mid_idx;
-	int		max_idx;
+	int	nidx;
+	int	lidx;
 
-	max_idx = g_sorted.arr[0];
-	mid_idx = g_sorted.arr[1];
-	min_idx = g_sorted.arr[2];
-	ft_printf("mid = %d\n", mid);
+	nidx = ft_lstsize(g_lst1);
+	while (nidx < g_sorted.size)
+	{
+		move_top(g_sorted.arr[nidx], MODE_B);
+		push(MODE_A);
+		nidx++;
+	}
 }
 
-void	presort()
+/**
+ * @brief Sort only last 3 elements in list
+ * @param lst 
+ */
+/*
+Operation description
+Focus on Max and Min value only
+	3		1
+	1	ra	2
+	2		3
+
+	3		2		1
+	2	ra	1	sa	2
+	1		3		3
+
+	2		1
+	3	rra	2
+	1		3
+
+	1		2		1
+	3	rra	1	sa	2
+	2		3		3
+
+	2		1
+	1	sa	2
+	3		3
+*/
+void	bottom_sort()
+{
+	int		min;
+	int		mid;
+	int		max;
+	int		mid_lidx;
+
+	if (is_sorted_lst(g_lst1))
+		return ;
+	else if (ft_lstsize(g_lst1) == 2)
+		swap(MODE_A);
+	else if (ft_lstsize(g_lst1) == 3)
+	{
+		max = g_sorted.arr[0];
+		mid = g_sorted.arr[1];
+		min = g_sorted.arr[2];
+		if (lst_idx(g_lst1, max) == 2 && (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 1))
+			rotate(MODE_A);
+		if (lst_idx(g_lst1, max) == 1 && (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 2))
+			reverse(MODE_A);
+		if (lst_idx(g_lst1, max) == 0 && lst_idx(g_lst1, min) == 1)
+			swap(MODE_A);
+	}
+}
+
+void	pre_sort()
 {
 	int		mid;
 	int		midx;
@@ -32,7 +88,6 @@ void	presort()
 	ptr = g_lst1;
 	midx = ft_lstsize(g_lst1) / 2;
 	mid = g_sorted.arr[midx];
-	ft_printf("mid = %d\n", mid);
 	while (ft_lstsize(g_lst1) > midx)
 	{
 		ptr = g_lst1;
@@ -40,25 +95,31 @@ void	presort()
 		{
 			if (cint(ptr) <= mid)
 			{
-				move_top(g_lst1, cint(ptr), MODE_A);
+				move_top(cint(ptr), MODE_A);
 				push(MODE_B);
 			}
 			ptr = ptr->next;
 		}
 	}
-	lst_print();
 	if (ft_lstsize(g_lst1) > 3)
-		presort();
+		pre_sort();
 }
 
-void	move_top(t_list *lst, int nb, int stack)
+void	move_top(int nb, int stack)
 {
+	t_list	*lst;
 	int		size;
 	int		lidx;
 	int		times;
 
+	if (stack == MODE_A)
+		lst = g_lst1;
+	else if (stack == MODE_B)
+		lst = g_lst2;
+	else
+		return ;
 	size = ft_lstsize(lst);
-	lidx = get_lst_idx(lst, nb);
+	lidx = lst_idx(lst, nb);
 	if (lidx == size - 2)
 		swap(stack);
 	else if (lidx < size / 2)
@@ -97,7 +158,7 @@ void	set_sort_arr()
 	}
 }
 
-int		get_sorted_idx(int nb)
+int		sorted_idx(int nb)
 {
 	int		i;
 

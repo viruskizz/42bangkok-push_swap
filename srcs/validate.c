@@ -22,7 +22,7 @@ int	is_valid_int(char *str)
 	return (1);
 }
 
-int	is_valid_lst(t_list *lst)
+int	is_dup_var(t_list *lst)
 {
 	t_list	*tmp;
 	t_list	*ptr;
@@ -53,7 +53,7 @@ int	is_sorted_lst(t_list *lst)
 		tmp = ptr->next;
 		while (tmp)
 		{
-			if (cint(ptr) >= cint(tmp))
+			if (cint(ptr) < cint(tmp))
 				return (0);
 			tmp = tmp->next;
 		}

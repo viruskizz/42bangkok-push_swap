@@ -16,25 +16,18 @@ static void	rotate_lst(t_list **lst);
 
 void	rotate(int mode)
 {
-	if (mode == MODE_A)
+	if (mode == MODE_A && g_lst1 && ft_lstsize(g_lst1) > 2)
 	{
-		if (!g_lst1 || ft_lstsize(g_lst1) <= 1)
-			return ;
 		rotate_lst(&g_lst1);
 		ft_printf("ra\n");
 	}
-	else if (mode == MODE_B)
+	else if (mode == MODE_B && g_lst2 && ft_lstsize(g_lst2) > 2)
 	{
-		if (!g_lst2 || ft_lstsize(g_lst2) <= 1)
-			return ;
 		rotate_lst(&g_lst2);
 		ft_printf("rb\n");
 	}
-	else
+	else if (g_lst1 && g_lst2 && ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 2)
 	{
-		if (!g_lst1 || !g_lst2
-			|| ft_lstsize(g_lst1) <= 1 || ft_lstsize(g_lst2) <= 1)
-			return ;
 		rotate_lst(&g_lst1);
 		rotate_lst(&g_lst2);
 		ft_printf("rr\n");
@@ -44,14 +37,16 @@ void	rotate(int mode)
 static void	rotate_lst(t_list **lst)
 {
 	t_list	*tmp;
-	t_list	*fst;
+	t_list	*lt;
+	t_list	*ft;
 
-	fst = *lst;
+	ft = *lst;
 	tmp = *lst;
-	tmp = ft_lstlast(tmp);
-	tmp->next = fst;
-	fst->prev = tmp;
-	tmp->prev->next = NULL;
-	tmp->prev = NULL;
-	*lst = tmp;
+	lt = ft_lstlast(tmp);
+	tmp = lt->prev;
+	tmp->next = NULL;
+	*lst = lt;
+	(*lst)->prev = NULL;
+	(*lst)->next = ft;
+	ft->prev = *lst;
 }

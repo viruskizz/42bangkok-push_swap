@@ -16,25 +16,18 @@ static void	reverse_lst(t_list **lst);
 
 void	reverse(int mode)
 {
-	if (mode == MODE_A)
+	if (mode == MODE_A && g_lst1 && ft_lstsize(g_lst1) > 2)
 	{
-		if (!g_lst1 || ft_lstsize(g_lst1) <= 1)
-			return ;
 		reverse_lst(&g_lst1);
 		ft_printf("rra\n");
 	}
-	else if (mode == MODE_B)
+	else if (mode == MODE_B && g_lst2 && ft_lstsize(g_lst2) > 2)
 	{
-		if (!g_lst2 || ft_lstsize(g_lst2) <= 1)
-			return ;
 		reverse_lst(&g_lst2);
 		ft_printf("rrb\n");
 	}
-	else
+	else if (g_lst1 && g_lst2 && ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 2)
 	{
-		if (!g_lst1 || !g_lst2
-			|| ft_lstsize(g_lst1) <= 1 || ft_lstsize(g_lst2) <= 1)
-			return ;
 		reverse_lst(&g_lst1);
 		reverse_lst(&g_lst2);
 		ft_printf("rrr\n");
@@ -44,13 +37,15 @@ void	reverse(int mode)
 static void	reverse_lst(t_list **lst)
 {
 	t_list	*tmp;
-	t_list	*fst;
+	t_list	*lt;
+	t_list	*ft;
 
-	fst = *lst;
 	tmp = *lst;
-	tmp = ft_lstlast(tmp);
-	*lst = fst->next;
-	fst->next = NULL;
-	fst->prev = tmp;
-	tmp->next = fst;
+	ft = *lst;
+	lt = ft_lstlast(tmp);
+	ft->next->prev = NULL;
+	*lst = ft->next;
+	lt->next = ft;
+	ft->prev = lt;
+	ft->next = NULL;
 }

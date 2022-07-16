@@ -28,11 +28,13 @@ int	main(int argc, char *argv[])
 	else
 		g_lst1 = set_var_nbs(argc, argv);
 	if (!g_lst1)
-		ft_printf("Error\n");
+		ft_printf("Error: invalid argument\n");
 	else
 	{
-		if (!is_valid_lst(g_lst1) || is_sorted_lst(g_lst1))
-			ft_printf("Error\n");
+		if (!is_dup_var(g_lst1))
+			ft_printf("Error: duplicated argument\n");
+		else if (is_sorted_lst(g_lst1))
+			ft_printf("Error: already sorted argument\n");
 		else
 			runner();
 		ft_lstclear(&g_lst1, &del_content);
@@ -47,16 +49,21 @@ static void	runner(void)
 	int		size;
 
 	i = 0;
+	// ft_printf("\n= RUN =\n");
 	set_sort_arr();
-	// ft_printf("size %d\n", g_sorted.size);
 	// while (i < g_sorted.size)
-	// 	ft_printf("%d, ", g_sorted.arr[i++]);
-	// ft_printf("\n[%d]: %d\n", get_sorted_idx(cint(g_lst1)), cint(g_lst1));
-	lst_print();
+	// {
+	// 	ft_printf("[%d]: %d\n", i, g_sorted.arr[i]);
+	// 	i++;
+	// }
+	// lst_print();
 	sort();
-	lst_print();
-	
-	// swap(MODE_A);
-	// reverse(MODE_A);
+	// if (is_sorted_lst(g_lst1))
+	// 	ft_printf("\nSORTED\n");
+	// lst_print();
+	// ft_printf("\n= Finish =\n");
+
+	// lst_print();
+	// rotate(MODE_A);
 	// lst_print();
 }
