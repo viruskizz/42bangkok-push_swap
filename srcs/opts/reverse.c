@@ -20,6 +20,7 @@ void	reverse(int stack, int is_print)
 {
 	if (stack == STACK_X || stack == STACK_Y)
 		sim_reverse(stack);
+		// reverse_lst(&g_lstx);
 	else
 		opt_reverse(stack);
 }

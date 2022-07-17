@@ -69,22 +69,7 @@ void	pre_sort(void)
 		midx = ft_lstsize(g_lst1) - ridx;
 	else
 		midx = 3;
-	// ft_printf("%d - %d\n", ft_lstsize(g_lst1), ridx);
-	// ft_printf("[%d]: %d\n", midx, g_tmp.ar[midx]);
-	// if (midx < 3)
-	// 	return;
-
-	// ft_printf(">> SIM <<\n");
-	// sim_move(EDGE_MOV, midx, STACK_A, STACK_B);
-	// sim_move(TOP_MOV, midx, STACK_A, STACK_B);
-	// sim_move(BOT_MOV, midx, STACK_A, STACK_B);
-	// from_edge_move(midx, &g_lst1, STACK_A, STACK_B);
-	// from_top_move(midx, &g_lst1, STACK_A, STACK_B);
-	// ft_printf(">> RUN <<\n");
-	// from_bot_move(midx, &g_lst1, STACK_A, STACK_B);
 	short_move(midx, &g_lst1, STACK_A, STACK_B);
-	// ft_printf(">presorted<\n");
-	// lst_print();
 	if (ft_lstsize(g_lst1) > 3)
 		pre_sort();
 }

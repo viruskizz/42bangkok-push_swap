@@ -50,7 +50,7 @@ static void	sim_rotate(int stack)
 
 	if (stack == STACK_X && g_lstx && ft_lstsize(g_lstx) > 1)
 	{
-		rotate_lst(&g_lst1);
+		rotate_lst(&g_lstx);
 	}
 	else if (stack == STACK_Y && g_lsty && ft_lstsize(g_lsty) > 1)
 	{
