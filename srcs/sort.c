@@ -18,10 +18,9 @@ void	complete_sort(void)
 	int	nidx;
 
 	nidx = ft_lstsize(g_lst1);
-	lst_print();
 	while (nidx < g_tmp.n)
 	{
-		ft_printf("move: %d\n", g_tmp.ar[nidx]);
+		// ft_printf("move: %d\n", g_tmp.ar[nidx]);
 		move_top(g_tmp.ar[nidx], g_lst2, MODE_B);
 		push(MODE_A);
 		nidx++;
