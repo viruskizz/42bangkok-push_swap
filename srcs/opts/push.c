@@ -13,6 +13,7 @@
 #include "push_swap.h"
 
 static void	push_lst(t_list **src, t_list **dest);
+static void print_opt(char *str, int is_print);
 
 /**
  * @brief push top of stack from source to destination
@@ -21,19 +22,20 @@ static void	push_lst(t_list **src, t_list **dest);
  * == push b
  * A: 7 5 9 2
  * B: 3
- * @param mode 
+ * @param stack 
  */
-void	push(int mode)
+void	push(int stack, int is_print)
 {
-	if (mode == STACK_A && g_lst2 && ft_lstsize(g_lst2) > 0)
+	if (stack == STACK_A && g_lst2 && ft_lstsize(g_lst2) > 0)
 	{
 		push_lst(&g_lst2, &g_lst1);
-		ft_printf("pa\n");
+		print_opt("pa", is_print);
+
 	}
-	else if (mode == STACK_B && g_lst1 && ft_lstsize(g_lst1) > 0)
+	else if (stack == STACK_B && g_lst1 && ft_lstsize(g_lst1) > 0)
 	{
 		push_lst(&g_lst1, &g_lst2);
-		ft_printf("pb\n");
+		print_opt("pb", is_print);
 	}
 }
 
@@ -49,4 +51,10 @@ static void	push_lst(t_list **src, t_list **dest)
 	else
 		*src = NULL;
 	ft_lstadd_back(dest, tmp);
+}
+
+static void print_opt(char *str, int is_print)
+{
+	if (is_print)
+		ft_printf("%s\n", str);
 }

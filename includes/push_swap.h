@@ -60,8 +60,8 @@ int		lst_idx(t_list *lst, int nb);
 t_list	*lst_ptr(t_list *lst, int idx);
 
 // operation
-void	swap(int mode);
-void	push(int mode);
-void	rotate(int mode);
-void	reverse(int mode);
+void	swap(int stack, int is_print);
+void	push(int stack, int is_print);
+void	rotate(int stack, int is_print);
+void	reverse(int stack, int is_print);
 #endif

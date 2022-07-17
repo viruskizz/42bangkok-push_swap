@@ -13,25 +13,29 @@
 #include "push_swap.h"
 
 static void	reverse_lst(t_list **lst);
+static void print_opt(char *str, int is_print);
 
-void	reverse(int mode)
+void	reverse(int stack, int is_print)
 {
-	if (mode == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 2)
+	if (stack == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
 		reverse_lst(&g_lst1);
-		ft_printf("rra\n");
+		print_opt("rra", is_print);
+
 	}
-	else if (mode == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 2)
+	else if (stack == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst2);
-		ft_printf("rrb\n");
+		print_opt("rrb", is_print);
+
 	}
 	else if (g_lst1 && g_lst2
-		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 2)
+		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst1);
 		reverse_lst(&g_lst2);
-		ft_printf("rrr\n");
+		print_opt("rrr", is_print);
+
 	}
 }
 
@@ -49,4 +53,10 @@ static void	reverse_lst(t_list **lst)
 	lt->next = ft;
 	ft->prev = lt;
 	ft->next = NULL;
+}
+
+static void print_opt(char *str, int is_print)
+{
+	if (is_print)
+		ft_printf("%s\n", str);
 }
