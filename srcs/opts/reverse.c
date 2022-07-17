@@ -21,13 +21,11 @@ void	reverse(int stack, int is_print)
 	{
 		reverse_lst(&g_lst1);
 		print_opt("rra", is_print);
-
 	}
 	else if (stack == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst2);
 		print_opt("rrb", is_print);
-
 	}
 	else if (g_lst1 && g_lst2
 		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 1)
@@ -35,7 +33,6 @@ void	reverse(int stack, int is_print)
 		reverse_lst(&g_lst1);
 		reverse_lst(&g_lst2);
 		print_opt("rrr", is_print);
-
 	}
 }
 

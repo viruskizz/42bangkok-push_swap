@@ -21,13 +21,11 @@ void	rotate(int stack, int is_print)
 	{
 		rotate_lst(&g_lst1);
 		print_opt("ra", is_print);
-
 	}
 	else if (stack == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
 		rotate_lst(&g_lst2);
 		print_opt("rb", is_print);
-
 	}
 	else if (g_lst1 && g_lst2
 		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 1)
@@ -35,7 +33,6 @@ void	rotate(int stack, int is_print)
 		rotate_lst(&g_lst1);
 		rotate_lst(&g_lst2);
 		print_opt("rr", is_print);
-
 	}
 }
 

@@ -30,7 +30,6 @@ void	push(int stack, int is_print)
 	{
 		push_lst(&g_lst2, &g_lst1);
 		print_opt("pa", is_print);
-
 	}
 	else if (stack == STACK_B && g_lst1 && ft_lstsize(g_lst1) > 0)
 	{

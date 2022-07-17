@@ -25,18 +25,12 @@ void	swap(int stack, int is_print)
 {
 	if (stack == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
-		if (ft_lstsize(g_lst1) == 2)
-			swap_two(&g_lst1);
-		else
-			swap_lst(&g_lst1);
+		swap_lst(&g_lst1);
 		print_opt("sa", is_print);
 	}
 	else if (stack == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
-		if (ft_lstsize(g_lst2) == 2)
-			swap_two(&g_lst2);
-		else
-			swap_lst(&g_lst2);
+		swap_lst(&g_lst2);
 		print_opt("sb", is_print);
 	}
 	else if (g_lst1 && g_lst2
@@ -54,6 +48,8 @@ static void	swap_lst(t_list **lst)
 	t_list	*lt;
 	t_list	*ft;
 
+	if (ft_lstsize(*lst) == 2)
+		return (swap_two(lst));
 	tmp = *lst;
 	while (tmp->next->next->next)
 		tmp = tmp->next;
