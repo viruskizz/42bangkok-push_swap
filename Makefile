@@ -19,6 +19,7 @@ SRCS		= 	lst_setup.c \
 				lst_opt.c \
 				validate.c \
 				template.c \
+				move.c \
 				sort.c \
 				opts/push.c \
 				opts/swap.c \

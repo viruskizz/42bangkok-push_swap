@@ -77,36 +77,37 @@ void	pre_sort(void)
 		return;
 	// ft_printf("%d/%d\n", ridx, ft_lstsize(g_lst1));
 	// ft_printf("[%d]: %d\n", midx, g_tmp.ar[midx]);
-	mid = g_tmp.ar[midx];
-	while (ft_lstsize(g_lst1) > midx)
-	{
-		fidx = 0;
-		bidx = ft_lstsize(g_lst1) - 1;
-		while (bidx != fidx)
-		{
-			fptr = lst_ptr(g_lst1, fidx);
-			bptr = lst_ptr(g_lst1, bidx);
-			if (bptr && cint(bptr) <= mid)
-			{
-				// ft_printf("move: %d\n", cint(bptr));
-				move_top(cint(bptr), g_lst1, STACK_A);
-				push(STACK_B, PRINT);
-				break;
-			}
-			else if (fptr && cint(fptr) <= mid)
-			{
-				// lst_print();
-				// ft_printf("move: %d\n", cint(fptr));
-				move_top(cint(fptr), g_lst1, STACK_A);
-				push(STACK_B, PRINT);
-				break;
-			}
-			fidx++;
-			bidx--;
-		}
-		// ft_printf("%d/%d, %d\n", ridx, ft_lstsize(g_lst1), midx);
-		// lst_print();
-	}
+	short_move(midx, &g_lst1, STACK_A, STACK_B);
+	// mid = g_tmp.ar[midx];
+	// while (ft_lstsize(g_lst1) > midx)
+	// {
+	// 	fidx = 0;
+	// 	bidx = ft_lstsize(g_lst1) - 1;
+	// 	while (bidx != fidx)
+	// 	{
+	// 		fptr = lst_ptr(g_lst1, fidx);
+	// 		bptr = lst_ptr(g_lst1, bidx);
+	// 		if (bptr && cint(bptr) <= mid)
+	// 		{
+	// 			// ft_printf("move: %d\n", cint(bptr));
+	// 			move_top(cint(bptr), g_lst1, STACK_A);
+	// 			push(STACK_B, PRINT);
+	// 			break;
+	// 		}
+	// 		else if (fptr && cint(fptr) <= mid)
+	// 		{
+	// 			// lst_print();
+	// 			// ft_printf("move: %d\n", cint(fptr));
+	// 			move_top(cint(fptr), g_lst1, STACK_A);
+	// 			push(STACK_B, PRINT);
+	// 			break;
+	// 		}
+	// 		fidx++;
+	// 		bidx--;
+	// 	}
+	// 	// ft_printf("%d/%d, %d\n", ridx, ft_lstsize(g_lst1), midx);
+	// 	// lst_print();
+	// }
 	// ft_printf(">presorted<\n");
 	// lst_print();
 	if (ft_lstsize(g_lst1) > 3)

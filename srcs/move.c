@@ -3,36 +3,38 @@
 
 static int	move_top(int nb, t_list	*lst, int stack);
 
-int	short_move(int midx, t_list **lst, int stack)
+int	short_move(int midx, t_list **lst, int stack1, int stack2)
 {
 	int	times;
 	int fidx;
 	int	bidx;
+	t_list	*tmp;
 	t_list	*fptr;
 	t_list	*bptr;
 
 	// ft_printf("%d/%d\n", midx, ft_lstsize(*lst));
 	// ft_printf("[%d]: %d\n", midx, g_tmp.ar[midx]);
 	times = 0;
-	while (ft_lstsize(g_lst1) > midx)
+	while (ft_lstsize(*lst) > midx)
 	{
-		bidx = ft_lstsize(g_lst1) - 1;
+		tmp = *lst;
+		bidx = ft_lstsize(tmp) - 1;
 		fidx = 0;
 		while (bidx != fidx)
 		{
-			fptr = lst_ptr(g_lst1, fidx);
-			bptr = lst_ptr(g_lst1, bidx);
+			fptr = lst_ptr(tmp, fidx);
+			bptr = lst_ptr(tmp, bidx);
 			if (bptr && cint(bptr) <= g_tmp.ar[midx])
 			{
-				times += move_top(cint(bptr), g_lst1, stack);
-				push(STACK_B, PRINT);
+				times += move_top(cint(bptr), tmp, stack1);
+				push(stack2, PRINT);
 				times++;
 				break;
 			}
 			else if (fptr && cint(fptr) <= g_tmp.ar[midx])
 			{
-				times += move_top(cint(fptr), g_lst1, stack);
-				push(STACK_B, PRINT);
+				times += move_top(cint(fptr), tmp, stack1);
+				push(stack2, PRINT);
 				times++;
 				break;
 			}

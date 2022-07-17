@@ -46,6 +46,8 @@ void	pre_sort(void);
 void	bottom_sort(void);
 void	complete_sort(void);
 
+int		short_move(int midx, t_list **lst, int stack1, int stack2);
+
 // template
 void	set_sort_arr();
 int		sorted_idx(int nb);
