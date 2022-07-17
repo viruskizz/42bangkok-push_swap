@@ -59,6 +59,8 @@ void	pre_sort(void)
 	int		midx;
 	int		ridx;
 
+	if (is_sorted_lst(g_lst1))
+		return ;
 	if (g_tmp.n > 499)
 		ridx = g_tmp.n / 11;
 	else if (g_tmp.n > 49)
@@ -70,6 +72,7 @@ void	pre_sort(void)
 	else
 		midx = 3;
 	short_move(midx, &g_lst1, STACK_A, STACK_B);
+	// lst_print();
 	if (ft_lstsize(g_lst1) > 3)
 		pre_sort();
 }
