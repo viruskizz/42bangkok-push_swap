@@ -18,8 +18,10 @@ void	complete_sort(void)
 	int	nidx;
 
 	nidx = ft_lstsize(g_lst1);
+	lst_print();
 	while (nidx < g_tmp.n)
 	{
+		ft_printf("move: %d\n", g_tmp.ar[nidx]);
 		move_top(g_tmp.ar[nidx], g_lst2, MODE_B);
 		push(MODE_A);
 		nidx++;
@@ -67,22 +69,15 @@ void	pre_sort(void)
 	else if (g_tmp.n > 49)
 		ridx = g_tmp.n / 5;
 	else
-		ridx = 3;
-
-	if (ft_lstsize(g_lst1) < 6)
-		midx = 3;
-	else if (ft_lstsize(g_lst1) <= ridx)
-		midx = 3;
-	else if (g_tmp.n > 499)
-		midx = ft_lstsize(g_lst1) - ridx;
-	else if (g_tmp.n > 49)
+		ridx = g_tmp.n / 2;
+	if (ft_lstsize(g_lst1) > ridx)
 		midx = ft_lstsize(g_lst1) - ridx;
 	else
-		midx = ft_lstsize(g_lst1) / 2;
+		midx = 3;
+	if (midx < 3)
+		return;
 	// ft_printf("%d/%d\n", ridx, ft_lstsize(g_lst1));
 	// ft_printf("[%d]: %d\n", midx, g_tmp.ar[midx]);
-	if (midx >= ft_lstsize(g_lst1))
-		return;
 	mid = g_tmp.ar[midx];
 	while (ft_lstsize(g_lst1) > midx)
 	{
@@ -92,24 +87,28 @@ void	pre_sort(void)
 		{
 			fptr = lst_ptr(g_lst1, fidx);
 			bptr = lst_ptr(g_lst1, bidx);
-			if (cint(fptr) <= mid)
+			if (bptr && cint(bptr) <= mid)
 			{
-				// lst_print();
-				move_top(cint(fptr), g_lst1, MODE_A);
+				// ft_printf("move: %d\n", cint(bptr));
+				move_top(cint(bptr), g_lst1, MODE_A);
 				push(MODE_B);
 				break;
 			}
-			else if (cint(bptr) <= mid)
+			else if (fptr && cint(fptr) <= mid)
 			{
 				// lst_print();
-				move_top(cint(bptr), g_lst1, MODE_A);
+				// ft_printf("move: %d\n", cint(fptr));
+				move_top(cint(fptr), g_lst1, MODE_A);
 				push(MODE_B);
 				break;
 			}
 			fidx++;
 			bidx--;
 		}
+		// ft_printf("%d/%d, %d\n", ridx, ft_lstsize(g_lst1), midx);
+		// lst_print();
 	}
+	// ft_printf(">presorted<\n");
 	// lst_print();
 	if (ft_lstsize(g_lst1) > 3)
 		pre_sort();

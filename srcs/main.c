@@ -48,8 +48,8 @@ static void	sort(void)
 	int		i;
 
 	i = 0;
-	// ft_printf("\n= RUN =\n");
 	set_sort_arr();
+	// ft_printf("\n= RUN =\n");
 	// while (i < g_tmp.n)
 	// {
 	// 	ft_printf("[%d]: %d\n", i, g_tmp.ar[i]);
@@ -58,7 +58,6 @@ static void	sort(void)
 	// lst_print();
 	if (ft_lstsize(g_lst1) > 3)
 		pre_sort();
-	// lst_print();
 	bottom_sort();
 	complete_sort();
 	// if (is_sorted_lst(g_lst1))
