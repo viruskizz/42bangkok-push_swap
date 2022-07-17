@@ -18,7 +18,7 @@ static void	sim_reverse(int stack);
 
 void	reverse(int stack, int is_print)
 {
-	if (stack == STACK_X || stack == STACK_Y || stack == STACK_Z)
+	if (stack == STACK_X || stack == STACK_Y)
 		sim_reverse(stack);
 	else
 		opt_reverse(stack);
@@ -37,7 +37,7 @@ static void	opt_reverse(int stack)
 		ft_printf("rrb\n");
 	}
 	else if (g_lst1 && g_lst2
-		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 1)
+		&& ft_lstsize(g_lst1) > 1 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst1);
 		reverse_lst(&g_lst2);
@@ -56,7 +56,7 @@ static void	sim_reverse(int stack)
 		reverse_lst(&g_lsty);
 	}
 	else if (g_lstx && g_lsty
-		&& ft_lstsize(g_lstx) > 2 && ft_lstsize(g_lsty) > 1)
+		&& ft_lstsize(g_lstx) > 1 && ft_lstsize(g_lsty) > 1)
 	{
 		reverse_lst(&g_lstx);
 		reverse_lst(&g_lsty);

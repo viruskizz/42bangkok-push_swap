@@ -33,6 +33,35 @@ static int	move_push(int nb, t_list **lst, int stack1, int stack2);
 // 	}
 // 	return (times);
 // }
+
+void	short_move(int midx, t_list **lst, int stack1, int stack2)
+{
+	int		et;
+	int		tt;
+	int		bt;
+
+	// ft_printf(">> SIM <<\n");
+	// et = sim_move(EDGE_MOV, midx, STACK_A, STACK_B);
+	// tt = sim_move(TOP_MOV, midx, STACK_A, STACK_B);
+	// bt = sim_move(BOT_MOV, midx, STACK_A, STACK_B);
+	// if (et < tt && et < bt)
+	// {
+	// 	// ft_printf(">>EDGE_MOVE<<\n");
+	// 	from_edge_move(midx, &g_lst1, STACK_A, STACK_B);
+	// }
+	// else if (tt < bt)
+	// {
+	// 	// ft_printf(">>TOP_MOVE<<\n");
+	// 	from_top_move(midx, &g_lst1, STACK_A, STACK_B);
+	// }
+	// else
+	// {
+	// 	// ft_printf(">>BOT_MOVE<<\n");
+	// 	from_bot_move(midx, &g_lst1, STACK_A, STACK_B);
+	// }
+	from_edge_move(midx, &g_lst1, STACK_A, STACK_B);
+}
+
 int	sim_move(int move, int midx, int stack1, int stack2)
 {
 	int		times;
@@ -42,9 +71,18 @@ int	sim_move(int move, int midx, int stack1, int stack2)
 	times = 0;
 	if (move == EDGE_MOV)
 		times = from_edge_move(midx, &g_lstx, STACK_X, STACK_Y);
-	// ft_lstclear(&lstx, &del_content);
-	// ft_lstclear(&lsty, &del_content);
-	ft_printf("times = %d\n", times);
+	if (move == TOP_MOV)
+		times = from_top_move(midx, &g_lstx, STACK_X, STACK_Y);
+	if (move == BOT_MOV)
+		times = from_bot_move(midx, &g_lstx, STACK_X, STACK_Y);
+	ft_lstclear(&g_lstx, &del_content);
+	ft_lstclear(&g_lsty, &del_content);
+	// if (move == EDGE_MOV)
+	// 	ft_printf("EDGE_t = %d\n", times);
+	// if (move == TOP_MOV)
+	// 	ft_printf("TOP_t = %d\n", times);
+	// if (move == BOT_MOV)
+	// 	ft_printf("BOT_t = %d\n", times);
 	return (times);
 }
 
@@ -138,15 +176,19 @@ int	from_bot_move(int midx, t_list **lst, int stack1, int stack2)
 static int	move_push(int nb, t_list **lst, int stack1, int stack2)
 {
 	int times;
+	int t;
 	int	is_print;
 
 	times = 0;
-	if (stack1 == STACK_X || stack1 == STACK_Y)
+	t = 0;
+	if (stack1 == STACK_X || stack1 == STACK_Y || stack2 == STACK_X || stack2 == STACK_Y)
 		is_print = NOPRINT;
 	else
 		is_print = PRINT;
-	times += move_top(nb, *lst, stack1, is_print);
+	t = move_top(nb, *lst, stack1, is_print);
+	times += t;
 	push(stack2, is_print);
+	// ft_printf("t = %d\n", ++t);
 	return (++times);
 }
 

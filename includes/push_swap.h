@@ -54,6 +54,7 @@ void	complete_sort(void);
 int		from_top_move(int midx, t_list **lst, int stack1, int stack2);
 int		from_bot_move(int midx, t_list **lst, int stack1, int stack2);
 int		from_edge_move(int midx, t_list **lst, int stack1, int stack2);
+void	short_move(int midx, t_list **lst, int stack1, int stack2);
 int		sim_move(int move, int midx, int stack1, int stack2);
 
 // template

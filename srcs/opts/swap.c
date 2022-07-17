@@ -24,7 +24,7 @@ static void	opt_swap(int stack);
  */
 void	swap(int stack, int is_print)
 {
-	if (stack == STACK_X || stack == STACK_Y || stack == STACK_Z)
+	if (stack == STACK_X || stack == STACK_Y)
 		sim_swap(stack);
 	else
 		opt_swap(stack);

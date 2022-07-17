@@ -49,7 +49,6 @@ static void	sort(void)
 
 	i = 0;
 	set_sort_arr();
-
 	// ft_printf("\n= RUN =\n");
 	// while (i < g_tmp.n)
 	// {
@@ -66,7 +65,7 @@ static void	sort(void)
 	// if (is_sorted_lst(g_lst1))
 	// 	ft_printf("\nSORTED\n");
 	// lst_print();
-	// ft_printf("\n= Finish =\n");
+	// ft_printf("= Finish =\n");
 
 	// lst_print();
 	// rotate(MODE_A);

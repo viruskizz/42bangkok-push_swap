@@ -27,7 +27,7 @@ static void	sim_push(int stack);
  */
 void	push(int stack, int is_print)
 {
-	if (stack == STACK_X || stack == STACK_Y || stack == STACK_Z)
+	if (stack == STACK_X || stack == STACK_Y)
 		sim_push(stack);
 	else
 		opt_push(stack);

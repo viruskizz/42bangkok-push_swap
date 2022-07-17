@@ -18,7 +18,7 @@ static void	sim_rotate(int stack);
 
 void	rotate(int stack, int is_print)
 {
-	if (stack == STACK_X || stack == STACK_Y || stack == STACK_Z)
+	if (stack == STACK_X || stack == STACK_Y)
 		sim_rotate(stack);
 	else
 		opt_rotate(stack);
@@ -36,7 +36,7 @@ static void	opt_rotate(int stack)
 		ft_printf("rb\n");
 	}
 	else if (g_lst1 && g_lst2
-		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 1)
+		&& ft_lstsize(g_lst1) > 1 && ft_lstsize(g_lst2) > 1)
 	{
 		rotate_lst(&g_lst1);
 		rotate_lst(&g_lst2);
@@ -57,7 +57,7 @@ static void	sim_rotate(int stack)
 		rotate_lst(&g_lst2);
 	}
 	else if (g_lstx && g_lsty
-		&& ft_lstsize(g_lstx) > 2 && ft_lstsize(g_lsty) > 1)
+		&& ft_lstsize(g_lstx) > 1 && ft_lstsize(g_lsty) > 1)
 	{
 		rotate_lst(&g_lstx);
 		rotate_lst(&g_lsty);
