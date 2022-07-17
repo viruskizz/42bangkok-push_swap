@@ -21,8 +21,8 @@ void	complete_sort(void)
 	while (nidx < g_tmp.n)
 	{
 		// ft_printf("move: %d\n", g_tmp.ar[nidx]);
-		move_top(g_tmp.ar[nidx], g_lst2, MODE_B);
-		push(MODE_A);
+		move_top(g_tmp.ar[nidx], g_lst2, STACK_B);
+		push(STACK_A);
 		nidx++;
 	}
 }
@@ -36,7 +36,7 @@ void	bottom_sort(void)
 	if (is_sorted_lst(g_lst1))
 		return ;
 	else if (ft_lstsize(g_lst1) == 2)
-		swap(MODE_A);
+		swap(STACK_A);
 	else if (ft_lstsize(g_lst1) == 3)
 	{
 		max = g_tmp.ar[0];
@@ -44,12 +44,12 @@ void	bottom_sort(void)
 		min = g_tmp.ar[2];
 		if (lst_idx(g_lst1, max) == 2
 			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 1))
-			rotate(MODE_A);
+			rotate(STACK_A);
 		if (lst_idx(g_lst1, max) == 1
 			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 2))
-			reverse(MODE_A);
+			reverse(STACK_A);
 		if (lst_idx(g_lst1, max) == 0 && lst_idx(g_lst1, min) == 1)
-			swap(MODE_A);
+			swap(STACK_A);
 	}
 }
 
@@ -89,16 +89,16 @@ void	pre_sort(void)
 			if (bptr && cint(bptr) <= mid)
 			{
 				// ft_printf("move: %d\n", cint(bptr));
-				move_top(cint(bptr), g_lst1, MODE_A);
-				push(MODE_B);
+				move_top(cint(bptr), g_lst1, STACK_A);
+				push(STACK_B);
 				break;
 			}
 			else if (fptr && cint(fptr) <= mid)
 			{
 				// lst_print();
 				// ft_printf("move: %d\n", cint(fptr));
-				move_top(cint(fptr), g_lst1, MODE_A);
-				push(MODE_B);
+				move_top(cint(fptr), g_lst1, STACK_A);
+				push(STACK_B);
 				break;
 			}
 			fidx++;
@@ -133,8 +133,8 @@ void	pre_sort(void)
 // 		{
 // 			if (cint(fptr) <= mid)
 // 			{
-// 				move_top(cint(fptr), g_lst1, MODE_A);
-// 				push(MODE_B);
+// 				move_top(cint(fptr), g_lst1, STACK_A);
+// 				push(STACK_B);
 // 			}
 // 			fptr = fptr->next;
 // 		}

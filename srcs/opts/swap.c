@@ -18,11 +18,11 @@ static void	swap_two(t_list **lst);
 /**
  * @brief swap top and prev-top
  * 9 7 8 5 -> 9 7 5 8
- * @param mode MODE_A or MODE_B or MODE_S select stact to swap a or b or same
+ * @param mode STACK_A or STACK_B or STACK_S select stact to swap a or b or same
  */
 void	swap(int mode)
 {
-	if (mode == MODE_A && g_lst1 && ft_lstsize(g_lst1) > 1)
+	if (mode == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
 		if (ft_lstsize(g_lst1) == 2)
 			swap_two(&g_lst1);
@@ -30,7 +30,7 @@ void	swap(int mode)
 			swap_lst(&g_lst1);
 		ft_printf("sa\n");
 	}
-	else if (mode == MODE_B && g_lst2 && ft_lstsize(g_lst2) > 1)
+	else if (mode == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
 		if (ft_lstsize(g_lst2) == 2)
 			swap_two(&g_lst2);

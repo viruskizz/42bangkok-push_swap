@@ -16,12 +16,12 @@ static void	rotate_lst(t_list **lst);
 
 void	rotate(int mode)
 {
-	if (mode == MODE_A && g_lst1 && ft_lstsize(g_lst1) > 2)
+	if (mode == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 2)
 	{
 		rotate_lst(&g_lst1);
 		ft_printf("ra\n");
 	}
-	else if (mode == MODE_B && g_lst2 && ft_lstsize(g_lst2) > 2)
+	else if (mode == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 2)
 	{
 		rotate_lst(&g_lst2);
 		ft_printf("rb\n");
