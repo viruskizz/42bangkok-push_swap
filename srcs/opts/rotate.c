@@ -13,26 +13,54 @@
 #include "push_swap.h"
 
 static void	rotate_lst(t_list **lst);
-static void print_opt(char *str, int is_print);
+static void	opt_rotate(int stack);
+static void	sim_rotate(int stack);
 
 void	rotate(int stack, int is_print)
+{
+	if (stack == STACK_X || stack == STACK_Y || stack == STACK_Z)
+		sim_rotate(stack);
+	else
+		opt_rotate(stack);
+}
+static void	opt_rotate(int stack)
 {
 	if (stack == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
 		rotate_lst(&g_lst1);
-		print_opt("ra", is_print);
+		ft_printf("ra\n");
 	}
 	else if (stack == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
 		rotate_lst(&g_lst2);
-		print_opt("rb", is_print);
+		ft_printf("rb\n");
 	}
 	else if (g_lst1 && g_lst2
 		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 1)
 	{
 		rotate_lst(&g_lst1);
 		rotate_lst(&g_lst2);
-		print_opt("rr", is_print);
+		ft_printf("rr\n");
+	}
+}
+
+static void	sim_rotate(int stack)
+{
+	t_list	*lst;
+
+	if (stack == STACK_X && g_lstx && ft_lstsize(g_lstx) > 1)
+	{
+		rotate_lst(&g_lst1);
+	}
+	else if (stack == STACK_Y && g_lsty && ft_lstsize(g_lsty) > 1)
+	{
+		rotate_lst(&g_lst2);
+	}
+	else if (g_lstx && g_lsty
+		&& ft_lstsize(g_lstx) > 2 && ft_lstsize(g_lsty) > 1)
+	{
+		rotate_lst(&g_lstx);
+		rotate_lst(&g_lsty);
 	}
 }
 
@@ -51,10 +79,4 @@ static void	rotate_lst(t_list **lst)
 	(*lst)->prev = NULL;
 	(*lst)->next = ft;
 	ft->prev = *lst;
-}
-
-static void print_opt(char *str, int is_print)
-{
-	if (is_print)
-		ft_printf("%s\n", str);
 }

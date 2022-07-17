@@ -20,16 +20,21 @@
 # define STACK_A	1
 # define STACK_B	2
 # define STACK_S	3
+# define STACK_X	98
+# define STACK_Y	99
+# define STACK_Z	100
 # define TESTING	0
 # define RUNNING	1
 # define PRINT		1
 # define NOPRINT	0
-# define SORT_5		5
-# define SORT_100	100
-# define SORT_500	500
+# define EDGE_MOV	50
+# define TOP_MOV	99
+# define BOT_MOV	0
 
 t_list		*g_lst1;
 t_list		*g_lst2;
+t_list		*g_lstx;
+t_list		*g_lsty;
 typedef struct  s_template
 {
 	int *ar;
@@ -46,7 +51,10 @@ void	pre_sort(void);
 void	bottom_sort(void);
 void	complete_sort(void);
 
-int		short_move(int midx, t_list **lst, int stack1, int stack2);
+int		from_top_move(int midx, t_list **lst, int stack1, int stack2);
+int		from_bot_move(int midx, t_list **lst, int stack1, int stack2);
+int		from_edge_move(int midx, t_list **lst, int stack1, int stack2);
+int		sim_move(int move, int midx, int stack1, int stack2);
 
 // template
 void	set_sort_arr();
@@ -58,8 +66,10 @@ t_list	*set_var_str(char *str);
 void	del_content(void *content);
 int		cint(t_list *lst);
 void	lst_print();
+void	lst_debug(char *str, t_list *lst);
 int		lst_idx(t_list *lst, int nb);
 t_list	*lst_ptr(t_list *lst, int idx);
+t_list	*lst_clone(t_list *lst);
 
 // operation
 void	swap(int stack, int is_print);

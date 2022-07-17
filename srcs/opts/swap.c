@@ -14,7 +14,8 @@
 
 static void	swap_lst(t_list **lst);
 static void	swap_two(t_list **lst);
-static void print_opt(char *str, int is_print);
+static void	sim_swap(int stack);
+static void	opt_swap(int stack);
 
 /**
  * @brief swap top and prev-top
@@ -23,22 +24,48 @@ static void print_opt(char *str, int is_print);
  */
 void	swap(int stack, int is_print)
 {
+	if (stack == STACK_X || stack == STACK_Y || stack == STACK_Z)
+		sim_swap(stack);
+	else
+		opt_swap(stack);
+}
+
+static void	opt_swap(int stack)
+{
 	if (stack == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
 		swap_lst(&g_lst1);
-		print_opt("sa", is_print);
+		ft_printf("sa\n");
 	}
 	else if (stack == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
 		swap_lst(&g_lst2);
-		print_opt("sb", is_print);
+		ft_printf("sb\n");
 	}
 	else if (g_lst1 && g_lst2
 		&& ft_lstsize(g_lst1) > 1 && ft_lstsize(g_lst2) > 1)
 	{
 		swap_lst(&g_lst1);
 		swap_lst(&g_lst2);
-		print_opt("ss", is_print);
+		ft_printf("ss\n");
+	}
+}
+
+static void	sim_swap(int stack)
+{
+	if (stack == STACK_X && g_lstx && ft_lstsize(g_lstx) > 1)
+	{
+		swap_lst(&g_lstx);
+	}
+	else if (stack == STACK_Y && g_lst2 && ft_lstsize(g_lsty) > 1)
+	{
+		swap_lst(&g_lsty);
+	}
+	else if (g_lstx && g_lsty
+		&& ft_lstsize(g_lstx) > 1 && ft_lstsize(g_lsty) > 1)
+	{
+		swap_lst(&g_lstx);
+		swap_lst(&g_lsty);
 	}
 }
 
@@ -74,10 +101,4 @@ static void	swap_two(t_list **lst)
 	ft->prev = lt;
 	lt->next = ft;
 	lt->prev = NULL;
-}
-
-static void print_opt(char *str, int is_print)
-{
-	if (is_print)
-		ft_printf("%s\n", str);
 }

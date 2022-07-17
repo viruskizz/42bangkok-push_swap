@@ -13,26 +13,53 @@
 #include "push_swap.h"
 
 static void	reverse_lst(t_list **lst);
-static void print_opt(char *str, int is_print);
+static void	opt_reverse(int stack);
+static void	sim_reverse(int stack);
 
 void	reverse(int stack, int is_print)
+{
+	if (stack == STACK_X || stack == STACK_Y || stack == STACK_Z)
+		sim_reverse(stack);
+	else
+		opt_reverse(stack);
+}
+
+static void	opt_reverse(int stack)
 {
 	if (stack == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
 		reverse_lst(&g_lst1);
-		print_opt("rra", is_print);
+		ft_printf("rra\n");
 	}
 	else if (stack == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst2);
-		print_opt("rrb", is_print);
+		ft_printf("rrb\n");
 	}
 	else if (g_lst1 && g_lst2
 		&& ft_lstsize(g_lst1) > 2 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst1);
 		reverse_lst(&g_lst2);
-		print_opt("rrr", is_print);
+		ft_printf("rrr\n");
+	}
+}
+
+static void	sim_reverse(int stack)
+{
+	if (stack == STACK_X && g_lstx && ft_lstsize(g_lstx) > 1)
+	{
+		reverse_lst(&g_lstx);
+	}
+	else if (stack == STACK_Y && g_lsty && ft_lstsize(g_lsty) > 1)
+	{
+		reverse_lst(&g_lsty);
+	}
+	else if (g_lstx && g_lsty
+		&& ft_lstsize(g_lstx) > 2 && ft_lstsize(g_lsty) > 1)
+	{
+		reverse_lst(&g_lstx);
+		reverse_lst(&g_lsty);
 	}
 }
 
@@ -50,10 +77,4 @@ static void	reverse_lst(t_list **lst)
 	lt->next = ft;
 	ft->prev = lt;
 	ft->next = NULL;
-}
-
-static void print_opt(char *str, int is_print)
-{
-	if (is_print)
-		ft_printf("%s\n", str);
 }

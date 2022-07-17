@@ -12,6 +12,27 @@
 
 #include "push_swap.h"
 
+t_list	*lst_clone(t_list *lst)
+{
+	t_list	*new;
+	t_list	*tmp;
+	int		*nb;
+
+	tmp = NULL;
+	while(lst)
+	{
+		nb = malloc(sizeof(int));
+		*nb = cint(lst);
+		new = ft_lstnew(nb);
+		if (tmp)
+			ft_lstadd_back(&tmp, new);
+		else
+			tmp = new;
+		lst = lst->next;
+	}
+	return (tmp);
+}
+
 int	lst_idx(t_list *lst, int nb)
 {
 	t_list	*ptr;
@@ -72,6 +93,19 @@ void	lst_print(void)
 	{
 		ft_printf("%d ", cint(tmp2));
 		tmp2 = tmp2->next;
+	}
+	ft_printf("\n");
+}
+
+void	lst_debug(char *str, t_list *lst)
+{
+	if (!lst)
+		return ;
+	ft_printf("%s", str);
+	while (lst)
+	{
+		ft_printf("%d ", cint(lst));
+		lst = lst->next;
 	}
 	ft_printf("\n");
 }

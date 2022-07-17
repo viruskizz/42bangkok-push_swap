@@ -57,11 +57,7 @@ void	pre_sort(void)
 {
 	int		mid;
 	int		midx;
-	int		fidx;
-	int		bidx;
 	int		ridx;
-	t_list	*fptr;
-	t_list	*bptr;
 
 	if (g_tmp.n > 499)
 		ridx = g_tmp.n / 11;
@@ -73,76 +69,21 @@ void	pre_sort(void)
 		midx = ft_lstsize(g_lst1) - ridx;
 	else
 		midx = 3;
-	if (midx < 3)
-		return;
-	// ft_printf("%d/%d\n", ridx, ft_lstsize(g_lst1));
+	// ft_printf("%d - %d\n", ft_lstsize(g_lst1), ridx);
 	// ft_printf("[%d]: %d\n", midx, g_tmp.ar[midx]);
-	short_move(midx, &g_lst1, STACK_A, STACK_B);
-	// mid = g_tmp.ar[midx];
-	// while (ft_lstsize(g_lst1) > midx)
-	// {
-	// 	fidx = 0;
-	// 	bidx = ft_lstsize(g_lst1) - 1;
-	// 	while (bidx != fidx)
-	// 	{
-	// 		fptr = lst_ptr(g_lst1, fidx);
-	// 		bptr = lst_ptr(g_lst1, bidx);
-	// 		if (bptr && cint(bptr) <= mid)
-	// 		{
-	// 			// ft_printf("move: %d\n", cint(bptr));
-	// 			move_top(cint(bptr), g_lst1, STACK_A);
-	// 			push(STACK_B, PRINT);
-	// 			break;
-	// 		}
-	// 		else if (fptr && cint(fptr) <= mid)
-	// 		{
-	// 			// lst_print();
-	// 			// ft_printf("move: %d\n", cint(fptr));
-	// 			move_top(cint(fptr), g_lst1, STACK_A);
-	// 			push(STACK_B, PRINT);
-	// 			break;
-	// 		}
-	// 		fidx++;
-	// 		bidx--;
-	// 	}
-	// 	// ft_printf("%d/%d, %d\n", ridx, ft_lstsize(g_lst1), midx);
-	// 	// lst_print();
-	// }
+	// if (midx < 3)
+	// 	return;
+
+	// sim_move(EDGE_MOV, midx, STACK_A, STACK_B);
+	from_edge_move(midx, &g_lst1, STACK_A, STACK_B);
+	// from_top_move(midx, &g_lst1, STACK_A, STACK_B);
+	// from_bot_move(midx, &g_lst1, STACK_A, STACK_B);
+
 	// ft_printf(">presorted<\n");
 	// lst_print();
 	if (ft_lstsize(g_lst1) > 3)
 		pre_sort();
 }
-
-// void	pre_sort(void)
-// {
-// 	int		mid;
-// 	int		midx;
-// 	t_list	*fptr;
-// 	t_list	*bptr;
-
-// 	fptr = g_lst1;
-// 	if (ft_lstsize(g_lst1) > 6)
-// 		midx = ft_lstsize(g_lst1) / 2;
-// 	else
-// 		midx = 3;
-// 	mid = g_tmp.ar[midx];
-// 	while (ft_lstsize(g_lst1) > midx)
-// 	{
-// 		fptr = g_lst1;
-// 		while (fptr)
-// 		{
-// 			if (cint(fptr) <= mid)
-// 			{
-// 				move_top(cint(fptr), g_lst1, STACK_A);
-// 				push(STACK_B);
-// 			}
-// 			fptr = fptr->next;
-// 		}
-// 	}
-// 	if (ft_lstsize(g_lst1) > 3)
-// 		pre_sort();
-// }
 
 static void	move_top(int nb, t_list	*lst, int stack)
 {
@@ -167,43 +108,3 @@ static void	move_top(int nb, t_list	*lst, int stack)
 			rotate(stack, PRINT);
 	}
 }
-
-static int	sim_top(int nb, t_list	*lst, int stack)
-{
-	int		size;
-	int		lidx;
-	int		times;
-
-	lidx = lst_idx(lst, nb);
-	if (lidx == size - 2)
-		times = 1;
-	else if (lidx < size / 2)
-		times = lidx + 1;
-	else
-		times = size - lidx - 1;
-	return (times);
-}
-
-// static void	move_range_top(int min, int max, t_list	*lst, int stack)
-// {
-// 	int		size;
-// 	int		lidx;
-// 	int		times;
-
-// 	size = ft_lstsize(lst);
-// 	lidx = lst_idx(lst, nb);
-// 	if (lidx == size - 2)
-// 		swap(stack);
-// 	else if (lidx < size / 2)
-// 	{
-// 		times = lidx + 1;
-// 		while (times-- > 0)
-// 			reverse(stack);
-// 	}
-// 	else
-// 	{
-// 		times = size - lidx - 1;
-// 		while (times-- > 0)
-// 			rotate(stack);
-// 	}
-// }
