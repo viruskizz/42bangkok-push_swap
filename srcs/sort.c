@@ -14,6 +14,7 @@
 static void	move_top(int nb, t_list	*lst, int stack);
 static int	top_swap(void);
 static int	move_top_times(int nb, t_list *lst);
+static void	top_sort(void);
 
 static int	top_push_back(int nb)
 {
@@ -70,6 +71,48 @@ void	complete_sort(void)
 	}
 }
 
+/**
+ * @brief 
+ * 
+ */
+// void	complete_sort()
+// {
+// 	int	max_idx;
+// 	int	min_idx;
+// 	int	p;
+// 	int	lidx;
+// 	int	nb;
+
+// 	while (ft_lstsize(g_lst2) > 0)
+// 	{
+// 		max_idx = ft_lstsize(g_lst1);
+// 		min_idx = max_idx + 2;
+// 		if (min_idx > g_tmp.n - 1)
+// 			min_idx =  g_tmp.n - 1;
+// 		// ft_printf("[%d:%d]: %d,%d\n", min_idx, max_idx, g_tmp.ar[min_idx], g_tmp.ar[max_idx]);
+// 		p = min_idx - max_idx;
+// 		while (p >= 0)
+// 		{
+// 			lidx = ft_lstsize(g_lst2) - 1;
+// 			while (lidx >= 0)
+// 			{
+// 				nb = cint(lst_ptr(g_lst2, lidx));
+// 				if (g_tmp.ar[min_idx] <= nb && nb <= g_tmp.ar[max_idx])
+// 				{
+// 					move_top(nb, g_lst2, STACK_B);
+// 					push(STACK_A, PRINT);
+// 					p--;
+// 					break;
+// 				}
+// 				lidx--;
+// 			}
+// 		}
+// 		top_sort();
+// 		// ft_printf("after topsort\n");
+// 		// lst_print();
+// 	}
+// }
+
 static int	top_swap(void)
 {
 	int		size;
@@ -93,6 +136,7 @@ static int	top_swap(void)
 	return (1);
 }
 
+
 /**
  * @brief 
  	3		1		3		2		1
@@ -101,24 +145,42 @@ static int	top_swap(void)
 	x		x		x		x		x
 	x		x		1		1		x
 	
-	3		2		1
-	2	ra	1	sa	2
-	1		3		3
-
-	2		1
-	3	rra	2
-	1		3
-
-	1		2		1
-	3	rra	1	sa	2
-	2		3		3
-	2		1
-	1	sa	2
-	3		3
+	3		2		3		1		2		1
+	2	sa	3	ra	1	sa	3	rra	1	sa	2
+	1		1		x		x		3		3
+	x		x		x		x		x		x
+	x		x		2		2		x		x
  */
-void	top_sort(void)
+static void	top_sort(void)
 {
-	
+	int	size;
+	t_list	*top;
+	t_list	*prev;
+	t_list	*pprev;
+
+	size = ft_lstsize(g_lst1);
+	if (size <= 3)
+		bottom_sort();
+
+	top = lst_ptr(g_lst1, size - 1);
+	prev = lst_ptr(g_lst1, size - 2);
+	pprev = lst_ptr(g_lst1, size - 3);
+	// ft_printf("top sort: %d %d %d\n", cint(pprev), cint(prev), cint(top));
+	// lst_print();
+	if (cint(top) > cint(prev) && cint(top) > cint(pprev))
+	{
+		swap(STACK_A, PRINT);
+		top_sort();
+	}
+	if (cint(prev) > cint(top) && cint(prev) > cint(pprev))
+	{
+		rotate(STACK_A, PRINT);
+		swap(STACK_A, PRINT);
+		reverse(STACK_A, PRINT);
+		top_sort();
+	}
+	if (cint(pprev) > cint(prev) && cint(pprev) > cint(top) && cint(top) > cint(prev))
+		swap(STACK_A, PRINT);
 }
 
 /**
@@ -217,7 +279,7 @@ static void	move_top(int nb, t_list	*lst, int stack)
 	int times;
 	
 	times = move_top_times(nb, lst);
-	ft_printf("%d -> %d\n", nb, times);
+	// ft_printf("%d -> %d\n", nb, times);
 	if (times > 0)
 	{
 		while (times-- > 0)

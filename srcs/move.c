@@ -19,7 +19,7 @@ void	short_move(int midx, t_list **lst, int stack1, int stack2)
 		from_bot_move(midx, &g_lst1, STACK_A, STACK_B);
 	else
 		from_top_move(midx, &g_lst1, STACK_A, STACK_B);
-	from_top_move(midx, &g_lst1, STACK_A, STACK_B);
+	// from_top_move(midx, &g_lst1, STACK_A, STACK_B);
 	// from_edge_move(midx, &g_lst1, STACK_A, STACK_B);
 }
 
@@ -163,14 +163,18 @@ static int	move_top(int nb, t_list	*lst, int stack, int is_print)
 		times = lidx + 1;
 		t = times;
 		while (times-- > 0)
+		{
 			reverse(stack, is_print);
+		}
 	}
 	else
 	{
 		times = size - lidx - 1;
 		t = times;
 		while (times-- > 0)
+		{
 			rotate(stack, is_print);
+		}
 	}
 	return (t);
 }
