@@ -19,7 +19,8 @@ void	short_move(int midx, t_list **lst, int stack1, int stack2)
 		from_bot_move(midx, &g_lst1, STACK_A, STACK_B);
 	else
 		from_top_move(midx, &g_lst1, STACK_A, STACK_B);
-	// from_top_move(midx, &g_lst1, STACK_A, STACK_B);
+	from_top_move(midx, &g_lst1, STACK_A, STACK_B);
+	// from_edge_move(midx, &g_lst1, STACK_A, STACK_B);
 }
 
 int	sim_move(int move, int midx, int stack1, int stack2)
