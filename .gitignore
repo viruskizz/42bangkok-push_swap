@@ -3,3 +3,4 @@
 *.out
 *.dSYM
 .vscode
+push_swap
