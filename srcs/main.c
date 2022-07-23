@@ -49,29 +49,29 @@ static void	sort(void)
 
 	i = 0;
 	set_sort_arr();
-	ft_printf("\n= RUN =\n");
-	while (i < g_tmp.n)
-	{
-		ft_printf("[%d]: %d\n", i, g_tmp.ar[i]);
-		i++;
-	}
+	// ft_printf("\n= RUN =\n");
+	// while (i < g_tmp.n)
+	// {
+	// 	ft_printf("[%d]: %d\n", i, g_tmp.ar[i]);
+	// 	i++;
+	// }
 	// lst_print();
-	// if (ft_lstsize(g_lst1) > 3)
-		// pre_sort();
-	// bottom_sort();
+	if (ft_lstsize(g_lst1) > 3)
+		pre_sort();
+	bottom_sort();
 	// lst_print();
-	// complete_sort();
+	complete_sort();
 	// lst_print();
 	// if (is_sorted_lst(g_lst1))
 	// 	ft_printf("\nSORTED\n");
 	// lst_print();
 	// ft_printf("= Finish =\n");
 
-	lst_print();
-	qsorta(ft_lstsize(g_lst1));
+	// lst_print();
+	// qsorta(ft_lstsize(g_lst1));
 
-	if (is_sorted_lst(g_lst1))
-		ft_printf("\nSORTED\n");
-	lst_print();
-	ft_printf("= Finish =\n");
+	// if (is_sorted_lst(g_lst1))
+	// 	ft_printf("\nSORTED\n");
+	// lst_print();
+	// ft_printf("= Finish =\n");
 }

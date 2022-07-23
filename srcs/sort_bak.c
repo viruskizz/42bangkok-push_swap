@@ -15,6 +15,129 @@ static void	move_top(int nb, t_list	*lst, int stack);
 static int	top_swap(void);
 static int	move_top_times(int nb, t_list *lst);
 static void	top_sort(void);
+static int	top_push_back(int nb);
+
+void	c_sort(int range)
+{
+	int	max;
+	int	min;
+	int	idx;
+	int r;
+	int	p;
+	t_list	*ptr;
+
+	if (ft_lstsize(g_lst2) == 1)
+	{
+		push(STACK_A, PRINT);
+		return;
+	}
+	if (range <= 0)
+		return ;
+	max = g_tmp.ar[ft_lstsize(g_lst1)];
+	if (ft_lstsize(g_lst1) > range && range > 2)
+		min = g_tmp.ar[ft_lstsize(g_lst1) + 2];
+	else
+		min = g_tmp.ar[ft_lstsize(g_lst1) - range];
+	else
+	{
+		min = g_tmp.ar[ft_lstsize(g_lst1)];
+	}
+
+	idx = 0;
+	r = -1;
+	idx = 0;
+	p = 0;
+	ft_printf("%d - %d / %d\n", min, max, range);
+	lst_print();
+	while (p <= max - min && idx < ft_lstsize(g_lst2))
+	{
+		if (r < 0)
+			ptr = lst_ptr(g_lst2, ft_lstsize(g_lst2) - 1 - idx);
+		else
+			ptr = lst_ptr(g_lst2, idx);
+		ft_printf(">>%d\n", cint(ptr));
+		if (ptr && cint(ptr) <= max && cint(ptr) >= min)
+		{
+			if (p == 0)
+			{
+				ft_printf("p1\n");
+				move_top(cint(ptr), g_lst2, STACK_B);
+				push(STACK_A, PRINT);
+				p++;
+			}
+			else if (p == 1)
+			{
+				ft_printf("p2\n");
+				move_top(cint(ptr), g_lst2, STACK_B);
+				push(STACK_A, PRINT);
+				if ((cint(lst_ptr(g_lst1, ft_lstsize(g_lst1) - 1)) > cint(lst_ptr(g_lst1, ft_lstsize(g_lst1) - 2))))
+				{
+					swap(STACK_A, PRINT);
+				}
+				p++;
+			}
+			else if (p == 2)
+			{
+				move_top(cint(ptr), g_lst2, STACK_B);
+				// rotate(STACK_B, PRINT);
+				ft_printf("p3\n");
+				lst_print();
+				if (cint(lst_ptr(g_lst2, ft_lstsize(g_lst2) - 1)) > cint(lst_ptr(g_lst1, ft_lstsize(g_lst1) - 2)))
+				{
+					rotate(STACK_A, PRINT);
+					rotate(STACK_A, PRINT);
+					push(STACK_A, PRINT);
+					reverse(STACK_A, PRINT);
+					reverse(STACK_A, PRINT);
+				}
+				else if(cint(lst_ptr(g_lst2, ft_lstsize(g_lst2) - 1)) > cint(lst_ptr(g_lst1, ft_lstsize(g_lst1) - 1)))
+				{
+					rotate(STACK_A, PRINT);
+					push(STACK_A, PRINT);
+					reverse(STACK_A, PRINT);
+				}
+				else
+				{
+					push(STACK_A, PRINT);
+				}
+				p++;
+			}
+			idx = 0;
+		}
+		else
+		{
+			r = r * -1;
+			if (r < 0)
+				idx++;
+		}
+	}
+	// if (max - min > 0)
+		c_sort(range - p);
+}
+
+void	complete_sort(void)
+{
+	int	nidx;
+	int	ridx;
+	int	nb;
+	int	nb2;
+	int times;
+	int	t;
+	int size;
+	int p;
+	t_list	*ptr;
+
+	if (ft_lstsize(g_lst1) == g_tmp.n && is_sorted_lst(g_lst1))
+		return ;
+	if (g_tmp.n > 499)
+		ridx = g_tmp.n / 11;
+	else if (g_tmp.n > 49)
+		ridx = g_tmp.n / 5;
+	else
+		ridx = g_tmp.n / 2;
+	c_sort(ridx);
+	complete_sort();
+}
 
 static int	top_push_back(int nb)
 {
@@ -29,42 +152,6 @@ static int	top_push_back(int nb)
 		return (1);
 	}
 	return (0);
-}
-
-void	complete_sort(void)
-{
-	int	nidx;
-	int	nb;
-	int times;
-	int	t;
-
-	nidx = ft_lstsize(g_lst1);
-	while (nidx < g_tmp.n)
-	{
-		nb = g_tmp.ar[nidx];
-		times = move_top_times(nb, g_lst2);
-		if (times > 0)
-		{
-			while (times-- > 0)
-			{
-				rotate(STACK_B, PRINT);
-				if (top_push_back(nb - 1))
-					times--;
-			}
-		}
-		else
-		{
-			while (times++ < 0)
-			{
-				reverse(STACK_B, PRINT);
-				top_push_back(nb - 1);
-			}
-		}
-		push(STACK_A, PRINT);
-		if (top_swap())
-			nidx++;
-		nidx++;
-	}
 }
 
 static int	top_swap(void)
