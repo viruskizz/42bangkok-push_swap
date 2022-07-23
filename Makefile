@@ -21,6 +21,7 @@ SRCS		= 	lst_setup.c \
 				template.c \
 				move.c \
 				sort.c \
+				qsort.c \
 				opts/push.c \
 				opts/swap.c \
 				opts/rotate.c \

@@ -25,7 +25,6 @@ static int	top_push_back(int nb)
 	ptr = lst_ptr(g_lst2, size - 1);
 	if (ptr && cint(ptr) == nb)
 	{
-		// ft_printf("push top back: %d\n", cint(ptr));
 		push(STACK_A, PRINT);
 		return (1);
 	}
@@ -43,8 +42,6 @@ void	complete_sort(void)
 	while (nidx < g_tmp.n)
 	{
 		nb = g_tmp.ar[nidx];
-		// move_top(nb, g_lst2, STACK_B);
-		// ft_printf("move: %d\n", nb);
 		times = move_top_times(nb, g_lst2);
 		if (times > 0)
 		{
@@ -63,55 +60,12 @@ void	complete_sort(void)
 				top_push_back(nb - 1);
 			}
 		}
-		// lst_print();
 		push(STACK_A, PRINT);
 		if (top_swap())
 			nidx++;
 		nidx++;
 	}
 }
-
-/**
- * @brief 
- * 
- */
-// void	complete_sort()
-// {
-// 	int	max_idx;
-// 	int	min_idx;
-// 	int	p;
-// 	int	lidx;
-// 	int	nb;
-
-// 	while (ft_lstsize(g_lst2) > 0)
-// 	{
-// 		max_idx = ft_lstsize(g_lst1);
-// 		min_idx = max_idx + 2;
-// 		if (min_idx > g_tmp.n - 1)
-// 			min_idx =  g_tmp.n - 1;
-// 		// ft_printf("[%d:%d]: %d,%d\n", min_idx, max_idx, g_tmp.ar[min_idx], g_tmp.ar[max_idx]);
-// 		p = min_idx - max_idx;
-// 		while (p >= 0)
-// 		{
-// 			lidx = ft_lstsize(g_lst2) - 1;
-// 			while (lidx >= 0)
-// 			{
-// 				nb = cint(lst_ptr(g_lst2, lidx));
-// 				if (g_tmp.ar[min_idx] <= nb && nb <= g_tmp.ar[max_idx])
-// 				{
-// 					move_top(nb, g_lst2, STACK_B);
-// 					push(STACK_A, PRINT);
-// 					p--;
-// 					break;
-// 				}
-// 				lidx--;
-// 			}
-// 		}
-// 		top_sort();
-// 		// ft_printf("after topsort\n");
-// 		// lst_print();
-// 	}
-// }
 
 static int	top_swap(void)
 {
@@ -258,6 +212,7 @@ void	pre_sort(void)
 	if (ft_lstsize(g_lst1) > 3)
 		pre_sort();
 }
+
 static int move_top_times(int nb, t_list *lst)
 {
 	int	times;
@@ -279,7 +234,6 @@ static void	move_top(int nb, t_list	*lst, int stack)
 	int times;
 	
 	times = move_top_times(nb, lst);
-	// ft_printf("%d -> %d\n", nb, times);
 	if (times > 0)
 	{
 		while (times-- > 0)

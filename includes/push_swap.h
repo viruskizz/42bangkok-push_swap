@@ -77,4 +77,8 @@ void	swap(int stack, int is_print);
 void	push(int stack, int is_print);
 void	rotate(int stack, int is_print);
 void	reverse(int stack, int is_print);
+
+int	qsorta(int len);
+int	qsortb(int len);
+
 #endif
