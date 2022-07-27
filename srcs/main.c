@@ -68,7 +68,15 @@ static void	sort(void)
 	// ft_printf("= Finish =\n");
 
 	// lst_print();
-	qsorta(ft_lstsize(g_lst1));
+	if (ft_lstsize(g_lst1) < 500)
+	{
+		if (ft_lstsize(g_lst1) > 3)
+			pre_sort();
+		bottom_sort();
+		complete_sort();
+	}
+	else
+		qsorta(ft_lstsize(g_lst1));
 
 	// if (is_sorted_lst(g_lst1))
 	// 	ft_printf("\nSORTED\n");
