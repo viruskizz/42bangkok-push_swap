@@ -14,8 +14,23 @@
 
 static void	swap_lst(t_list **lst);
 static void	swap_two(t_list **lst);
+static void	sim_swap(int stack);
+static void	opt_swap(int stack);
 
-void	swap(int stack)
+/**
+ * @brief swap top and prev-top
+ * 9 7 8 5 -> 9 7 5 8
+ * @param stack STACK_A or STACK_B or STACK_S select stact to swap a or b or same
+ */
+void	swap(int stack, int is_print)
+{
+	if (stack == STACK_X || stack == STACK_Y)
+		sim_swap(stack);
+	else
+		opt_swap(stack);
+}
+
+static void	opt_swap(int stack)
 {
 	if (stack == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
@@ -33,6 +48,24 @@ void	swap(int stack)
 		swap_lst(&g_lst1);
 		swap_lst(&g_lst2);
 		ft_printf("ss\n");
+	}
+}
+
+static void	sim_swap(int stack)
+{
+	if (stack == STACK_X && g_lstx && ft_lstsize(g_lstx) > 1)
+	{
+		swap_lst(&g_lstx);
+	}
+	else if (stack == STACK_Y && g_lst2 && ft_lstsize(g_lsty) > 1)
+	{
+		swap_lst(&g_lsty);
+	}
+	else if (g_lstx && g_lsty
+		&& ft_lstsize(g_lstx) > 1 && ft_lstsize(g_lsty) > 1)
+	{
+		swap_lst(&g_lstx);
+		swap_lst(&g_lsty);
 	}
 }
 

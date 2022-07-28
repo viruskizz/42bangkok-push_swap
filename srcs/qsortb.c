@@ -20,15 +20,15 @@ int	qsortb(int len)
 	if (is_sorted(g_lst2, len, -1))
 	{
 		while (len--)
-			push(STACK_A, PRINT);
+			push(STACK_A);
 		return (1);
 	}
 	// lst_print();
 	if (len == 2)
 	{
-		swap(STACK_B, PRINT);
+		swap(STACK_B);
 		while (len--)
-			push(STACK_A, PRINT);
+			push(STACK_A);
 		return (1);
 	}
 	mid = find_mid(g_lst2, len);
@@ -39,17 +39,17 @@ int	qsortb(int len)
 	{
 		if (cint(ft_lstlast(g_lst2)) >= mid)
 		{
-			push(STACK_A, PRINT);
+			push(STACK_A);
 			n--;
 		}
 		else
 		{
-			rotate(STACK_B, PRINT);
+			rotate(STACK_B);
 			p++;
 		}
 	}
 	while (len / 2 != ft_lstsize(g_lst2) && p-- > 0)
-		reverse(STACK_B, PRINT);
+		reverse(STACK_B);
 	// lst_print();
 	// ft_printf("START qsorta in B\n");
 	qsorta(len / 2 + len % 2);
@@ -82,19 +82,19 @@ static int	sort3b(void)
 	if (is_sorted(g_lst2, ft_lstsize(g_lst2), -1))
 		return (1);
 	else if (ft_lstsize(g_lst2) == 2)
-		swap(STACK_B, PRINT);
+		swap(STACK_B);
 	else if (ft_lstsize(g_lst2) == 3)
 	{
 		max = g_tmp.ar[0];
 		mid = g_tmp.ar[1];
 		min = g_tmp.ar[2];
 		if (lst_idx(g_lst2, max) == 2 && (lst_idx(g_lst2, min) == 1))
-			rotate(STACK_B, PRINT);
+			rotate(STACK_B);
 		if ((lst_idx(g_lst2, max) == 1 && lst_idx(g_lst2, min) == 0) ||
 			(lst_idx(g_lst2, max) == 0 && lst_idx(g_lst2, min) == 2))
-			swap(STACK_B, PRINT);
+			swap(STACK_B);
 		if (lst_idx(g_lst2, max) == 0 && lst_idx(g_lst2, min) == 1)
-			reverse(STACK_B, PRINT);
+			reverse(STACK_B);
 	}
 	return (1);
 }
@@ -131,23 +131,23 @@ static void	top_sortb(int len)
 	prev = lst_ptr(g_lst2, size - 2);
 	pprev = lst_ptr(g_lst2, size - 3);
 	if (len == 2 && cint(top) < cint(prev))
-		swap(STACK_B, PRINT);
+		swap(STACK_B);
 	if (len != 3)
 		return ;
 	if (cint(top) < cint(prev) && cint(top) < cint(pprev))
 	{
-		swap(STACK_B, PRINT);
+		swap(STACK_B);
 		top_sortb(len);
 	}
 	if (cint(prev) < cint(top) && cint(prev) < cint(pprev))
 	{
-		rotate(STACK_B, PRINT);
-		swap(STACK_B, PRINT);
-		reverse(STACK_B, PRINT);
+		rotate(STACK_B);
+		swap(STACK_B);
+		reverse(STACK_B);
 		top_sortb(len);
 	}
 	if (cint(pprev) < cint(prev) && cint(pprev) < cint(top) && cint(top) < cint(prev))
-		swap(STACK_B, PRINT);
+		swap(STACK_B);
 }
 
 /**
@@ -184,7 +184,7 @@ static void	bottom_sortb(void)
 	if (is_sorted(g_lst2, ft_lstsize(g_lst2), 1))
 		return ;
 	else if (ft_lstsize(g_lst2) == 2 && g_tmp.ar[0]== cint(g_lst2))
-		swap(STACK_B, PRINT);
+		swap(STACK_B);
 	else if (ft_lstsize(g_lst2) == 3)
 	{
 		max = g_tmp.ar[0];
@@ -192,12 +192,12 @@ static void	bottom_sortb(void)
 		min = g_tmp.ar[2];
 		if (lst_idx(g_lst2, min) == 2
 			&& (lst_idx(g_lst2, max) == 0 || lst_idx(g_lst2, max) == 1))
-			rotate(STACK_B, PRINT);
+			rotate(STACK_B);
 		if (lst_idx(g_lst2, min) == 1
 			&& (lst_idx(g_lst2, mid) == 0 || lst_idx(g_lst2, mid) == 2))
-			reverse(STACK_B, PRINT);
+			reverse(STACK_B);
 		if (lst_idx(g_lst2, min) == 0 && lst_idx(g_lst2, max) == 1)
-			swap(STACK_B, PRINT);
+			swap(STACK_B);
 	}
 }
 

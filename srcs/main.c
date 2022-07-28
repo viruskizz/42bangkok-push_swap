@@ -71,7 +71,7 @@ static void	sort(void)
 	if (ft_lstsize(g_lst1) < 500)
 	{
 		if (ft_lstsize(g_lst1) > 3)
-			pre_sort();
+			partition_sort();
 		bottom_sort();
 		complete_sort();
 	}
