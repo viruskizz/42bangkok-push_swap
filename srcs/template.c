@@ -36,6 +36,16 @@ void	set_sort_arr(void)
 	}
 }
 
+void	set_arr_range(void)
+{
+	if (g_tmp.n > 499)
+		g_tmp.range = g_tmp.n / 11;
+	else if (g_tmp.n > 49)
+		g_tmp.range = g_tmp.n / 5;
+	else
+		g_tmp.range = g_tmp.n / 2;
+}
+
 int	sorted_idx(int nb)
 {
 	int		i;

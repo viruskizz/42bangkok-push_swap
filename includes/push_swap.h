@@ -38,6 +38,7 @@ typedef struct  s_template
 {
 	int *ar;
 	int n;
+	int	range;
 }	t_template;
 
 t_template	g_tmp;
@@ -55,7 +56,8 @@ int 	move_top_times(int nb, t_list *lst);
 void	move_top(int nb, t_list	*lst, int stack);
 
 // template
-void	set_sort_arr();
+void	set_sort_arr(void);
+void	set_arr_range(void);
 int		sorted_idx(int nb);
 
 // list function

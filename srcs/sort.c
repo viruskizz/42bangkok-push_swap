@@ -11,75 +11,48 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-static int	top_swap(void);
-
 static int	top_push_back(int nb)
 {
 	t_list	*ptr;
-	int		size;
+	int		times;
+	int		t;
+	int		p;
 
-	size = ft_lstsize(g_lst2);
-	ptr = lst_ptr(g_lst2, size - 1);
-	if (ptr && cint(ptr) == nb)
+	t = move_top_times(nb, g_lst2);
+	times = ft_abs(t);
+	p = 1;
+	while (times-- > 0)
 	{
-		push(STACK_A);
-		return (1);
+		if (t > 0)
+			rotate(STACK_B);
+		else
+			reverse(STACK_B);
+		if (cint(ft_lstlast(g_lst2)) == nb - 1)
+		{
+			push(STACK_A);
+			if (p++ && t > 0)
+				times--;
+		}
 	}
-	return (0);
+	push(STACK_A);
+	return (p);
 }
 
 void	complete_sort(void)
 {
 	int	nidx;
 	int	nb;
-	int times;
-	int	t;
+	int	p;
 
 	nidx = ft_lstsize(g_lst1);
 	while (nidx < g_tmp.n)
 	{
 		nb = g_tmp.ar[nidx];
-		times = move_top_times(nb, g_lst2);
-		if (times > 0)
-		{
-			while (times-- > 0)
-			{
-				rotate(STACK_B);
-				if (top_push_back(nb - 1))
-					times--;
-			}
-		}
-		else
-		{
-			while (times++ < 0)
-			{
-				reverse(STACK_B);
-				top_push_back(nb - 1);
-			}
-		}
-		push(STACK_A);
-		if (top_swap())
-			nidx++;
-		nidx++;
+		p = top_push_back(nb);
+		if (p == 2)
+			swap(STACK_A);
+		nidx += p;
 	}
-}
-
-static int	top_swap(void)
-{
-	int		size;
-	t_list	*top;
-	t_list	*prev;
-
-	size = ft_lstsize(g_lst1);
-	if (size == 1 || is_sorted_lst(g_lst1))
-		return (0);
-	top = lst_ptr(g_lst1, size - 1);
-	prev = lst_ptr(g_lst1, size - 2);
-	if ((cint(top) > cint(prev) && cint(top) - cint(prev) == 1))
-		swap(STACK_A);
-	else
-		return (0);
-	return (1);
 }
 
 /**
@@ -136,23 +109,11 @@ void	bottom_sort(void)
 
 void	partition_sort(void)
 {
-	int		mid;
-	int		midx;
-	int		ridx;
+	int		len;
 
-	if (is_sorted_lst(g_lst1))
-		return ;
-	if (g_tmp.n > 499)
-		ridx = g_tmp.n / 11;
-	else if (g_tmp.n > 49)
-		ridx = g_tmp.n / 5;
-	else
-		ridx = g_tmp.n / 2;
-	if (ft_lstsize(g_lst1) > ridx)
-		midx = ft_lstsize(g_lst1) - ridx;
-	else
-		midx = 3;
-	partition_ab(midx);
-	if (ft_lstsize(g_lst1) > 3)
-		partition_sort();
+	len = ft_lstsize(g_lst1);
+	if (len > 3)
+		partition_ab(g_tmp.ar[len - g_tmp.range]);
+	bottom_sort();
+	complete_sort();
 }

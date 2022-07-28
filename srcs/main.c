@@ -49,6 +49,7 @@ static void	sort(void)
 
 	i = 0;
 	set_sort_arr();
+	set_arr_range();
 	// ft_printf("\n= RUN =\n");
 	// while (i < g_tmp.n)
 	// {
@@ -69,12 +70,7 @@ static void	sort(void)
 
 	// lst_print();
 	if (ft_lstsize(g_lst1) < 500)
-	{
-		if (ft_lstsize(g_lst1) > 3)
-			partition_sort();
-		bottom_sort();
-		complete_sort();
-	}
+		partition_sort();
 	else
 		qsorta(ft_lstsize(g_lst1));
 
