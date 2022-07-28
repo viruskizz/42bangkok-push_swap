@@ -20,7 +20,6 @@ SRCS		= 	lst_setup.c \
 				validate.c \
 				template.c \
 				util.c \
-				move.c \
 				sort.c \
 				qsorta.c \
 				qsortb.c \

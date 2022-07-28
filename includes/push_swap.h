@@ -74,8 +74,8 @@ void	push(int stack);
 void	rotate(int stack);
 void	reverse(int stack);
 
-int	qsorta(int len);
-int	qsortb(int len);
+void	qsorta(int len);
+void	qsortb(int len);
 
 int		find_mid(t_list *lst, int len);
 int		is_sorted(t_list *lst, int len, int cmp);

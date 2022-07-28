@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   util.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/28 18:06:51 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/07/28 18:06:52 by tsomsa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	find_mid(t_list *lst, int len)
@@ -5,15 +17,9 @@ int	find_mid(t_list *lst, int len)
 	t_list	*tmp;
 	t_list	*ptr;
 	t_list	*chk;
-	int		n;
 	int		idx;
 
-	if (len <= 0)
-		return (cint(lst));
-	n = ft_lstsize(lst) - len;
-	ptr = lst;
-	while (n-- > 0)
-		ptr = ptr->next;
+	ptr = lst_ptr(lst, ft_lstsize(lst) - len);
 	tmp = ptr;
 	while (ptr)
 	{
@@ -58,4 +64,37 @@ int	is_sorted(t_list *lst, int len, int cmp)
 		chk = chk->next;
 	}
 	return (1);
+}
+
+int	move_top_times(int nb, t_list *lst)
+{
+	int	times;
+	int	size;
+	int	lidx;
+
+	size = ft_lstsize(lst);
+	lidx = lst_idx(lst, nb);
+	if (size < 2 || lidx == size - 1)
+		return (0);
+	if (lidx < size / 2)
+		return (lidx * -1 - 1);
+	else
+		return (size - lidx - 1);
+}
+
+void	move_top(int nb, t_list	*lst, int stack)
+{
+	int	times;
+
+	times = move_top_times(nb, lst);
+	if (times > 0)
+	{
+		while (times-- > 0)
+			rotate(stack);
+	}
+	else
+	{
+		while (times++ < 0)
+			reverse(stack);
+	}
 }

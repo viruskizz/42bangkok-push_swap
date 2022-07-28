@@ -16,18 +16,18 @@ static void	sort3a(int len);
 static void	sort3a_opt(int top, int prev, int pprev, int len);
 static void	bottom_sorta(void);
 
-int	qsorta(int len)
+void	qsorta(int len)
 {
 	int	mid;
 	int	n;
 	int	p;
 
 	if (is_sorted(g_lst1, len, 1))
-		return (1);
+		return ;
 	if (len <= 3)
 		sort3a(len);
 	if (ft_lstsize(g_lst1) <= 3)
-		return (1);
+		return ;
 	mid = find_mid(g_lst1, len);
 	n = len;
 	p = 0;
@@ -42,7 +42,6 @@ int	qsorta(int len)
 		reverse(STACK_A);
 	qsorta(len / 2 + len % 2);
 	qsortb(len / 2);
-	return (0);
 }
 
 static void	sort3a(int len)
@@ -60,7 +59,7 @@ static void	sort3a(int len)
 	pprev = lst_ptr(g_lst1, size - 3);
 	if (len == 2 && cint(top) > cint(prev))
 		swap(STACK_A);
-	else
+	else if (len == 3)
 		sort3a_opt(cint(top), cint(prev), cint(pprev), len);
 }
 

@@ -78,7 +78,6 @@ void	lst_print(void)
 
 void	lst_debug(char *str, t_list *lst)
 {
-
 	ft_printf("%s", str);
 	while (lst)
 	{
