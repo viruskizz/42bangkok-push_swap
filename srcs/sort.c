@@ -14,7 +14,6 @@
 static void	move_top(int nb, t_list	*lst, int stack);
 static int	top_swap(void);
 static int	move_top_times(int nb, t_list *lst);
-static void	top_sort(void);
 
 static int	top_push_back(int nb)
 {
@@ -90,53 +89,6 @@ static int	top_swap(void)
 	return (1);
 }
 
-
-/**
- * @brief
- 	3		1		3		2		1
-	1		3		2		3		2
-	2	sa	2	ra	x	sa	x	rra	3
-	x		x		x		x		x
-	x		x		1		1		x
-
-	3		2		3		1		2		1
-	2	sa	3	ra	1	sa	3	rra	1	sa	2
-	1		1		x		x		3		3
-	x		x		x		x		x		x
-	x		x		2		2		x		x
- */
-static void	top_sort(void)
-{
-	int	size;
-	t_list	*top;
-	t_list	*prev;
-	t_list	*pprev;
-
-	size = ft_lstsize(g_lst1);
-	if (size <= 3)
-		bottom_sort();
-
-	top = lst_ptr(g_lst1, size - 1);
-	prev = lst_ptr(g_lst1, size - 2);
-	pprev = lst_ptr(g_lst1, size - 3);
-	// ft_printf("top sort: %d %d %d\n", cint(pprev), cint(prev), cint(top));
-	// lst_print();
-	if (cint(top) > cint(prev) && cint(top) > cint(pprev))
-	{
-		swap(STACK_A, PRINT);
-		top_sort();
-	}
-	if (cint(prev) > cint(top) && cint(prev) > cint(pprev))
-	{
-		rotate(STACK_A, PRINT);
-		swap(STACK_A, PRINT);
-		reverse(STACK_A, PRINT);
-		top_sort();
-	}
-	if (cint(pprev) > cint(prev) && cint(pprev) > cint(top) && cint(top) > cint(prev))
-		swap(STACK_A, PRINT);
-}
-
 /**
  * @brief Sort only last 3 elements in list
  * @param lst
@@ -207,8 +159,7 @@ void	pre_sort(void)
 		midx = ft_lstsize(g_lst1) - ridx;
 	else
 		midx = 3;
-	short_move(midx, &g_lst1, STACK_A, STACK_B);
-	// lst_print();
+	from_top_move(midx, &g_lst1, STACK_A, STACK_B);
 	if (ft_lstsize(g_lst1) > 3)
 		pre_sort();
 }
