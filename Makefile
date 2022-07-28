@@ -1,4 +1,5 @@
 NAME		= push_swap
+CNAME		= checker
 CC			= gcc
 # CFLAGS		= -Wall -Wextra -Werror
 RM			= /bin/rm -f
@@ -13,25 +14,37 @@ INCLUDES 	= -I$(INCLUDE_DIR) \
 LIBS		= -L$(LIBFT_DIR) -lft \
 			  -L$(PRINTF_DIR) -lftprintf
 
-BUILD_DIR	= build
 SRC_DIR		= ./srcs
-SRCS		= 	lst_setup.c \
-				lst_opt.c \
-				validate.c \
-				template.c \
-				util.c \
-				sort.c \
-				qsorta.c \
-				qsortb.c \
+UTIL_SRCS = \
+				utils/lst_setup.c \
+				utils/lst_opt.c \
+				utils/sorted.c \
+				utils/util.c \
+				utils/validate.c \
 				opts/push.c \
 				opts/swap.c \
 				opts/rotate.c \
-				opts/reverse.c \
-				main.c
+				opts/reverse.c
+SRCS		= \
+				main.c \
+				psort.c \
+				qsorta.c \
+				qsortb.c \
+				$(UTIL_SRCS)
+
+CSRCS = \
+				checker.c \
+				$(UTIL_SRCS)
+
+BUILD_DIR	= build
+CBUILD_DIR	= cbuild
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
+COBJS = $(CSRCS:%.c=$(CBUILD_DIR)/%.o)
 
 all: $(NAME)
+
+bonus: $(CNAME)
 
 $(NAME): $(OBJS) libs
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
@@ -43,6 +56,19 @@ $(OBJS): $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 restart: cbuild $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
+
+$(CNAME): checker
+
+$(COBJS): $(CBUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(@D)
+	@$(CC) -g $(CFLAGS) $(INCLUDES) -c $< -o $@
+
+checker: $(COBJS) libs
+	$(CC) $(CFLAGS) $(COBJS) $(LIBS) -o $(CNAME)
+
+crestart: ccbuild $(COBJS)
+	$(CC) $(CFLAGS) $(COBJS) $(LIBS) -o $(NAME)
+
 libs:
 	@make -C $(LIBFT_DIR)
 	@make -C $(PRINTF_DIR)
@@ -51,6 +77,9 @@ re: fclean all
 
 cbuild:
 	$(RM) -r $(BUILD_DIR)
+
+ccbuild: 
+	$(RM) -r $(CBUILD_DIR)
 
 clean:
 	make clean -C $(LIBFT_DIR)

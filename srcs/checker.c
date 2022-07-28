@@ -12,8 +12,6 @@
 
 #include "push_swap.h"
 
-static void	sort(void);
-
 int	main(int argc, char *argv[])
 {
 	g_lst1 = NULL;
@@ -36,22 +34,9 @@ int	main(int argc, char *argv[])
 		else if (is_sorted_lst(g_lst1))
 			ft_printf("Error: already sorted argument\n");
 		else
-			sort();
+			ft_printf("SORTING");
 		ft_lstclear(&g_lst1, &del_content);
 		ft_lstclear(&g_lst2, &del_content);
 	}
 	return (0);
-}
-
-static void	sort(void)
-{
-	int		i;
-
-	i = 0;
-	set_sort_arr();
-	set_arr_range();
-	if (ft_lstsize(g_lst1) < 500)
-		partition_sort();
-	else
-		qsorta(ft_lstsize(g_lst1));
 }
