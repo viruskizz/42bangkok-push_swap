@@ -11,48 +11,52 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-static int	top_push_back(int nb)
-{
-	t_list	*ptr;
-	int		times;
-	int		t;
-	int		p;
+static void	partition_ab(int mid);
+static void	bottom_sort(void);
+static void	complete_sort(void);
+static int	top_push_back(int nb);
 
-	t = move_top_times(nb, g_lst2);
-	times = ft_abs(t);
-	p = 1;
-	while (times-- > 0)
-	{
-		if (t > 0)
-			rotate(STACK_B);
-		else
-			reverse(STACK_B);
-		if (cint(ft_lstlast(g_lst2)) == nb - 1)
-		{
-			push(STACK_A);
-			if (p++ && t > 0)
-				times--;
-		}
-	}
-	push(STACK_A);
-	return (p);
+void	partition_sort(void)
+{
+	int		len;
+
+	len = ft_lstsize(g_lst1);
+	if (len > 3)
+		partition_ab(g_tmp.ar[len - g_tmp.range]);
+	bottom_sort();
+	complete_sort();
 }
 
-void	complete_sort(void)
+/*
+partition range from a to b
+*/
+static void	partition_ab(int mid)
 {
-	int	nidx;
-	int	nb;
-	int	p;
+	int		p;
+	int		idx;
+	int		len;
+	t_list	*ptr;
 
-	nidx = ft_lstsize(g_lst1);
-	while (nidx < g_tmp.n)
+	p = g_tmp.range;
+	while (ft_lstsize(g_lst1) > 3 && p-- > 0)
 	{
-		nb = g_tmp.ar[nidx];
-		p = top_push_back(nb);
-		if (p == 2)
-			swap(STACK_A);
-		nidx += p;
+		idx = ft_lstsize(g_lst1) - 1;
+		while (idx >= 0)
+		{
+			ptr = lst_ptr(g_lst1, idx--);
+			if (ptr && cint(ptr) <= mid)
+			{
+				move_top(cint(ptr), g_lst1, STACK_A);
+				push(STACK_B);
+				break ;
+			}
+		}
 	}
+	len = ft_lstsize(g_lst1);
+	if (len > 3 && len > g_tmp.range)
+		partition_ab(g_tmp.ar[len - g_tmp.range]);
+	else if (len > 3)
+		partition_ab(g_tmp.ar[3]);
 }
 
 /**
@@ -81,7 +85,7 @@ Focus on Max and Min value only
 	1	sa	2
 	3		3
 */
-void	bottom_sort(void)
+static void	bottom_sort(void)
 {
 	int		min;
 	int		mid;
@@ -107,13 +111,50 @@ void	bottom_sort(void)
 	}
 }
 
-void	partition_sort(void)
+/**
+ * @brief find max and almost max in B
+ * swap on A if push 2 times from B
+ */
+static void	complete_sort(void)
 {
-	int		len;
+	int	nidx;
+	int	nb;
+	int	p;
 
-	len = ft_lstsize(g_lst1);
-	if (len > 3)
-		partition_ab(g_tmp.ar[len - g_tmp.range]);
-	bottom_sort();
-	complete_sort();
+	nidx = ft_lstsize(g_lst1);
+	while (nidx < g_tmp.n)
+	{
+		nb = g_tmp.ar[nidx];
+		p = top_push_back(nb);
+		if (p == 2)
+			swap(STACK_A);
+		nidx += p;
+	}
+}
+
+static int	top_push_back(int nb)
+{
+	t_list	*ptr;
+	int		times;
+	int		t;
+	int		p;
+
+	t = move_top_times(nb, g_lst2);
+	times = ft_abs(t);
+	p = 1;
+	while (times-- > 0)
+	{
+		if (t > 0)
+			rotate(STACK_B);
+		else
+			reverse(STACK_B);
+		if (cint(ft_lstlast(g_lst2)) == nb - 1)
+		{
+			push(STACK_A);
+			if (p++ && t > 0)
+				times--;
+		}
+	}
+	push(STACK_A);
+	return (p);
 }

@@ -48,12 +48,10 @@ int		is_dup_var(t_list *lst);
 int		is_sorted_lst(t_list *lst);
 
 void	partition_sort(void);
-void	bottom_sort(void);
-void	complete_sort(void);
-void	partition_ab(int midx);
 
 int 	move_top_times(int nb, t_list *lst);
 void	move_top(int nb, t_list	*lst, int stack);
+
 
 // template
 void	set_sort_arr(void);
@@ -78,5 +76,8 @@ void	reverse(int stack);
 
 int	qsorta(int len);
 int	qsortb(int len);
+
+int		find_mid(t_list *lst, int len);
+int		is_sorted(t_list *lst, int len, int cmp);
 
 #endif
