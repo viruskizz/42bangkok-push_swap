@@ -11,82 +11,52 @@
 /* ************************************************************************** */
 #include "push_swap.h"
 
-static void	move_top(int nb, t_list	*lst, int stack);
-static int	top_swap(void);
-static int	move_top_times(int nb, t_list *lst);
+static void	partition_ab(int mid);
+static void	bottom_sort(void);
+static void	complete_sort(void);
+static int	top_push_back(int nb);
 
-static int	top_push_back(int nb)
+void	partition_sort(void)
 {
+	int		len;
+
+	len = ft_lstsize(g_lst1);
+	if (len > 3)
+		partition_ab(g_tmp.ar[len - g_tmp.range]);
+	bottom_sort();
+	complete_sort();
+}
+
+/*
+partition range from a to b
+*/
+static void	partition_ab(int mid)
+{
+	int		p;
+	int		idx;
+	int		len;
 	t_list	*ptr;
-	int		size;
 
-	size = ft_lstsize(g_lst2);
-	ptr = lst_ptr(g_lst2, size - 1);
-	if (ptr && cint(ptr) == nb)
+	p = g_tmp.range;
+	while (ft_lstsize(g_lst1) > 3 && p-- > 0)
 	{
-		push(STACK_A, PRINT);
-		return (1);
-	}
-	return (0);
-}
-
-void	complete_sort(void)
-{
-	int	nidx;
-	int	nb;
-	int times;
-	int	t;
-
-	nidx = ft_lstsize(g_lst1);
-	while (nidx < g_tmp.n)
-	{
-		nb = g_tmp.ar[nidx];
-		times = move_top_times(nb, g_lst2);
-		if (times > 0)
+		idx = ft_lstsize(g_lst1) - 1;
+		while (idx >= 0)
 		{
-			while (times-- > 0)
+			ptr = lst_ptr(g_lst1, idx--);
+			if (ptr && cint(ptr) <= mid)
 			{
-				rotate(STACK_B, PRINT);
-				if (top_push_back(nb - 1))
-					times--;
+				move_top(cint(ptr), g_lst1, STACK_A);
+				push(STACK_B);
+				break ;
 			}
 		}
-		else
-		{
-			while (times++ < 0)
-			{
-				reverse(STACK_B, PRINT);
-				top_push_back(nb - 1);
-			}
-		}
-		push(STACK_A, PRINT);
-		if (top_swap())
-			nidx++;
-		nidx++;
 	}
-}
-
-static int	top_swap(void)
-{
-	int		size;
-	t_list	*top;
-	t_list	*prev;
-
-	size = ft_lstsize(g_lst1);
-	if (size == 1 || is_sorted_lst(g_lst1))
-		return (0);
-	top = lst_ptr(g_lst1, size - 1);
-	prev = lst_ptr(g_lst1, size - 2);
-	if ((cint(top) > cint(prev) && cint(top) - cint(prev) == 1))
-	{
-		// lst_print();
-		// ft_printf("swap: %d<->%d\n", cint(top), cint(prev));
-		swap(STACK_A, PRINT);
-		// lst_print();
-	}
-	else
-		return (0);
-	return (1);
+	len = ft_lstsize(g_lst1);
+	if (len > 3 && len > g_tmp.range)
+		partition_ab(g_tmp.ar[len - g_tmp.range]);
+	else if (len > 3)
+		partition_ab(g_tmp.ar[3]);
 }
 
 /**
@@ -115,7 +85,7 @@ Focus on Max and Min value only
 	1	sa	2
 	3		3
 */
-void	bottom_sort(void)
+static void	bottom_sort(void)
 {
 	int		min;
 	int		mid;
@@ -124,7 +94,7 @@ void	bottom_sort(void)
 	if (is_sorted_lst(g_lst1))
 		return ;
 	else if (ft_lstsize(g_lst1) == 2)
-		swap(STACK_A, PRINT);
+		swap(STACK_A);
 	else if (ft_lstsize(g_lst1) == 3)
 	{
 		max = g_tmp.ar[0];
@@ -132,67 +102,59 @@ void	bottom_sort(void)
 		min = g_tmp.ar[2];
 		if (lst_idx(g_lst1, max) == 2
 			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 1))
-			rotate(STACK_A, PRINT);
+			rotate(STACK_A);
 		if (lst_idx(g_lst1, max) == 1
 			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 2))
-			reverse(STACK_A, PRINT);
+			reverse(STACK_A);
 		if (lst_idx(g_lst1, max) == 0 && lst_idx(g_lst1, min) == 1)
-			swap(STACK_A, PRINT);
+			swap(STACK_A);
 	}
 }
 
-void	pre_sort(void)
+/**
+ * @brief find max and almost max in B
+ * swap on A if push 2 times from B
+ */
+static void	complete_sort(void)
 {
-	int		mid;
-	int		midx;
-	int		ridx;
+	int	nidx;
+	int	nb;
+	int	p;
 
-	if (is_sorted_lst(g_lst1))
-		return ;
-	if (g_tmp.n > 499)
-		ridx = g_tmp.n / 11;
-	else if (g_tmp.n > 49)
-		ridx = g_tmp.n / 5;
-	else
-		ridx = g_tmp.n / 2;
-	if (ft_lstsize(g_lst1) > ridx)
-		midx = ft_lstsize(g_lst1) - ridx;
-	else
-		midx = 3;
-	from_top_move(midx, &g_lst1, STACK_A, STACK_B);
-	if (ft_lstsize(g_lst1) > 3)
-		pre_sort();
-}
-
-static int move_top_times(int nb, t_list *lst)
-{
-	int	times;
-	int	size;
-	int	lidx;
-
-	size = ft_lstsize(lst);
-	lidx = lst_idx(lst, nb);
-	if (size < 2 || lidx == size - 1)
-		return (0);
-	if (lidx < size / 2)
-		return (lidx * -1 - 1);
-	else
-		return (size - lidx - 1);
-}
-
-static void	move_top(int nb, t_list	*lst, int stack)
-{
-	int times;
-
-	times = move_top_times(nb, lst);
-	if (times > 0)
+	nidx = ft_lstsize(g_lst1);
+	while (nidx < g_tmp.n)
 	{
-		while (times-- > 0)
-			rotate(stack, PRINT);
+		nb = g_tmp.ar[nidx];
+		p = top_push_back(nb);
+		if (p == 2)
+			swap(STACK_A);
+		nidx += p;
 	}
-	else
+}
+
+static int	top_push_back(int nb)
+{
+	t_list	*ptr;
+	int		times;
+	int		t;
+	int		p;
+
+	t = move_top_times(nb, g_lst2);
+	times = ft_abs(t);
+	p = 1;
+	while (times-- > 0)
 	{
-		while (times++ < 0)
-			reverse(stack, PRINT);
+		if (t > 0)
+			rotate(STACK_B);
+		else
+			reverse(STACK_B);
+		if (cint(ft_lstlast(g_lst2)) == nb - 1)
+		{
+			push(STACK_A);
+			if (p++ && t > 0)
+				times--;
+		}
 	}
+	push(STACK_A);
+	return (p);
 }

@@ -34,12 +34,11 @@
 
 t_list		*g_lst1;
 t_list		*g_lst2;
-t_list		*g_lstx;
-t_list		*g_lsty;
 typedef struct  s_template
 {
 	int *ar;
 	int n;
+	int	range;
 }	t_template;
 
 t_template	g_tmp;
@@ -48,18 +47,15 @@ int		is_valid_int(char *str);
 int		is_dup_var(t_list *lst);
 int		is_sorted_lst(t_list *lst);
 
-void	pre_sort(void);
-void	bottom_sort(void);
-void	complete_sort(void);
+void	partition_sort(void);
 
-int		from_top_move(int midx, t_list **lst, int stack1, int stack2);
-int		from_bot_move(int midx, t_list **lst, int stack1, int stack2);
-int		from_edge_move(int midx, t_list **lst, int stack1, int stack2);
-void	short_move(int midx, t_list **lst, int stack1, int stack2);
-int		sim_move(int move, int midx, int stack1, int stack2);
+int 	move_top_times(int nb, t_list *lst);
+void	move_top(int nb, t_list	*lst, int stack);
+
 
 // template
-void	set_sort_arr();
+void	set_sort_arr(void);
+void	set_arr_range(void);
 int		sorted_idx(int nb);
 
 // list function
@@ -71,15 +67,17 @@ void	lst_print();
 void	lst_debug(char *str, t_list *lst);
 int		lst_idx(t_list *lst, int nb);
 t_list	*lst_ptr(t_list *lst, int idx);
-t_list	*lst_clone(t_list *lst);
 
 // operation
-void	swap(int stack, int is_print);
-void	push(int stack, int is_print);
-void	rotate(int stack, int is_print);
-void	reverse(int stack, int is_print);
+void	swap(int stack);
+void	push(int stack);
+void	rotate(int stack);
+void	reverse(int stack);
 
-int	qsorta(int len);
-int	qsortb(int len);
+void	qsorta(int len);
+void	qsortb(int len);
+
+int		find_mid(t_list *lst, int len);
+int		is_sorted(t_list *lst, int len, int cmp);
 
 #endif
