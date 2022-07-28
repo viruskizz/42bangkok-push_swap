@@ -30,6 +30,7 @@
 # define EDGE_MOV	50
 # define TOP_MOV	99
 # define BOT_MOV	0
+# define TOC_MOV	55
 
 t_list		*g_lst1;
 t_list		*g_lst2;
