@@ -16,6 +16,7 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include <stdlib.h>
+# include <unistd.h>
 
 # define STACK_A	1
 # define STACK_B	2
@@ -31,6 +32,7 @@
 # define TOP_MOV	99
 # define BOT_MOV	0
 # define TOC_MOV	55
+# define BUF_SIZE	10
 
 t_list		*g_lst1;
 t_list		*g_lst2;
@@ -79,5 +81,8 @@ void	qsortb(int len);
 
 int		find_mid(t_list *lst, int len);
 int		is_sorted(t_list *lst, int len, int cmp);
+
+// checker.h
+int		is_opt(char *str);
 
 #endif

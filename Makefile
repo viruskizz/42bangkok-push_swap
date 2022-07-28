@@ -25,6 +25,7 @@ UTIL_SRCS = \
 				opts/swap.c \
 				opts/rotate.c \
 				opts/reverse.c
+
 SRCS		= \
 				main.c \
 				psort.c \
@@ -67,7 +68,7 @@ checker: $(COBJS) libs
 	$(CC) $(CFLAGS) $(COBJS) $(LIBS) -o $(CNAME)
 
 crestart: ccbuild $(COBJS)
-	$(CC) $(CFLAGS) $(COBJS) $(LIBS) -o $(NAME)
+	$(CC) $(CFLAGS) $(COBJS) $(LIBS) -o $(CNAME)
 
 libs:
 	@make -C $(LIBFT_DIR)
