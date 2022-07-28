@@ -57,24 +57,10 @@ static void	sort(void)
 	// 	i++;
 	// }
 	// lst_print();
-	// if (ft_lstsize(g_lst1) > 3)
-	// 	pre_sort();
-	// bottom_sort();
-	// lst_print();
-	// complete_sort();
-	// lst_print();
-	// if (is_sorted_lst(g_lst1))
-	// 	ft_printf("\nSORTED\n");
-	// lst_print();
-	// ft_printf("= Finish =\n");
-
-	// lst_print();
-	qsorta(ft_lstsize(g_lst1));
-	// if (ft_lstsize(g_lst1) < 500)
-	// 	partition_sort();
-	// else
-	// 	qsorta(ft_lstsize(g_lst1));
-
+	if (ft_lstsize(g_lst1) < 500)
+		partition_sort();
+	else
+		qsorta(ft_lstsize(g_lst1));
 	// if (is_sorted_lst(g_lst1))
 	// 	ft_printf("\nSORTED\n");
 	// lst_print();
