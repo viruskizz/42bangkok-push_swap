@@ -14,7 +14,7 @@
 
 void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	t_list *fst;
+	t_list	*fst;
 
 	if (!*lst)
 		*lst = new;
