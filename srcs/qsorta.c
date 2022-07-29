@@ -34,12 +34,12 @@ void	qsorta(int len)
 	while (n != len / 2 + len % 2)
 	{
 		if (cint(ft_lstlast(g_lst1)) < mid && n--)
-			push(STACK_B);
+			push(STACK_B, PRINT);
 		else if (++p)
-			rotate(STACK_A);
+			rotate(STACK_A, PRINT);
 	}
 	while (len / 2 + len % 2 != ft_lstsize(g_lst1) && p-- > 0)
-		reverse(STACK_A);
+		reverse(STACK_A, PRINT);
 	qsorta(len / 2 + len % 2);
 	qsortb(len / 2);
 }
@@ -58,7 +58,7 @@ static void	sort3a(int len)
 	prev = lst_ptr(g_lst1, size - 2);
 	pprev = lst_ptr(g_lst1, size - 3);
 	if (len == 2 && cint(top) > cint(prev))
-		swap(STACK_A);
+		swap(STACK_A, PRINT);
 	else if (len == 3)
 		sort3a_opt(cint(top), cint(prev), cint(pprev), len);
 }
@@ -81,18 +81,18 @@ static void	sort3a_opt(int top, int prev, int pprev, int len)
 {
 	if (top > prev && top > pprev)
 	{
-		swap(STACK_A);
+		swap(STACK_A, PRINT);
 		sort3a(len);
 	}
 	else if (prev > top && prev > pprev)
 	{
-		rotate(STACK_A);
-		swap(STACK_A);
-		reverse(STACK_A);
+		rotate(STACK_A, PRINT);
+		swap(STACK_A, PRINT);
+		reverse(STACK_A, PRINT);
 		sort3a(len);
 	}
 	else if (pprev > prev && pprev > top && top > prev)
-		swap(STACK_A);
+		swap(STACK_A, PRINT);
 }
 
 /**
@@ -128,7 +128,7 @@ static void	bottom_sorta(void)
 	int		max;
 
 	if (ft_lstsize(g_lst1) == 2 && g_tmp.ar[0] != cint(g_lst1))
-		swap(STACK_A);
+		swap(STACK_A, PRINT);
 	else if (ft_lstsize(g_lst1) == 3)
 	{
 		max = g_tmp.ar[0];
@@ -136,11 +136,11 @@ static void	bottom_sorta(void)
 		min = g_tmp.ar[2];
 		if (lst_idx(g_lst1, max) == 2
 			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 1))
-			rotate(STACK_A);
+			rotate(STACK_A, PRINT);
 		if (lst_idx(g_lst1, max) == 1
 			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 2))
-			reverse(STACK_A);
+			reverse(STACK_A, PRINT);
 		if (lst_idx(g_lst1, max) == 0 && lst_idx(g_lst1, min) == 1)
-			swap(STACK_A);
+			swap(STACK_A, PRINT);
 	}
 }

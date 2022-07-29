@@ -82,7 +82,7 @@ int	move_top_times(int nb, t_list *lst)
 		return (size - lidx - 1);
 }
 
-void	move_top(int nb, t_list	*lst, int stack)
+void	move_top(int nb, t_list	*lst, int stack, int is_print)
 {
 	int	times;
 
@@ -90,11 +90,37 @@ void	move_top(int nb, t_list	*lst, int stack)
 	if (times > 0)
 	{
 		while (times-- > 0)
-			rotate(stack);
+			rotate(stack, is_print);
 	}
 	else
 	{
 		while (times++ < 0)
-			reverse(stack);
+			reverse(stack, is_print);
 	}
+}
+
+void	run_opt(char *str, int is_print)
+{
+	if (!ft_strncmp(str, "rra", 3))
+		reverse(STACK_A, is_print);
+	else if (!ft_strncmp(str, "rrb", 3))
+		reverse(STACK_B, is_print);
+	else if (!ft_strncmp(str, "rrr", 3))
+		reverse(STACK_S, is_print);
+	else if (!ft_strncmp(str, "ra", 2))
+		rotate(STACK_A, is_print);
+	else if (!ft_strncmp(str, "rb", 2))
+		rotate(STACK_B, is_print);
+	else if (!ft_strncmp(str, "rr", 2))
+		rotate(STACK_S, is_print);
+	else if (!ft_strncmp(str, "sa", 2))
+		swap(STACK_A, is_print);
+	else if (!ft_strncmp(str, "sb", 2))
+		swap(STACK_B, is_print);
+	else if (!ft_strncmp(str, "ss", 2))
+		swap(STACK_S, is_print);
+	else if (!ft_strncmp(str, "pa", 2))
+		push(STACK_A, is_print);
+	else if (!ft_strncmp(str, "pb", 2))
+		push(STACK_B, is_print);
 }

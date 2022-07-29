@@ -13,25 +13,26 @@
 #include "push_swap.h"
 
 static void	reverse_lst(t_list **lst);
+static void	print_opt(int is_print, char *opt);
 
-void	reverse(int stack)
+void	reverse(int stack, int is_print)
 {
 	if (stack == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
 		reverse_lst(&g_lst1);
-		ft_printf("rra\n");
+		print_opt(is_print, "rra");
 	}
 	else if (stack == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst2);
-		ft_printf("rrb\n");
+		print_opt(is_print, "rrb");
 	}
 	else if (g_lst1 && g_lst2
 		&& ft_lstsize(g_lst1) > 1 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst1);
 		reverse_lst(&g_lst2);
-		ft_printf("rrr\n");
+		print_opt(is_print, "rrr");
 	}
 }
 
@@ -49,4 +50,10 @@ static void	reverse_lst(t_list **lst)
 	lt->next = ft;
 	ft->prev = lt;
 	ft->next = NULL;
+}
+
+static void	print_opt(int is_print, char *opt)
+{
+	if (is_print)
+		ft_printf("%s\n", opt);
 }

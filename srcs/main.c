@@ -28,13 +28,13 @@ int	main(int argc, char *argv[])
 	else
 		g_lst1 = set_var_nbs(argc, argv);
 	if (!g_lst1)
-		ft_printf("Error: invalid argument\n");
+		write(STDERR_FILENO, &"Error\n", 6);
 	else
 	{
 		if (!is_dup_var(g_lst1))
-			ft_printf("Error: duplicated argument\n");
+			ft_printf("Error\n");
 		else if (is_sorted_lst(g_lst1))
-			ft_printf("Error: already sorted argument\n");
+			ft_printf("Error\n");
 		else
 			sort();
 		ft_lstclear(&g_lst1, &del_content);
@@ -50,19 +50,8 @@ static void	sort(void)
 	i = 0;
 	set_sort_arr();
 	set_arr_range();
-	// ft_printf("\n= RUN =\n");
-	// while (i < g_tmp.n)
-	// {
-	// 	ft_printf("[%d]: %d\n", i, g_tmp.ar[i]);
-	// 	i++;
-	// }
-	// lst_print();
 	if (ft_lstsize(g_lst1) < 500)
 		partition_sort();
 	else
 		qsorta(ft_lstsize(g_lst1));
-	// if (is_sorted_lst(g_lst1))
-	// 	ft_printf("\nSORTED\n");
-	// lst_print();
-	// ft_printf("= Finish =\n");
 }

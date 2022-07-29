@@ -46,8 +46,8 @@ static void	partition_ab(int mid)
 			ptr = lst_ptr(g_lst1, idx--);
 			if (ptr && cint(ptr) <= mid)
 			{
-				move_top(cint(ptr), g_lst1, STACK_A);
-				push(STACK_B);
+				move_top(cint(ptr), g_lst1, STACK_A, PRINT);
+				push(STACK_B, PRINT);
 				break ;
 			}
 		}
@@ -94,7 +94,7 @@ static void	bottom_sort(void)
 	if (is_sorted_lst(g_lst1))
 		return ;
 	else if (ft_lstsize(g_lst1) == 2)
-		swap(STACK_A);
+		swap(STACK_A, PRINT);
 	else if (ft_lstsize(g_lst1) == 3)
 	{
 		max = g_tmp.ar[0];
@@ -102,12 +102,12 @@ static void	bottom_sort(void)
 		min = g_tmp.ar[2];
 		if (lst_idx(g_lst1, max) == 2
 			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 1))
-			rotate(STACK_A);
+			rotate(STACK_A, PRINT);
 		if (lst_idx(g_lst1, max) == 1
 			&& (lst_idx(g_lst1, mid) == 0 || lst_idx(g_lst1, mid) == 2))
-			reverse(STACK_A);
+			reverse(STACK_A, PRINT);
 		if (lst_idx(g_lst1, max) == 0 && lst_idx(g_lst1, min) == 1)
-			swap(STACK_A);
+			swap(STACK_A, PRINT);
 	}
 }
 
@@ -127,7 +127,7 @@ static void	complete_sort(void)
 		nb = g_tmp.ar[nidx];
 		p = top_push_back(nb);
 		if (p == 2)
-			swap(STACK_A);
+			swap(STACK_A, PRINT);
 		nidx += p;
 	}
 }
@@ -145,16 +145,16 @@ static int	top_push_back(int nb)
 	while (times-- > 0)
 	{
 		if (t > 0)
-			rotate(STACK_B);
+			rotate(STACK_B, PRINT);
 		else
-			reverse(STACK_B);
+			reverse(STACK_B, PRINT);
 		if (cint(ft_lstlast(g_lst2)) == nb - 1)
 		{
-			push(STACK_A);
+			push(STACK_A, PRINT);
 			if (p++ && t > 0)
 				times--;
 		}
 	}
-	push(STACK_A);
+	push(STACK_A, PRINT);
 	return (p);
 }
