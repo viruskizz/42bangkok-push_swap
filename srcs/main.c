@@ -45,8 +45,14 @@ static void	sort(void)
 	i = 0;
 	set_sort_arr();
 	set_arr_range();
-	if (ft_lstsize(g_lst1) < 500)
+	if (ft_lstsize(g_lst1) < 200)
 		partition_sort();
 	else
 		qsorta(ft_lstsize(g_lst1));
+
+	// if (!is_sorted_lst())
+	// {
+	// 	ft_printf("== NOT SORT ==\n");
+	// 	lst_print();
+	// }
 }

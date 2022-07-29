@@ -53,7 +53,7 @@ static void	partition_ab(int mid)
 		}
 	}
 	len = ft_lstsize(g_lst1);
-	if (len > 3 && len > g_tmp.range)
+	if (len - g_tmp.range > 3)
 		partition_ab(g_tmp.ar[len - g_tmp.range]);
 	else if (len > 3)
 		partition_ab(g_tmp.ar[3]);
