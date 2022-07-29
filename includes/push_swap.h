@@ -36,10 +36,10 @@
 
 t_list		*g_lst1;
 t_list		*g_lst2;
-typedef struct  s_template
+typedef struct s_template
 {
-	int *ar;
-	int n;
+	int	*ar;
+	int	n;
 	int	range;
 }	t_template;
 
@@ -59,7 +59,7 @@ void	qsortb(int len);
 // validate
 int		is_valid_int(char *str);
 int		is_dup_var(t_list *lst);
-int		is_sorted_lst();
+int		is_sorted_lst(void);
 int		is_opt(char *str);
 
 // template
@@ -72,14 +72,14 @@ t_list	*set_var_nbs(int argc, char *argv[]);
 t_list	*set_var_str(char *str);
 void	del_content(void *content);
 int		cint(t_list *lst);
-void	lst_print();
+void	lst_print(void);
 int		lst_idx(t_list *lst, int nb);
 t_list	*lst_ptr(t_list *lst, int idx);
 
 // util
 int		find_mid(t_list *lst, int len);
 int		is_sorted(t_list *lst, int len, int cmp);
-int 	move_top_times(int nb, t_list *lst);
+int		move_top_times(int nb, t_list *lst);
 void	move_top(int nb, t_list	*lst, int stack, int is_print);
 void	run_opt(char *str, int is_print);
 
