@@ -16,7 +16,7 @@ LIBS		= -L$(LIBFT_DIR) -lft \
 
 SRC_DIR		= ./srcs
 UTIL_SRCS = \
-				utils/lst_setup.c \
+				utils/setup.c \
 				utils/lst_opt.c \
 				utils/sorted.c \
 				utils/util.c \
@@ -58,14 +58,12 @@ restart: cbuild $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) $(LIBS) -o $(NAME)
 
 
-$(CNAME): checker
+$(CNAME): $(COBJS) libs
+	$(CC) $(CFLAGS) $(COBJS) $(LIBS) -o $(CNAME)
 
 $(COBJS): $(CBUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(@D)
 	@$(CC) -g $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-checker: $(COBJS) libs
-	$(CC) $(CFLAGS) $(COBJS) $(LIBS) -o $(CNAME)
 
 crestart: ccbuild $(COBJS)
 	$(CC) $(CFLAGS) $(COBJS) $(LIBS) -o $(CNAME)

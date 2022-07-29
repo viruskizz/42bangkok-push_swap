@@ -91,7 +91,7 @@ static void	bottom_sort(void)
 	int		mid;
 	int		max;
 
-	if (is_sorted_lst(g_lst1))
+	if (is_sorted_lst())
 		return ;
 	else if (ft_lstsize(g_lst1) == 2)
 		swap(STACK_A, PRINT);

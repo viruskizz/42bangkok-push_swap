@@ -30,7 +30,7 @@ int	main(int argc, char *argv[])
 	{
 		if (is_dup_var(g_lst1))
 			ft_putstr_fd("Error\n", STDERR_FILENO);
-		else if (!is_sorted_lst(g_lst1))
+		else if (!is_sorted_lst())
 			sort();
 		ft_lstclear(&g_lst1, &del_content);
 		ft_lstclear(&g_lst2, &del_content);

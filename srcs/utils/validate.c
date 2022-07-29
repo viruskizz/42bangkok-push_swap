@@ -53,12 +53,14 @@ int	is_dup_var(t_list *lst)
 	return (0);
 }
 
-int	is_sorted_lst(t_list *lst)
+int	is_sorted_lst(void)
 {
 	t_list	*tmp;
 	t_list	*ptr;
 
-	ptr = lst;
+	if (!g_lst1 || !g_lst2 || ft_lstsize(g_lst2) > 0)
+		return (0);
+	ptr = g_lst1;
 	while (ptr->next)
 	{
 		tmp = ptr->next;

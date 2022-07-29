@@ -51,6 +51,7 @@ void	push(int stack, int is_print);
 void	rotate(int stack, int is_print);
 void	reverse(int stack, int is_print);
 
+// sort
 void	partition_sort(void);
 void	qsorta(int len);
 void	qsortb(int len);
@@ -58,7 +59,7 @@ void	qsortb(int len);
 // validate
 int		is_valid_int(char *str);
 int		is_dup_var(t_list *lst);
-int		is_sorted_lst(t_list *lst);
+int		is_sorted_lst();
 int		is_opt(char *str);
 
 // template

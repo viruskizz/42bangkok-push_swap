@@ -35,7 +35,7 @@ int	main(int argc, char *argv[])
 	{
 		if (!is_dup_var(g_lst1))
 			ft_printf("Error: duplicated argument\n");
-		else if (is_sorted_lst(g_lst1))
+		else if (is_sorted_lst())
 			ft_printf("Error: already sorted argument\n");
 		else
 			run_checker();
@@ -94,7 +94,7 @@ void	run_opts(t_list *lst)
 		run_opt((char *) lst->content, NOPRINT);
 		lst = lst->next;
 	}
-	if (ft_lstsize(g_lst2) == 0 && is_sorted_lst(g_lst1))
+	if (is_sorted_lst())
 		ft_printf("OK\n");
 	else
 		ft_printf("KO\n");
