@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "get_next_line.h"
 
 t_list	*read_input(t_list **lst);
 void	run_opts(t_list *lst);
@@ -20,24 +21,19 @@ int	main(int argc, char *argv[])
 {
 	g_lst1 = NULL;
 	g_lst2 = NULL;
-	if (argc == 1)
-	{
-		ft_printf("Error\n");
+	if (argc == 1 || (argc == 2 && ft_strlen(argv[1]) == 0))
 		return (0);
-	}
 	else if (argc == 2)
 		g_lst1 = set_var_str(argv[1]);
 	else
 		g_lst1 = set_var_nbs(argc, argv);
 	if (!g_lst1)
-		ft_printf("Error: invalid argument\n");
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 	else
 	{
-		if (!is_dup_var(g_lst1))
-			ft_printf("Error: duplicated argument\n");
-		else if (is_sorted_lst())
-			ft_printf("Error: already sorted argument\n");
-		else
+		if (is_dup_var(g_lst1))
+			ft_putstr_fd("Error\n", STDERR_FILENO);
+		else if (!is_sorted_lst())
 			run_checker();
 		ft_lstclear(&g_lst1, &del_content);
 		ft_lstclear(&g_lst2, &del_content);
@@ -52,7 +48,7 @@ void	run_checker(void)
 	lst = NULL;
 	if (!read_input(&lst))
 	{
-		ft_printf("Error not operation argument\n");
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return ;
 	}
 	run_opts(lst);
@@ -61,41 +57,41 @@ void	run_checker(void)
 
 t_list	*read_input(t_list **lst)
 {
-	char	*buf;
-	char	*opt;
+	char	*line;
 	t_list	*new;
 
-	buf = calloc(sizeof(char), BUF_SIZE + 1);
-	while (read(0, buf, BUF_SIZE))
+	line = get_next_line(0);
+	while (line)
 	{
-		if (!is_opt(buf))
+		if (!is_opt(line))
 		{
 			if (lst)
 				ft_lstclear(lst, &del_content);
-			free(buf);
+			free(line);
 			return (NULL);
 		}
-		opt = calloc(sizeof(char), ft_strlen(buf));
-		ft_strlcpy(opt, buf, ft_strlen(buf));
-		new = ft_lstnew(opt);
+		new = ft_lstnew(line);
 		if (*lst == NULL)
 			*lst = new;
 		else
 			ft_lstadd_back(lst, new);
+		line = get_next_line(0);
 	}
-	free(buf);
 	return (*lst);
 }
 
 void	run_opts(t_list *lst)
 {
+	int		t;
+
+	t = 0;
 	while (lst)
 	{
 		run_opt((char *) lst->content, NOPRINT);
 		lst = lst->next;
 	}
 	if (is_sorted_lst())
-		ft_printf("OK\n");
+		ft_putstr_fd("OK\n", STDOUT_FILENO);
 	else
-		ft_printf("KO\n");
+		ft_putstr_fd("KO\n", STDOUT_FILENO);
 }

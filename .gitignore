@@ -4,5 +4,5 @@
 *.out
 *.dSYM
 .vscode
-# build
-# cbuild
+build
+cbuild

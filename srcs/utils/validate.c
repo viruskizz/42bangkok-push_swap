@@ -58,7 +58,7 @@ int	is_sorted_lst(void)
 	t_list	*tmp;
 	t_list	*ptr;
 
-	if (!g_lst1 || !g_lst2 || ft_lstsize(g_lst2) > 0)
+	if (g_lst2 && ft_lstsize(g_lst2) > 0)
 		return (0);
 	ptr = g_lst1;
 	while (ptr->next)
