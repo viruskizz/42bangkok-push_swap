@@ -75,14 +75,3 @@ void	lst_print(void)
 	}
 	ft_printf("\n");
 }
-
-void	lst_debug(char *str, t_list *lst)
-{
-	ft_printf("%s", str);
-	while (lst)
-	{
-		ft_printf("%d ", cint(lst));
-		lst = lst->next;
-	}
-	ft_printf("\n");
-}

@@ -28,13 +28,13 @@ int	main(int argc, char *argv[])
 	else
 		g_lst1 = set_var_nbs(argc, argv);
 	if (!g_lst1)
-		ft_printf("Error: invalid argument\n");
+		write(STDERR_FILENO, &"Error\n", 6);
 	else
 	{
 		if (!is_dup_var(g_lst1))
-			ft_printf("Error: duplicated argument\n");
+			ft_printf("Error\n");
 		else if (is_sorted_lst(g_lst1))
-			ft_printf("Error: already sorted argument\n");
+			ft_printf("Error\n");
 		else
 			sort();
 		ft_lstclear(&g_lst1, &del_content);

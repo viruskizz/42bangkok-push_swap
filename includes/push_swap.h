@@ -45,15 +45,21 @@ typedef struct  s_template
 
 t_template	g_tmp;
 
+// operation
+void	swap(int stack, int is_print);
+void	push(int stack, int is_print);
+void	rotate(int stack, int is_print);
+void	reverse(int stack, int is_print);
+
+void	partition_sort(void);
+void	qsorta(int len);
+void	qsortb(int len);
+
+// validate
 int		is_valid_int(char *str);
 int		is_dup_var(t_list *lst);
 int		is_sorted_lst(t_list *lst);
-
-void	partition_sort(void);
-
-int 	move_top_times(int nb, t_list *lst);
-void	move_top(int nb, t_list	*lst, int stack);
-
+int		is_opt(char *str);
 
 // template
 void	set_sort_arr(void);
@@ -66,24 +72,14 @@ t_list	*set_var_str(char *str);
 void	del_content(void *content);
 int		cint(t_list *lst);
 void	lst_print();
-void	lst_debug(char *str, t_list *lst);
 int		lst_idx(t_list *lst, int nb);
 t_list	*lst_ptr(t_list *lst, int idx);
 
-// operation
-void	swap(int stack);
-void	push(int stack);
-void	rotate(int stack);
-void	reverse(int stack);
-
-void	qsorta(int len);
-void	qsortb(int len);
-
+// util
 int		find_mid(t_list *lst, int len);
 int		is_sorted(t_list *lst, int len, int cmp);
-
-// checker.h
-int		is_opt(char *str);
-void 	run_opt(char *str);
+int 	move_top_times(int nb, t_list *lst);
+void	move_top(int nb, t_list	*lst, int stack, int is_print);
+void	run_opt(char *str, int is_print);
 
 #endif

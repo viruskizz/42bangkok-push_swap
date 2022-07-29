@@ -91,7 +91,7 @@ void	run_opts(t_list *lst)
 {
 	while (lst)
 	{
-		run_opt((char *) lst->content);
+		run_opt((char *) lst->content, NOPRINT);
 		lst = lst->next;
 	}
 	if (ft_lstsize(g_lst2) == 0 && is_sorted_lst(g_lst1))

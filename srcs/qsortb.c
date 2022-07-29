@@ -26,7 +26,7 @@ void	qsortb(int len)
 	{
 		sort3b(len);
 		while (len--)
-			push(STACK_A);
+			push(STACK_A, PRINT);
 		return ;
 	}
 	mid = find_mid(g_lst2, len);
@@ -35,12 +35,12 @@ void	qsortb(int len)
 	while (n != len / 2)
 	{
 		if (cint(ft_lstlast(g_lst2)) >= mid && n--)
-			push(STACK_A);
+			push(STACK_A, PRINT);
 		else if (++p)
-			rotate(STACK_B);
+			rotate(STACK_B, PRINT);
 	}
 	while (len / 2 != ft_lstsize(g_lst2) && p-- > 0)
-		reverse(STACK_B);
+		reverse(STACK_B, PRINT);
 	qsorta(len / 2 + len % 2);
 	qsortb(len / 2);
 }
@@ -59,7 +59,7 @@ static void	sort3b(int len)
 	prev = lst_ptr(g_lst2, size - 2);
 	pprev = lst_ptr(g_lst2, size - 3);
 	if (len == 2 && cint(top) < cint(prev))
-		swap(STACK_B);
+		swap(STACK_B, PRINT);
 	else if (len == 3)
 		sort3b_opt(cint(top), cint(prev), cint(pprev), len);
 }
@@ -82,18 +82,18 @@ static void	sort3b_opt(int top, int prev, int pprev, int len)
 {
 	if (top < prev && top < pprev)
 	{
-		swap(STACK_B);
+		swap(STACK_B, PRINT);
 		sort3b(len);
 	}
 	if (prev < top && prev < pprev)
 	{
-		rotate(STACK_B);
-		swap(STACK_B);
-		reverse(STACK_B);
+		rotate(STACK_B, PRINT);
+		swap(STACK_B, PRINT);
+		reverse(STACK_B, PRINT);
 		sort3b(len);
 	}
 	if (pprev < prev && pprev < top && top < prev)
-		swap(STACK_B);
+		swap(STACK_B, PRINT);
 }
 
 /**
@@ -132,7 +132,7 @@ static void	bottom_sortb(void)
 	if (is_sorted(g_lst2, size, 1))
 		return ;
 	else if (size == 2 && g_tmp.ar[0] == cint(g_lst2))
-		swap(STACK_B);
+		swap(STACK_B, PRINT);
 	else if (size == 3)
 	{
 		min = g_tmp.ar[g_tmp.n - 1];
@@ -140,11 +140,11 @@ static void	bottom_sortb(void)
 		max = g_tmp.ar[g_tmp.n - 3];
 		if (lst_idx(g_lst2, min) == 2
 			&& (lst_idx(g_lst2, max) == 0 || lst_idx(g_lst2, max) == 1))
-			rotate(STACK_B);
+			rotate(STACK_B, PRINT);
 		if (lst_idx(g_lst2, min) == 1
 			&& (lst_idx(g_lst2, mid) == 0 || lst_idx(g_lst2, mid) == 2))
-			reverse(STACK_B);
+			reverse(STACK_B, PRINT);
 		if (lst_idx(g_lst2, min) == 0 && lst_idx(g_lst2, max) == 1)
-			swap(STACK_B);
+			swap(STACK_B, PRINT);
 	}
 }
