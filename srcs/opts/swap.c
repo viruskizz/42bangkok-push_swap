@@ -14,6 +14,7 @@
 
 static void	swap_lst(t_list **lst);
 static void	swap_two(t_list **lst);
+// static void	print_opt(int is_print, char *opt);
 
 void	swap(int stack)
 {
@@ -69,3 +70,10 @@ static void	swap_two(t_list **lst)
 	lt->next = ft;
 	lt->prev = NULL;
 }
+
+// static void	print_opt(int is_print, char *opt)
+// {
+// 	if (is_print)
+// 		ft_printf("%s\n", opt);
+// }
+

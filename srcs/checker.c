@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsomsa <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: tsomsa <tsomsa@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/25 22:15:14 by tsomsa            #+#    #+#             */
-/*   Updated: 2022/06/25 22:15:18 by tsomsa           ###   ########.fr       */
+/*   Created: 2022/07/29 16:16:15 by tsomsa            #+#    #+#             */
+/*   Updated: 2022/07/29 16:16:16 by tsomsa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	read_input(void);
+t_list	*read_input(t_list **lst);
+void	run_opts(t_list *lst);
+void	run_checker(void);
 
 int	main(int argc, char *argv[])
 {
@@ -36,40 +38,64 @@ int	main(int argc, char *argv[])
 		else if (is_sorted_lst(g_lst1))
 			ft_printf("Error: already sorted argument\n");
 		else
-			read_input();
+			run_checker();
 		ft_lstclear(&g_lst1, &del_content);
 		ft_lstclear(&g_lst2, &del_content);
 	}
 	return (0);
 }
-#include <string.h>
-void	read_input(void)
+
+void	run_checker(void)
+{
+	t_list	*lst;
+
+	lst = NULL;
+	if (!read_input(&lst))
+	{
+		ft_printf("Error not operation argument\n");
+		return ;
+	}
+	run_opts(lst);
+	ft_lstclear(&lst, &del_content);
+}
+
+t_list	*read_input(t_list **lst)
 {
 	char	*buf;
 	char	*opt;
-	t_list	*lst;
 	t_list	*new;
-	t_list	*ptr;
 
 	buf = calloc(sizeof(char), BUF_SIZE + 1);
-	lst = NULL;
-	while(read(0, buf, BUF_SIZE))
+	while (read(0, buf, BUF_SIZE))
 	{
 		if (!is_opt(buf))
 		{
-			ft_printf("Error not operation argument\n", buf);
-			break;
+			if (lst)
+				ft_lstclear(lst, &del_content);
+			free(buf);
+			return (NULL);
 		}
 		opt = calloc(sizeof(char), ft_strlen(buf));
 		ft_strlcpy(opt, buf, ft_strlen(buf));
 		new = ft_lstnew(opt);
-		if (!lst)
-			lst = new;
+		if (*lst == NULL)
+			*lst = new;
 		else
-			ft_lstadd_back(&lst, new);
+			ft_lstadd_back(lst, new);
 	}
-	ft_printf("finish %p\n", lst);
-	if (lst)
-		ft_lstclear(&lst, &del_content);
 	free(buf);
+	return (*lst);
+}
+
+void	run_opts(t_list *lst)
+{
+	while (lst)
+	{
+		run_opt((char *) lst->content);
+		lst = lst->next;
+	}
+	if (ft_lstsize(g_lst2) == 0 && is_sorted_lst(g_lst1))
+		ft_printf("OK\n");
+	else
+		ft_printf("KO\n");
 }

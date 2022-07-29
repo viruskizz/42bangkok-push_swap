@@ -98,3 +98,29 @@ void	move_top(int nb, t_list	*lst, int stack)
 			reverse(stack);
 	}
 }
+
+void	run_opt(char *str)
+{
+	if (!ft_strncmp(str, "rra", 3))
+		reverse(STACK_A);
+	else if (!ft_strncmp(str, "rrb", 3))
+		reverse(STACK_B);
+	else if (!ft_strncmp(str, "rrr", 3))
+		reverse(STACK_S);
+	else if (!ft_strncmp(str, "ra", 2))
+		rotate(STACK_A);
+	else if (!ft_strncmp(str, "rb", 2))
+		rotate(STACK_B);
+	else if (!ft_strncmp(str, "rr", 2))
+		rotate(STACK_S);
+	else if (!ft_strncmp(str, "sa", 2))
+		swap(STACK_A);
+	else if (!ft_strncmp(str, "sb", 2))
+		swap(STACK_B);
+	else if (!ft_strncmp(str, "ss", 2))
+		swap(STACK_S);
+	else if (!ft_strncmp(str, "pa", 2))
+		push(STACK_A);
+	else if (!ft_strncmp(str, "pb", 2))
+		push(STACK_B);
+}

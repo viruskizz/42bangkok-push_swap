@@ -84,5 +84,6 @@ int		is_sorted(t_list *lst, int len, int cmp);
 
 // checker.h
 int		is_opt(char *str);
+void 	run_opt(char *str);
 
 #endif
