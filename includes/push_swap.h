@@ -16,6 +16,7 @@
 # include "ft_printf.h"
 # include "libft.h"
 # include <stdlib.h>
+# include <unistd.h>
 
 # define STACK_A	1
 # define STACK_B	2
@@ -30,35 +31,39 @@
 # define EDGE_MOV	50
 # define TOP_MOV	99
 # define BOT_MOV	0
+# define TOC_MOV	55
+# define BUF_SIZE	10
 
 t_list		*g_lst1;
 t_list		*g_lst2;
-t_list		*g_lstx;
-t_list		*g_lsty;
 typedef struct  s_template
 {
 	int *ar;
 	int n;
+	int	range;
 }	t_template;
 
 t_template	g_tmp;
 
+// operation
+void	swap(int stack, int is_print);
+void	push(int stack, int is_print);
+void	rotate(int stack, int is_print);
+void	reverse(int stack, int is_print);
+
+void	partition_sort(void);
+void	qsorta(int len);
+void	qsortb(int len);
+
+// validate
 int		is_valid_int(char *str);
 int		is_dup_var(t_list *lst);
 int		is_sorted_lst(t_list *lst);
-
-void	pre_sort(void);
-void	bottom_sort(void);
-void	complete_sort(void);
-
-int		from_top_move(int midx, t_list **lst, int stack1, int stack2);
-int		from_bot_move(int midx, t_list **lst, int stack1, int stack2);
-int		from_edge_move(int midx, t_list **lst, int stack1, int stack2);
-void	short_move(int midx, t_list **lst, int stack1, int stack2);
-int		sim_move(int move, int midx, int stack1, int stack2);
+int		is_opt(char *str);
 
 // template
-void	set_sort_arr();
+void	set_sort_arr(void);
+void	set_arr_range(void);
 int		sorted_idx(int nb);
 
 // list function
@@ -67,14 +72,14 @@ t_list	*set_var_str(char *str);
 void	del_content(void *content);
 int		cint(t_list *lst);
 void	lst_print();
-void	lst_debug(char *str, t_list *lst);
 int		lst_idx(t_list *lst, int nb);
 t_list	*lst_ptr(t_list *lst, int idx);
-t_list	*lst_clone(t_list *lst);
 
-// operation
-void	swap(int stack, int is_print);
-void	push(int stack, int is_print);
-void	rotate(int stack, int is_print);
-void	reverse(int stack, int is_print);
+// util
+int		find_mid(t_list *lst, int len);
+int		is_sorted(t_list *lst, int len, int cmp);
+int 	move_top_times(int nb, t_list *lst);
+void	move_top(int nb, t_list	*lst, int stack, int is_print);
+void	run_opt(char *str, int is_print);
+
 #endif

@@ -13,19 +13,49 @@
 #include "push_swap.h"
 
 static void	push_lst(t_list **src, t_list **dest);
-static void	print_opt(int is_print, char *opt);
+static void	opt_push(int stack);
+static void	sim_push(int stack);
 
+/**
+ * @brief push top of stack from source to destination
+ * A: 7 5 9 2 3
+ * B:
+ * == push b
+ * A: 7 5 9 2
+ * B: 3
+ * @param stack 
+ */
 void	push(int stack, int is_print)
+{
+	if (stack == STACK_X || stack == STACK_Y)
+		sim_push(stack);
+	else
+		opt_push(stack);
+}
+
+static void	opt_push(int stack)
 {
 	if (stack == STACK_A && g_lst2 && ft_lstsize(g_lst2) > 0)
 	{
 		push_lst(&g_lst2, &g_lst1);
-		print_opt(is_print, "pa\n");
+		ft_printf("pa\n");
 	}
 	else if (stack == STACK_B && g_lst1 && ft_lstsize(g_lst1) > 0)
 	{
 		push_lst(&g_lst1, &g_lst2);
-		print_opt(is_print, "pb\n");
+		ft_printf("pb\n");
+	}
+}
+
+static void	sim_push(int stack)
+{
+	if (stack == STACK_X && g_lsty && ft_lstsize(g_lsty) > 0)
+	{
+		push_lst(&g_lsty, &g_lstx);
+	}
+	else if (stack == STACK_Y && g_lstx && ft_lstsize(g_lstx) > 0)
+	{
+		push_lst(&g_lstx, &g_lsty);
 	}
 }
 
@@ -41,10 +71,4 @@ static void	push_lst(t_list **src, t_list **dest)
 	else
 		*src = NULL;
 	ft_lstadd_back(dest, tmp);
-}
-
-static void	print_opt(int is_print, char *opt)
-{
-	if (is_print)
-		ft_putstr_fd(opt, STDOUT_FILENO);
 }

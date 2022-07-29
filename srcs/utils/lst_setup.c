@@ -13,6 +13,8 @@
 #include "push_swap.h"
 
 static void	set_lst_nb(t_list **lst, char *str);
+static void	is_number(char *str);
+static void	free_arr2d(char	**arr);
 
 void	del_content(void *content)
 {
@@ -30,11 +32,16 @@ t_list	*set_var_str(char *str)
 	while (*tmp)
 	{
 		if (!is_valid_int(*tmp++))
+		{
+			free_arr2d(arr);
 			return (NULL);
+		}
 	}
 	lst = NULL;
-	while (*arr)
-		set_lst_nb(&lst, *arr++);
+	tmp = arr;
+	while (*tmp)
+		set_lst_nb(&lst, *tmp++);
+	free_arr2d(arr);
 	return (lst);
 }
 
@@ -45,6 +52,10 @@ t_list	*set_var_nbs(int argc, char *argv[])
 
 	i = 1;
 	lst = NULL;
+	while (i < argc)
+		if (!is_valid_int(argv[i++]))
+			return (NULL);
+	i = 1;
 	while (i < argc)
 		set_lst_nb(&lst, argv[i++]);
 	return (lst);
@@ -59,4 +70,14 @@ static void	set_lst_nb(t_list **lst, char *str)
 	*nb = ft_atoi(str);
 	var = ft_lstnew(nb);
 	ft_lstadd_front(lst, var);
+}
+
+static void	free_arr2d(char	**arr)
+{
+	char	**tmp;
+
+	tmp = arr;
+	while (*tmp)
+		free(*tmp++);
+	free(arr);
 }

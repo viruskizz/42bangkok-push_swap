@@ -3,23 +3,29 @@
 
 static int	move_top(int nb, t_list	*lst, int stack, int is_print);
 static int	move_push(int nb, t_list **lst, int stack1, int stack2);
+int	to_center_move(int midx, t_list **lst, int stack1, int stack2);
 
 void	short_move(int midx, t_list **lst, int stack1, int stack2)
 {
-	int		et;
-	int		tt;
-	int		bt;
+	// int		et;
+	// int		tt;
+	// int		bt;
+	// int		tc;
 
-	et = sim_move(EDGE_MOV, midx, STACK_A, STACK_B);
-	tt = sim_move(TOP_MOV, midx, STACK_A, STACK_B);
-	bt = sim_move(BOT_MOV, midx, STACK_A, STACK_B);
-	if (et < tt && et < bt)
-		from_edge_move(midx, &g_lst1, STACK_A, STACK_B);
-	else if (bt < tt)
-		from_bot_move(midx, &g_lst1, STACK_A, STACK_B);
-	else
-		from_top_move(midx, &g_lst1, STACK_A, STACK_B);
-	// from_top_move(midx, &g_lst1, STACK_A, STACK_B);
+	// et = sim_move(EDGE_MOV, midx, STACK_A, STACK_B);
+	// tt = sim_move(TOP_MOV, midx, STACK_A, STACK_B);
+	// bt = sim_move(BOT_MOV, midx, STACK_A, STACK_B);
+	// tc = sim_move(TOC_MOV, midx, STACK_A, STACK_B);
+	// if (tc < bt && tc < tt && tc < et)
+	// 	to_center_move(midx, &g_lst1, STACK_A, STACK_B);
+	// else if (et < tt && et < bt)
+	// 	from_edge_move(midx, &g_lst1, STACK_A, STACK_B);
+	// else if (bt < tt)
+	// 	from_bot_move(midx, &g_lst1, STACK_A, STACK_B);
+	// else
+	// 	from_top_move(midx, &g_lst1, STACK_A, STACK_B);
+	from_top_move(midx, &g_lst1, STACK_A, STACK_B);
+	// to_center_move(midx, &g_lst1, STACK_A, STACK_B);
 }
 
 int	sim_move(int move, int midx, int stack1, int stack2)
@@ -35,8 +41,60 @@ int	sim_move(int move, int midx, int stack1, int stack2)
 		times = from_top_move(midx, &g_lstx, STACK_X, STACK_Y);
 	if (move == BOT_MOV)
 		times = from_bot_move(midx, &g_lstx, STACK_X, STACK_Y);
+	if (move == TOC_MOV)
+		times = to_center_move(midx, &g_lstx, STACK_X, STACK_Y);
 	ft_lstclear(&g_lstx, &del_content);
 	ft_lstclear(&g_lsty, &del_content);
+	return (times);
+}
+
+int	to_center_move(int midx, t_list **lst, int stack1, int stack2)
+{
+	int	times;
+	int	t_times;
+	int	b_times;
+	int	idx;
+	t_list	*tmp;
+	int		len;
+
+	len = ft_lstsize(*lst);
+	// ft_printf("%d = %d, %d\n", len, midx, g_tmp.ar[midx]);
+	while (ft_lstsize(*lst) > midx)
+	{
+		idx = 0;
+		tmp = ft_lstlast(*lst);
+		if (cint(tmp) <= g_tmp.ar[midx])
+		{
+			// ft_printf(">%d\n", cint(tmp));
+			// lst_print();
+			times += move_push(cint(tmp), lst, stack1, stack2);
+			continue;
+		}
+		while (idx < ft_lstsize(*lst) / 2)
+		{
+			// from top
+			// tmp = *lst;
+			tmp = lst_ptr(*lst, ft_lstsize(*lst) - 1 - 1 - idx);
+			if (cint(tmp) <= g_tmp.ar[midx])
+			{
+				// ft_printf(">%d\n", cint(tmp));
+				// lst_print();
+				times += move_push(cint(tmp), lst, stack1, stack2);
+				break;
+			}
+			tmp = lst_ptr(*lst, idx);
+			if (cint(tmp) <= g_tmp.ar[midx])
+			{
+				// ft_printf(">%d\n", cint(tmp));
+				// lst_print();
+				times += move_push(cint(tmp), lst, stack1, stack2);
+				break;
+			}
+			idx++;
+		}
+	}
+	// ft_printf("fin  to_center\n");
+	// lst_print();
 	return (times);
 }
 
@@ -162,14 +220,18 @@ static int	move_top(int nb, t_list	*lst, int stack, int is_print)
 		times = lidx + 1;
 		t = times;
 		while (times-- > 0)
+		{
 			reverse(stack, is_print);
+		}
 	}
 	else
 	{
 		times = size - lidx - 1;
 		t = times;
 		while (times-- > 0)
+		{
 			rotate(stack, is_print);
+		}
 	}
 	return (t);
 }

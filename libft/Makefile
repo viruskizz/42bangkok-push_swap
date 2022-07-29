@@ -1,5 +1,6 @@
 NAME = libft.a
 SRCS =	ft_isalnum.c \
+	ft_abs.c \
 	ft_isprint.c \
 	ft_memcmp.c \
 	ft_putchar_fd.c \
