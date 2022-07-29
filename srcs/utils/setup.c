@@ -13,13 +13,7 @@
 #include "push_swap.h"
 
 static void	set_lst_nb(t_list **lst, char *str);
-static void	is_number(char *str);
 static void	free_arr2d(char	**arr);
-
-void	del_content(void *content)
-{
-	free(content);
-}
 
 t_list	*set_var_str(char *str)
 {

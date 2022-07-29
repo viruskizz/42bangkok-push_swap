@@ -12,6 +12,11 @@
 
 #include "push_swap.h"
 
+void	del_content(void *content)
+{
+	free(content);
+}
+
 int	lst_idx(t_list *lst, int nb)
 {
 	t_list	*ptr;
