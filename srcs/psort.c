@@ -134,7 +134,6 @@ static void	complete_sort(void)
 
 static int	top_push_back(int nb)
 {
-	t_list	*ptr;
 	int		times;
 	int		t;
 	int		p;
