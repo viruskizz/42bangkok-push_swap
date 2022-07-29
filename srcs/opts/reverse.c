@@ -20,19 +20,19 @@ void	reverse(int stack, int is_print)
 	if (stack == STACK_A && g_lst1 && ft_lstsize(g_lst1) > 1)
 	{
 		reverse_lst(&g_lst1);
-		print_opt(is_print, "rra");
+		print_opt(is_print, "rra\n");
 	}
 	else if (stack == STACK_B && g_lst2 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst2);
-		print_opt(is_print, "rrb");
+		print_opt(is_print, "rrb\n");
 	}
 	else if (g_lst1 && g_lst2
 		&& ft_lstsize(g_lst1) > 1 && ft_lstsize(g_lst2) > 1)
 	{
 		reverse_lst(&g_lst1);
 		reverse_lst(&g_lst2);
-		print_opt(is_print, "rrr");
+		print_opt(is_print, "rrr\n");
 	}
 }
 
@@ -55,5 +55,5 @@ static void	reverse_lst(t_list **lst)
 static void	print_opt(int is_print, char *opt)
 {
 	if (is_print)
-		ft_printf("%s\n", opt);
+		ft_putstr_fd(opt, STDOUT_FILENO);
 }

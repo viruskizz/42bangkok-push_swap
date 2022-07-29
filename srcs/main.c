@@ -18,24 +18,19 @@ int	main(int argc, char *argv[])
 {
 	g_lst1 = NULL;
 	g_lst2 = NULL;
-	if (argc == 1)
-	{
-		ft_printf("Error\n");
+	if (argc == 1 || (argc == 2 && ft_strlen(argv[1]) == 0))
 		return (0);
-	}
 	else if (argc == 2)
 		g_lst1 = set_var_str(argv[1]);
 	else
 		g_lst1 = set_var_nbs(argc, argv);
 	if (!g_lst1)
-		write(STDERR_FILENO, &"Error\n", 6);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 	else
 	{
-		if (!is_dup_var(g_lst1))
-			ft_printf("Error\n");
-		else if (is_sorted_lst(g_lst1))
-			ft_printf("Error\n");
-		else
+		if (is_dup_var(g_lst1))
+			ft_putstr_fd("Error\n", STDERR_FILENO);
+		else if (!is_sorted_lst(g_lst1))
 			sort();
 		ft_lstclear(&g_lst1, &del_content);
 		ft_lstclear(&g_lst2, &del_content);

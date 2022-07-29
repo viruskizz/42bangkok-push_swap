@@ -11,12 +11,23 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "limits.h"
+#include <stdio.h>
 
 int	is_valid_int(char *str)
 {
-	while (*str)
+	int		nb;
+	long	nbl;
+	char	*tmp;
+
+	tmp = str;
+	if (ft_atoi(str) != ft_atol(str))
+		return (0);
+	if (tmp[0] == '-' && ft_isdigit(tmp[1]))
+		tmp++;
+	while (*tmp)
 	{
-		if (!ft_isdigit(*str++))
+		if (!ft_isdigit(*tmp++))
 			return (0);
 	}
 	return (1);
@@ -34,12 +45,12 @@ int	is_dup_var(t_list *lst)
 		while (tmp)
 		{
 			if (cint(ptr) == cint(tmp))
-				return (0);
+				return (1);
 			tmp = tmp->next;
 		}
 		ptr = ptr->next;
 	}
-	return (1);
+	return (0);
 }
 
 int	is_sorted_lst(t_list *lst)
