@@ -6,3 +6,5 @@
 .vscode
 build
 cbuild
+push_swap
+checker
