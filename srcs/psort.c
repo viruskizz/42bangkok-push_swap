@@ -53,7 +53,7 @@ static void	partition_ab(int mid)
 		}
 	}
 	len = ft_lstsize(g_lst1);
-	if (len > 3 && len > g_tmp.range)
+	if (len - g_tmp.range > 3)
 		partition_ab(g_tmp.ar[len - g_tmp.range]);
 	else if (len > 3)
 		partition_ab(g_tmp.ar[3]);
@@ -134,7 +134,6 @@ static void	complete_sort(void)
 
 static int	top_push_back(int nb)
 {
-	t_list	*ptr;
 	int		times;
 	int		t;
 	int		p;

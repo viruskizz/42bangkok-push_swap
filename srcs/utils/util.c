@@ -68,7 +68,6 @@ int	is_sorted(t_list *lst, int len, int cmp)
 
 int	move_top_times(int nb, t_list *lst)
 {
-	int	times;
 	int	size;
 	int	lidx;
 

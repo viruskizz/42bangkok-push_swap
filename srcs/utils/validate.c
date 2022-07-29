@@ -16,8 +16,6 @@
 
 int	is_valid_int(char *str)
 {
-	int		nb;
-	long	nbl;
 	char	*tmp;
 
 	tmp = str;
