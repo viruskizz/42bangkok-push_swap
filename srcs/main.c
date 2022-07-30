@@ -49,10 +49,4 @@ static void	sort(void)
 		partition_sort();
 	else
 		qsorta(ft_lstsize(g_lst1));
-
-	// if (!is_sorted_lst())
-	// {
-	// 	ft_printf("== NOT SORT ==\n");
-	// 	lst_print();
-	// }
 }
