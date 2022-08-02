@@ -21,8 +21,10 @@ void	partition_sort(void)
 	int		len;
 
 	len = ft_lstsize(g_lst1);
-	if (len > 3)
+	if (len > 6)
 		partition_ab(g_tmp.ar[len - g_tmp.range]);
+	else if (len > 3)
+		partition_ab(g_tmp.ar[3]);
 	bottom_sort();
 	complete_sort();
 }
