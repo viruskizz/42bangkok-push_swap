@@ -46,13 +46,10 @@ void	run_checker(void)
 	t_list	*lst;
 
 	lst = NULL;
-	if (!read_input(&lst))
-	{
-		ft_putstr_fd("Error\n", STDERR_FILENO);
-		return ;
-	}
+	read_input(&lst);
 	run_opts(lst);
-	ft_lstclear(&lst, &del_content);
+	if (lst)
+		ft_lstclear(&lst, &del_content);
 }
 
 t_list	*read_input(t_list **lst)
@@ -60,15 +57,16 @@ t_list	*read_input(t_list **lst)
 	char	*line;
 	t_list	*new;
 
-	line = get_next_line(0);
+	line = get_next_line(STDIN_FILENO);
 	while (line)
 	{
 		if (!is_opt(line))
 		{
+			ft_putstr_fd("Error\n", STDERR_FILENO);
 			if (lst)
 				ft_lstclear(lst, &del_content);
 			free(line);
-			return (NULL);
+			exit(EXIT_FAILURE);
 		}
 		new = ft_lstnew(line);
 		if (*lst == NULL)
