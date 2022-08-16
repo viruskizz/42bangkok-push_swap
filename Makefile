@@ -92,4 +92,4 @@ fclean: clean
 	make fclean -C $(PRINTF_DIR)
 	$(RM) $(NAME)
 
-.PHONY: all clean fclean re libs
+.PHONY: all bonus clean fclean re libs crestart cbuild ccbuild
