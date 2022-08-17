@@ -1,9 +1,9 @@
-# push_swap - 42 Bangkok
-
 <div align="center">
-  <img src="assets/push_swap.png">
+  <h1>push_swap - 42 Bangkok</h1>
+  <img src="assets/push_swap.png"><br>
+  <img src="https://badge42.vercel.app/api/v2/cl0yx1v0j0158ns5shlllmdvb/project/2133896">
 </div>
-this project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions.
+This project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions.
 
 ## Table of contents
 - [About](##About)
