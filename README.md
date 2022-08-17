@@ -1,6 +1,8 @@
-# push_swap - 42 School Project
+# push_swap - 42 Bangkok
 
-<!-- [![akurz's 42 push_swap Score](https://badge42.vercel.app/api/v2/cl1z3zeq4001109mkr4my4esw/project/2340733)](https://github.com/JaeSeoKim/badge42) -->
+<div align="center">
+  <img src="assets/push_swap.png">
+</div>
 this project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions.
 
 ## Table of contents
@@ -10,7 +12,7 @@ this project will make you sort data on a stack, with a limited set of instructi
 
 ## About
 
-* The Push_swap project is a very simple and highly effective algorithm project: data will need to be sorted.  
+* The push_swap project is a very simple and highly effective algorithm project: data will need to be sorted.  
 You have at your disposal a set of int values, 2 stacks and a set of instructions to manipulate both stacks.  
 
 * The goal ?  
@@ -99,6 +101,10 @@ echo $ARG
 ```
 
 ## Test with script
+
+<div align="left">
+  <img width="80%" src="assets/test-example.png">
+</div>
 
 Test your program easier with my script. It show sorting times and status beside evalute your grade in the same time. there are 3 test script.
 - `test_random.sh`: A single test with random numbers in size range.
