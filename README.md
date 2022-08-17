@@ -7,7 +7,8 @@ this project will make you sort data on a stack, with a limited set of instructi
 
 ## Table of contents
 - [About](##About)
-- [Test](#Test)
+- [Test](##Test)
+- [Test with script](##Test-with-script)
 - [Solution (Spoiler)](#solution)
 
 ## About

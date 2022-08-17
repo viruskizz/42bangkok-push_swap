@@ -78,6 +78,9 @@ print_times()
         printf $BOLD"Status:$RESET$GREEN PASS"
     fi
     echo -e $RESET
+    if [[ "$OUTPUT" == "KO" ]];then
+        printf $BOLD"ARG:$RESET $ARG\n"
+    fi
 }
 
 push_swap_test()
@@ -93,7 +96,7 @@ push_swap_test()
         OUTPUT=$(./$FILE $ARG | ./checker_linux $ARG)
     fi
     # echo -en "$SIZE\t"
-    print_times $SIZE $TIMES $OUTPUT
+    print_times $SIZE $TIMES $OUTPUT $ARG
 }
 
 
