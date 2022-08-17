@@ -44,22 +44,22 @@ malloc, free, exit, write, read
   
 | Operations | Points |
 | :---: | :---: |
-| less then 700 | 5 |
-| less then 900 | 4 |
-| less then 1100 | 3 |
-| less then 1300 | 2 |
-| less then 1500 | 1 |
+| less than 700 | 5 |
+| less than 900 | 4 |
+| less than 1100 | 3 |
+| less than 1300 | 2 |
+| less than 1500 | 1 |
 
 * Sorting 500 numbers: 
 * I achieve an average of 5400 Operations 
 
 | Operations | Points |
 | :---: | :---: |
-| less then 5500 | 5 |
-| less then 7000 | 4 |
-| less then 8500 | 3 |
-| less then 10000 | 2 |
-| less then 11500 | 1 |
+| less than 5500 | 5 |
+| less than 7000 | 4 |
+| less than 8500 | 3 |
+| less than 10000 | 2 |
+| less than 11500 | 1 |
 
 ## Bonus
 
@@ -70,7 +70,7 @@ malloc, free, exit, write, read
 ## Tester
 
 Basic test with official `checker` from intra
-```sh
+```bash
 # Declare number arguments
 ARG="10 7 8 2 3 6 1 4 9 5";
 # Check sorting opertation
@@ -99,12 +99,12 @@ echo $ARG
 
 Test your program easier with my script. It show sorting times and status beside evalute your grade in the same time. there are 3 test script.
 - `test_random.sh`: A single test with random numbers in size range.
-- `test_pushswap.sh`: Full test `push_swap` program with every relevance conditions.
+- `test_pushswap.sh`: Full test `push_swap` program with every relevance case.
 - `test_checker.sh`: Check your `checker` file in bonus part.
 
 ### Install script
 Option 1: clone entire project
-```sh
+```bash
 git clone https://github.com/viruskizz/42bangkok-push_swap.git
 ```
 
@@ -115,7 +115,7 @@ Option 2: Download from gist
 - [test_checker.sh](https://gist.github.com/viruskizz/17c9adf04b73d21487a882b18fe2a55b)
   
 You can use `curl` to download a file that you need in terminal
-```sh
+```bash
 # test_random.sh
 curl https://gist.github.com/viruskizz/5512ab5fca0b7dd9eefe157fc9680773 -o test_random.sh
 
@@ -126,32 +126,108 @@ curl https://gist.github.com/viruskizz/61b4ff717d530280102e16ba2d579460 -o test_
 curl https://gist.github.com/viruskizz/17c9adf04b73d21487a882b18fe2a55b -o test_checker.sh
 ```
 
+### How to use
+
+#### 1. `test_random.sh`
+A single test suite for minimal test and fast. It support 2 argument with 3 solutions
+- **No argument**
+random number size between range 1 - 500 
+
+```bash
+$ ./test_random.sh
+Size: 159
+Sorted: OK
+Times: 1370
+Point: 5/5
+Status: PASS
+```
+
+- **Single argument**
+Single argument is end of number. Test will supply number 1 to end of number.
+```bash
+# Test number 1 - 100
+$ ./test_random.sh 100
+Size: 100
+Sorted: OK
+Times: 697
+Point: 5/5
+Status: PASS
+```
+- **Two argument**
+Two argument is meant to start and end of number
+```bash
+# Test number -50 to 49
+$ ./test_random.sh -50 49
+Size: 100
+Sorted: OK
+Times: 692
+Point: 5/5
+Status: PASS
+```
+
+#### 2. `test_pushswap.sh`
+This is a fully test `push_swap` program. It run all relevance case.
+```bash
+./test_pushswap.sh
+```
+
+#### 3. `test_checker.sh`
+This is fully test `checker` file. It run all relevance case.
+```bash
+./test_checker.sh
+```
+
+#### Script Editing
+Customize a script for your desire test.
+- Chage file location if file is not in same root project directory
+```bash
+## Setup
+FILE="checker"
+```
+
+- Change `test_pushswap.sh` argument at bottom of file
+```bash
+### Bottom of test_push
+START=1
+END=500
+ROUND=20
+test_size $START $END $ROUND
+```
+
 -----
 
 <details>
-  <summary>Spoiler Alert</summary>
-  A Computer Science Portal for Geeks
+  <summary>
+    <big><strong>Solution</strong></big>
+    <small style="color: red"> Spoiler Alert!!</small>
+  </summary>
+
+  ## Approach for Algorithm
+
+  You can design your own fastest algorithm. I use 3 Algorithm for diference numbers size
+
+  ### 0. Hidden Sort
+  Create a sorted array with any algorythm. Sorted array that number is sorted smaller to bigger. The index of number is times of greater than other number. for example `[1, 2, 3]` `1` is great than other numbers in array 0 times so `1` is index `0`. This is a utility for your sorting operation.
+  - To get a sorted index of number
+  - Find sorted median
+
+  ### 1. Last 3 numbers Sort
+  - There are only 5 solution for 3 numbers.
+  - Try yourself with sampling numbers and write sorting operation.
+  - Hard code to sort this size
+
+  ### 2. Partition Sort
+  This solution is best for size of numbers less than 200 
+
+  ### 3. Quick Sort
+  This solution is best for size of numbers greater than 200
 </details>
 
-## Approach for Algorithm
 
-You can design your own fastest algorithm. I use 3 Algorithm for diference numbers size
-
-### 1. Last 3 numbers Sort
-- There are only 5 solution for 3 numbers.
-- Try yourself with sampling numbers and write sorting operation.
-- Hard code to sort this size
-
-### 2. Partition Sort
-
-
-### 3. Quick Sort
-
-
-
+----
 
 ## Credit
-- Friend:
+- **Friend**:
   - _sharnvon_
   - _cchettana_
   - _cananwat_

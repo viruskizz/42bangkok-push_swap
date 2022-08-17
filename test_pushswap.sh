@@ -109,11 +109,26 @@ print_compare()
 {
     ARG=$1
     EXPECT=$2
-    OUTPUT=$(./$FILE $ARG 2>&1)
-    if [[ $OUTPUT == $EXPECT ]]; then
-        echo -en $GREEN"PASS"
+    if [[ $EXPECT == "Error" ]]; then
+        ERR=error.log
+        OUTPUT=$(./$FILE $ARG 2>$ERR && cat $ERR)
+        if [ -z $(cat $ERR) ]; then
+            echo -en $RED"STDERR"
+        elif [[ $(cat $ERR) == $EXPECT ]]; then
+            echo -en $GREEN"PASS"
+        else
+            echo -en $RED"FAIL"
+        fi
+        if [ -f $ERR ]; then
+            /bin/rm $ERR
+        fi
     else
-        echo -en $RED"FAIL"
+        OUTPUT=$(./$FILE $ARG 2>&1)
+        if [[ $OUTPUT == $EXPECT ]]; then
+            echo -en $GREEN"PASS"
+        else
+            echo -en $RED"FAIL"
+        fi
     fi
     echo -en $RESET
     echo -en "\t$OUTPUT/$EXPECT"
@@ -124,30 +139,46 @@ print_compare()
 #
 # Validation Test
 printf $BLUE"Validation Test\n"$RESET
-printf "$BOLD%-22s%-10s%s$RESET\n" "Name" "Status" "Result/Expect"
+printf "$BOLD%-27s%-10s%s$RESET\n" "Name" "Status" "Result/Expect"
 #1
-printf "1. %-20s" "Invalid \$ARG"
+printf "1. %-25s" "Invalid \$ARG"
 ARG="abc"
 print_compare "$ARG" "Error"
 #2
-printf "2. %-20s" "Mixin invalid \$ARG"
+printf "2. %-25s" "Mixin invalid \$ARG"
 ARG="1 2 a"
 print_compare "$ARG" "Error"
 #3
-printf "3. %-20s" "MAX_INT++"
-ARG="9999999999"
+printf "3. %-25s" "Dupplicated \$ARG"
+ARG="1 2 3 1"
 print_compare "$ARG" "Error"
 #4
-printf "4. %-20s" "Mixin MAX_INT++"
-ARG="1 2 3 9999999999"
+printf "4. %-25s" "MAX_INT++"
+ARG="9999999999"
 print_compare "$ARG" "Error"
 #5
-printf "5. %-20s" "Empty"
+printf "5. %-25s" "Mixin MAX_INT++"
+ARG="1 2 3 9999999999"
+print_compare "$ARG" "Error"
+#6
+printf "6. %-25s" "No \$ARG"
+ARG=
+print_compare "$ARG" ""
+#7
+printf "7. %-25s" "Empty \$ARG"
 ARG=""
 print_compare "$ARG" ""
-#6
-printf "6. %-20s" "Sorted"
+#8
+printf "8. %-25s" "Single \$ARG"
+ARG="1"
+print_compare "$ARG" ""
+#9
+printf "9. %-25s" "Sorted \$ARG"
 ARG="1 2 3"
+print_compare "$ARG" ""
+#10
+printf "10.%-25s" "Sorted \$ARG"
+ARG="1 2 3 4 5 6 7 8 9"
 print_compare "$ARG" ""
 echo
 

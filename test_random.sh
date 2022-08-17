@@ -11,7 +11,7 @@ YELLOW="\033[1;33m"
 MAGENTA="\033[1;35m"
 LRED="\033[1;91m"
 RED="\033[1;31m"
-BOLD="\033[1m"
+BOLD="\033[1;37m"
 RESET="\033[0m"
 
 ## Function
@@ -60,9 +60,10 @@ print_times()
     fi
 
     ## PRINT OUTPUT
-    printf $BOLD"Sorted:$RESET %s\n" $OUTPUT
-    printf $BOLD"Times:$RESET %d\n" $TIMES
-    printf $BOLD"Point:$RESET %d/5\n" $POINT
+    printf $GRAY"Size:$RESET %s\n" $SIZE
+    printf $GRAY"Sorted:$RESET %s\n" $OUTPUT
+    printf $GRAY"Times:$RESET %d\n" $TIMES
+    printf $GRAY"Point:$RESET %d/5\n" $POINT
     if [ $POINT -eq 0 -o "$OUTPUT" == "KO" ];then
         printf $BOLD"Status:$RESET$RED FAIL"
     elif [ $POINT -eq 1 ];then
