@@ -1,11 +1,14 @@
 # push_swap - 42 School Project
 
 <!-- [![akurz's 42 push_swap Score](https://badge42.vercel.app/api/v2/cl1z3zeq4001109mkr4my4esw/project/2340733)](https://github.com/JaeSeoKim/badge42) -->
+this project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions.
 
+## Table of contents
+- [About](##About)
+- [Test](#Test)
+- [Solution (Spoiler)](#Approach-for-Algorithm)
 
 ## About
-
-* This project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions.
 
 * The Push_swap project is a very simple and highly effective algorithm project: data will need to be sorted.  
 You have at your disposal a set of int values, 2 stacks and a set of instructions to manipulate both stacks.  
@@ -67,7 +70,7 @@ malloc, free, exit, write, read
 * checker will return 'KO' when the given Operations will sort the numbers in ascending order. Otherwise it returns 'KO'.
 * In case of an error (f.ex. Operations doesn't exist) it returns 'Error'.
 
-## Tester
+## Test
 
 Basic test with official `checker` from intra
 ```bash
@@ -194,6 +197,13 @@ ROUND=20
 test_size $START $END $ROUND
 ```
 
+#### Status Description
+| Status | Description |
+| :--- | :--- |
+| PASS | The result is matched with expectation `OK` or `KO` or `Error` |
+| FAIL | The result is not matched with expectation |
+| STDERR | The expect `Error` need output _standard error_.|
+
 -----
 
 <details>
@@ -232,8 +242,9 @@ test_size $START $END $ROUND
   - _sharnvon_
   - _cchettana_
   - _cananwat_
-- [README Insparation]()
-- [Quicksort Concept]()
+- [README Insparation](https://github.com/42akurz/42_push_swap)
+- [Partialsort Concept](https://medium.com/@jamierobertdawson/push-swap-the-least-amount-of-moves-with-two-stacks-d1e76a71789a)
+- [Quicksort Concept](https://github.com/anaiel/push_swap)
 <!--
 1. I go through stack A looking for a sequenece of numbers that is already in ascending order.
 2. I keep this sequenece of numbers in stack A and push all other elements to stack B.
