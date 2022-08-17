@@ -22,7 +22,7 @@ print_compare()
     OUTPUT=$(echo -en $INPUT | ./$FILE $ARG 2>&1)
     if [[ $EXPECT == "Error" ]]; then
         ERR=error.log
-        OUTPUT=$(echo -en $INPUT | ./$FILE $ARG 2>$ERR)
+        OUTPUT=$(echo -en $INPUT | ./$FILE $ARG 2>$ERR && cat $ERR)
         if [ -z $(cat $ERR) ]; then
             echo -en $RED"STDERR"
         elif [[ $(cat $ERR) == $EXPECT ]]; then
