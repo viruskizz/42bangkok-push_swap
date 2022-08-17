@@ -6,7 +6,7 @@ this project will make you sort data on a stack, with a limited set of instructi
 ## Table of contents
 - [About](##About)
 - [Test](#Test)
-- [Solution (Spoiler)](#Approach-for-Algorithm)
+- [Solution (Spoiler)](##Approach-for-Algorithm)
 
 ## About
 
