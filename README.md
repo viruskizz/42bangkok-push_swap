@@ -103,7 +103,7 @@ echo $ARG
 ## Test with script
 
 <div align="left">
-  <img width="80%" src="assets/test-example.png">
+  <img width="80%" src="assets/checker-example.png">
 </div>
 
 Test your program easier with my script. It show sorting times and status beside evalute your grade in the same time. there are 3 test script.
