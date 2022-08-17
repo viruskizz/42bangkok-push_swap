@@ -10,9 +10,8 @@ This project will make you sort data on a stack, with a limited set of instructi
 - [Test with script](#test-with-script)
 - [Solution (Spoiler)](#solution)
 
-<div id="about"></div>
-
 ## About
+<div id="about"></div>
 
 * The push_swap project is a very simple and highly effective algorithm project: data will need to be sorted.  
 You have at your disposal a set of int values, 2 stacks and a set of instructions to manipulate both stacks.  
@@ -102,9 +101,8 @@ echo $ARG
 ./push_swap $ARG | wc -l
 ```
 
-<div id="test-with-script"></div>
-
 ## Test with script
+<div id="test-with-script"></div>
 
 <div align="left">
   <img width="80%" src="assets/checker-example.png">
