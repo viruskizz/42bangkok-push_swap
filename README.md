@@ -135,12 +135,17 @@ curl https://gist.github.com/viruskizz/17c9adf04b73d21487a882b18fe2a55b -o test_
 
 ## Approach for Algorithm
 
-You can design your own fastest algorithm. I use 2 Algorithm in this project. One for numbers size is less than 100 and other one is more than 100.
+You can design your own fastest algorithm. I use 3 Algorithm for diference numbers size
 
-### 1. Partition Sort
+### 1. Last 3 numbers Sort
+- There are only 5 solution for 3 numbers.
+- Try yourself with sampling numbers and write sorting operation.
+- Hard code to sort this size
+
+### 2. Partition Sort
 
 
-### 2. Quick Sort
+### 3. Quick Sort
 
 
 
