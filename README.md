@@ -11,6 +11,7 @@ This project will make you sort data on a stack, with a limited set of instructi
 - [Solution (Spoiler)](#solution)
 
 <div id="about"></div>
+
 ## About
 
 * The push_swap project is a very simple and highly effective algorithm project: data will need to be sorted.  
@@ -102,6 +103,7 @@ echo $ARG
 ```
 
 <div id="test-with-script"></div>
+
 ## Test with script
 
 <div align="left">
