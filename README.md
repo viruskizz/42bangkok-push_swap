@@ -6,11 +6,11 @@
 This project will make you sort data on a stack, with a limited set of instructions, using the lowest possible number of actions.
 
 ## Table of contents
-- [About](##About)
-- [Test](##Test)
-- [Test with script](##Test-with-script)
+- [About](#about)
+- [Test with script](#test-with-script)
 - [Solution (Spoiler)](#solution)
 
+<div id="about"></div>
 ## About
 
 * The push_swap project is a very simple and highly effective algorithm project: data will need to be sorted.  
@@ -73,7 +73,7 @@ malloc, free, exit, write, read
 * checker will return 'KO' when the given Operations will sort the numbers in ascending order. Otherwise it returns 'KO'.
 * In case of an error (f.ex. Operations doesn't exist) it returns 'Error'.
 
-## Test
+## Execution
 
 Basic test with official `checker` from intra
 ```bash
@@ -101,6 +101,7 @@ echo $ARG
 ./push_swap $ARG | wc -l
 ```
 
+<div id="test-with-script"></div>
 ## Test with script
 
 <div align="left">
