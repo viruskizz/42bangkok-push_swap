@@ -6,7 +6,7 @@ this project will make you sort data on a stack, with a limited set of instructi
 ## Table of contents
 - [About](##About)
 - [Test](#Test)
-- [Solution (Spoiler)](##Approach-for-Algorithm)
+- [Solution (Spoiler)](#solution)
 
 ## About
 
@@ -206,7 +206,7 @@ test_size $START $END $ROUND
 
 -----
 
-<details>
+<details id="solution">
   <summary>
     <big><strong>Solution</strong></big>
     <small style="color: red"> Spoiler Alert!!</small>
